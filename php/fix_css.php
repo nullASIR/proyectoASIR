@@ -1,0 +1,281 @@
+<?php
+$lines = file('../style/style.css');
+$valid_lines = array_slice($lines, 0, 695); // up to index 694
+$valid_lines[] = "}\n\n";
+
+$contact_css = <<<EOT
+/* ================== CONTACT PAGE SPECIFICS ================== */
+.contact-hero {
+    background: linear-gradient(135deg, var(--accent-blue) 0%, #0d1624 100%);
+    color: white;
+    padding: 80px 20px;
+    text-align: center;
+    border-bottom: 4px solid var(--accent-red);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-bg-glow {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(230, 57, 70, 0.2) 0%, rgba(0, 0, 0, 0) 70%);
+    top: -100px;
+    right: -100px;
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, #fff, var(--accent-yellow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 3rem;
+    margin-bottom: 15px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.hero-subtitle {
+    color: #a8dadc;
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 600;
+}
+
+.contact-section {
+    padding: 60px 20px;
+    margin-top: -40px;
+    position: relative;
+    z-index: 10;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 0;
+    background: var(--bg-surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+}
+
+.contact-info-card {
+    background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);
+    padding: 40px;
+    border-right: 1px solid var(--border-light);
+    position: relative;
+    overflow: hidden;
+}
+
+.info-header h3 {
+    font-size: 1.8rem;
+    color: var(--accent-blue);
+    margin-bottom: 15px;
+}
+
+.info-header p {
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+}
+
+.info-items {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.icon-box {
+    width: 50px;
+    height: 50px;
+    background: white;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-light);
+}
+
+.info-item h4 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: var(--primary);
+}
+
+.info-item p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.social-links {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.social-icon {
+    width: 35px;
+    height: 35px;
+    background: var(--accent-blue);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.8rem;
+    transition: var(--trans-bounce);
+}
+
+.social-icon:hover {
+    background: var(--accent-red);
+    transform: translateY(-3px);
+}
+
+.pokeball-deco {
+    position: absolute;
+    bottom: -50px;
+    right: -50px;
+    width: 150px;
+    height: 150px;
+    border: 15px solid rgba(0, 0, 0, 0.03);
+    border-radius: 50%;
+}
+
+.pokeball-deco::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 15px;
+    background: rgba(0, 0, 0, 0.03);
+    transform: translateY(-50%);
+}
+
+.contact-form-wrapper {
+    padding: 50px;
+    background: white;
+}
+
+.contact-form-wrapper h3 {
+    font-size: 2rem;
+    color: var(--accent-blue);
+    margin-bottom: 30px;
+}
+
+.premium-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Floating labels */
+.input-group {
+    position: relative;
+    padding-top: 10px;
+}
+
+.input-group input,
+.input-group textarea {
+    width: 100%;
+    padding: 12px 0;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--primary);
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--border-light);
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+    outline: none;
+    border-bottom-color: var(--accent-red);
+}
+
+.input-group label {
+    position: absolute;
+    top: 22px;
+    left: 0;
+    font-size: 1rem;
+    color: var(--text-muted);
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+/* Float the label when input is focused or not empty (requires placeholder=" " in HTML) */
+.input-group input:focus+label,
+.input-group input:not(:placeholder-shown)+label,
+.input-group textarea:focus+label,
+.input-group textarea:not(:placeholder-shown)+label {
+    top: -5px;
+    font-size: 0.8rem;
+    color: var(--accent-red);
+    font-weight: 700;
+}
+
+.focus-border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-yellow);
+    transition: 0.4s;
+}
+
+.input-group input:focus~.focus-border,
+.input-group textarea:focus~.focus-border {
+    width: 100%;
+}
+
+.btn-large {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    margin-top: 10px;
+}
+
+.btn-large .arrow {
+    margin-left: 10px;
+    transition: transform 0.3s;
+}
+
+.btn-large:hover .arrow {
+    transform: translateX(5px);
+}
+
+@media (max-width: 900px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+        /* Stack on smaller screens */
+    }
+
+    .contact-info-card {
+        border-right: none;
+        border-bottom: 1px solid var(--border-light);
+    }
+}
+EOT;
+
+$valid_lines[] = $contact_css;
+
+file_put_contents('../style/style.css', implode("", $valid_lines));
+echo "CSS fixed and properly appended.";
+?>
