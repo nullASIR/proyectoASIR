@@ -1,0 +1,113 @@
+/* ================= BUTTONS ================= */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    /* Reducido para que no ocupe demasiado espacio en el header */
+    border-radius: 30px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+    /* Letra un poco más ajustada */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--trans-bounce);
+    border: none;
+    white-space: nowrap;
+    /* Evita que INICIAR y SESIÓN partan el botón por la mitad */
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-blue), #60a5fa);
+    color: white;
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--accent-blue-hover), var(--accent-blue));
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: var(--glow-primary);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, var(--bg-surface), #f1f5f9);
+    color: var(--primary);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary:hover {
+    background: white;
+    color: var(--accent-blue);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent-blue);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.btn-outline:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+/* ================= TOAST NOTIFICATIONS ================= */
+#toast-container {
+    position: fixed;
+    top: 80px;
+    /* Movido arriba para evitar el chatbot y bajarlo del navbar */
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+    /* Allows clicking through the container */
+}
+
+.custom-toast {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg-surface);
+    color: var(--text-primary);
+    padding: 14px 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid var(--accent-blue);
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transform: translateX(120%);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+    min-width: 250px;
+    pointer-events: auto;
+    /* Re-enable pointer events for the toast itself */
+}
+
+.custom-toast.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.toast-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 50%;
+    padding: 6px;
+    color: var(--accent-blue);
+}

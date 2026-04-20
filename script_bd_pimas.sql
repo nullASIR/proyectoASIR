@@ -37,6 +37,8 @@ CREATE TABLE user (
     password VARCHAR(255) NOT NULL,
     verified BOOLEAN NOT NULL DEFAULT FALSE,
     addressId INTEGER,
+    failed_attempts INT DEFAULT 0,
+    lockout_time DATETIME NULL,
     FOREIGN KEY (addressId) REFERENCES address(id)
 );
 

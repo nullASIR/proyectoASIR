@@ -1,7 +1,7 @@
 <?php
 // 1. Rename strings in files
 $files = [
-    '../style/style.css',
+    '../style/style.css?v=12',
     'ver_carrito.php',
     'verificar.php',
     'registro.php',
@@ -65,3 +65,4 @@ mysqli_query($conexion, "SET FOREIGN_KEY_CHECKS=1");
 
 echo "OK - PokeNexus configured with products.";
 ?>
+

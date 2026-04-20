@@ -1,9 +1,3 @@
-<?php
-$lines = file('../style/style.css?v=12');
-$valid_lines = array_slice($lines, 0, 695); // up to index 694
-$valid_lines[] = "}\n\n";
-
-$contact_css = <<<EOT
 /* ================== CONTACT PAGE SPECIFICS ================== */
 .contact-hero {
     background: linear-gradient(135deg, var(--accent-blue) 0%, #0d1624 100%);
@@ -26,6 +20,7 @@ $contact_css = <<<EOT
 
 .gradient-text {
     background: linear-gradient(90deg, #fff, var(--accent-yellow));
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 3rem;
@@ -215,7 +210,7 @@ $contact_css = <<<EOT
     top: 22px;
     left: 0;
     font-size: 1rem;
-    color: var(--text-muted);
+    color: var(--text-secondary);
     pointer-events: none;
     transition: all 0.3s ease;
 }
@@ -264,7 +259,6 @@ $contact_css = <<<EOT
 @media (max-width: 900px) {
     .contact-grid {
         grid-template-columns: 1fr;
-        /* Stack on smaller screens */
     }
 
     .contact-info-card {
@@ -272,11 +266,3 @@ $contact_css = <<<EOT
         border-bottom: 1px solid var(--border-light);
     }
 }
-EOT;
-
-$valid_lines[] = $contact_css;
-
-file_put_contents('../style/style.css?v=12', implode("", $valid_lines));
-echo "CSS fixed and properly appended.";
-?>
-

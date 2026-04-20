@@ -10,10 +10,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $confirm_password = $_POST['confirm_password'];
 
     if ($password === $confirm_password) {
-        // Como la tabla user tiene password VARCHAR(20), password_hash (que genera 60 chars) se trunca 
-        // y luego password_verify falla siempre. 
-        // Creamos un hash y lo recortamos a 20 caracteres (o usamos texto plano, pero mejor esto).
-        $password_hash = substr(sha1($password), 0, 20);
+        // Creamos un hash seguro con BCRYPT
+        $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
         // Verificar si el correo ya existe
         $check_email = "SELECT * FROM user WHERE mail = '$correo'";
@@ -28,19 +26,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $fila_max_id = mysqli_fetch_assoc($resultado_max_id);
             $siguiente_id = ($fila_max_id['max_id'] !== null) ? $fila_max_id['max_id'] + 1 : 1;
 
-            $sql = "INSERT INTO user (id, name, mail, password, verified) VALUES ($siguiente_id, '$nombre', '$correo', '$password_hash', 0)";
+            $verification_code = sprintf("%06d", mt_rand(1, 999999));
+            $sql = "INSERT INTO user (id, name, mail, password, verified, verification_code) VALUES ($siguiente_id, '$nombre', '$correo', '$password_hash', 0, '$verification_code')";
 
             if (mysqli_query($conexion, $sql)) {
-                // Generar token para verificación (usamos el mail y hash de contraseña guardado)
-                $token = sha1($correo . $password_hash);
-                // URL simulada
-                $url_verificacion = "verificar.php?mail=" . urlencode($correo) . "&token=" . $token;
+                // Generar token para verificación real con mail()
+                $to = $correo;
+                $subject = "Verifica tu cuenta de Entrenador - PokePimas";
+                $message = "Hola $nombre,\n\nBienvenido a PokePimas.\n\nTu codigo secreto de verificacion es: $verification_code\n\nIntroducelo en nuestra web para completar el registro y comenzar tu aventura.\n\nAtentamente,\nEl Equipo de PokePimas (No responder a este correo).";
+                $headers = "From: noreply@pokepimas.com\r\n";
+                $headers .= "Reply-To: soporte@pokepimas.com\r\n";
+                $headers .= "X-Mailer: PHP/" . phpversion();
 
-                // Como es localhost, simulamos el email con un Alert de JS
-                echo "<script>
-                    alert('Registro exitoso. Se ha ENVIADO un email a tu correo para verificar la cuenta.\\n\\n[SIMULACIÓN DE CORREO]\\nHaz click en este enlace (copiando la URL):\\nhttp://localhost/proyectoPIMAS/proyectoASIR/php/$url_verificacion');
-                    window.location.href='index.php';
-                </script>";
+                // Enviar correo real (requiere tener servidor SMTP / Sendmail configurado en el servidor/PHP.ini)
+                $correo_enviado = @mail($to, $subject, $message, $headers);
+
+                if ($correo_enviado) {
+                    // Si se envió correctamente, redirigimos limpiamente
+                    header("Location: verificar.php?mail=" . urlencode($correo));
+                }
+                else {
+                    // Si falla el envío (muy común en XAMPP sin SMTP), mandamos el código por URL para el Modo Desarrollador
+                    header("Location: verificar.php?mail=" . urlencode($correo) . "&debug_code=" . urlencode($verification_code));
+                }
+                exit();
             }
             else {
                 $mensaje = "Error: " . mysqli_error($conexion);
@@ -57,12 +66,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <head>
     <meta charset="UTF-8">
-    <title>Registro - PokeNexus Premium</title>
+    <title>Registro - PokePimas Premium</title>
     <!-- Premium Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/style.css?v=12">
 </head>
 
 <body>

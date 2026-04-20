@@ -3,12 +3,13 @@ include 'database.php';
 
 $mensaje = "";
 $exito = false;
+$mail = isset($_GET['mail']) ? htmlspecialchars($_GET['mail']) : "";
 
-if (isset($_GET['mail']) && isset($_GET['token'])) {
-    $mail = mysqli_real_escape_string($conexion, $_GET['mail']);
-    $token = $_GET['token'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $mail_post = mysqli_real_escape_string($conexion, $_POST['mail']);
+    $codigo_ingresado = mysqli_real_escape_string($conexion, $_POST['codigo']);
 
-    $sql = "SELECT id, password, verified FROM user WHERE mail = '$mail'";
+    $sql = "SELECT id, verified, verification_code FROM user WHERE mail = '$mail_post'";
     $result = mysqli_query($conexion, $sql);
 
     // Verificar si el correo existe
@@ -21,13 +22,10 @@ if (isset($_GET['mail']) && isset($_GET['token'])) {
             $exito = true;
         }
         else {
-            // Re-generar el token esperado usando la DB
-            $expected_token = sha1($mail . $row['password']);
-
-            // Validar token
-            if ($token === $expected_token) {
-                // Token correcto, verificamos la cuenta
-                $update_sql = "UPDATE user SET verified = 1 WHERE mail = '$mail'";
+            // Validar código
+            if ($codigo_ingresado === $row['verification_code']) {
+                // Token correcto, verificamos la cuenta y eliminamos el código por seguridad
+                $update_sql = "UPDATE user SET verified = 1, verification_code = NULL WHERE mail = '$mail_post'";
                 if (mysqli_query($conexion, $update_sql)) {
                     $mensaje = "¡Cuenta verificada con éxito! Ya puedes entrar como Entrenador.";
                     $exito = true;
@@ -37,7 +35,8 @@ if (isset($_GET['mail']) && isset($_GET['token'])) {
                 }
             }
             else {
-                $mensaje = "El enlace proporcionado no es válido o ha sido modificado.";
+                $mensaje = "El código ingresado es incorrecto. Vuelve a intentarlo.";
+                $mail = $mail_post; // Mantener el correo en el form si falla
             }
         }
     }
@@ -45,43 +44,77 @@ if (isset($_GET['mail']) && isset($_GET['token'])) {
         $mensaje = "No existe ninguna cuenta asociada a este correo.";
     }
 }
-else {
-    $mensaje = "Enlace inválido. Faltan parámetros en la URL.";
-}
 ?>
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
-    <title>Verificación - PokeNexus Premium</title>
+    <title>Verificación - PokePimas Premium</title>
     <!-- Premium Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/style.css?v=12">
+    <style>
+        .code-input {
+            text-align: center;
+            font-size: 2rem !important;
+            letter-spacing: 0.5rem;
+            font-family: 'Montserrat', monospace;
+            font-weight: 800;
+        }
+    </style>
 </head>
 
 <body>
 
     <div class="contenedor-auth">
-        <h2>Verificación de Correo</h2>
+        <h2>Verificación de Cuenta</h2>
         
         <?php if ($exito): ?>
-            <div class="msg-success">
+            <div class="msg-success" style="color: green; border: 1px solid green; padding: 15px; border-radius: 8px; text-align: center;">
                 <strong>Correcto:</strong> <?php echo $mensaje; ?>
             </div>
             <br>
-            <a class="btn-primary" href="index.php" style="display:inline-block; padding:10px 20px; background:var(--accent-blue); color:white; border-radius:8px;">
+            <a href="index.php" class="btn btn-primary btn-block" style="text-align: center;">
                 Ir a Iniciar Sesión
             </a>
         <?php
 else: ?>
-            <div class="msg-error">
-                <strong>Error:</strong> <?php echo $mensaje; ?>
-            </div>
-            <br>
-            <a href="index.php">Volver al Inicio</a>
+            
+            <?php if (isset($_GET['debug_code'])): ?>
+                <div class="msg-warning" style="background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; padding: 15px; border-radius: 8px; text-align: center; margin-bottom: 20px;">
+                    <strong>⚠️ MODO DESARROLLO (Servidor Local)</strong><br><br>
+                    Como no hay servidor SMTP en XAMPP, simulo el envío del correo de verificación para que puedas probar el registro. <br><br>
+                    Tu código secreto autogenerado es: <strong style="font-size: 1.5rem; letter-spacing: 0.2rem; display: block; margin-top: 10px;"><?php echo htmlspecialchars($_GET['debug_code']); ?></strong>
+                </div>
+            <?php
+    endif; ?>
+
+            <?php if ($mensaje != ""): ?>
+                <div class="msg-error" style="color: red; padding-bottom: 15px; text-align: center;">
+                    <strong>Atención:</strong> <?php echo $mensaje; ?>
+                </div>
+            <?php
+    else: ?>
+                <p style="text-align: center; color: var(--text-secondary); margin-bottom: 20px;">
+                    Te hemos enviado un correo electrónico con un código de 6 dígitos. Escríbelo abajo para continuar tu viaje.
+                </p>
+            <?php
+    endif; ?>
+
+            <form action="verificar.php" method="POST">
+                
+                <input type="hidden" name="mail" value="<?php echo htmlspecialchars($mail); ?>">
+                
+                <label style="text-align: center; display: block;">Código Secreto:</label>
+                <input type="text" name="codigo" class="code-input" placeholder="000000" maxlength="6" pattern="\d{6}" required>
+
+                <button type="submit" class="btn btn-primary btn-block">Verificar y Entrar</button>
+            </form>
+            
+            <a href="index.php" style="display: block; text-align: center; margin-top: 15px;">Volver al Inicio</a>
         <?php
 endif; ?>
     </div>
@@ -89,3 +122,4 @@ endif; ?>
 </body>
 
 </html>
+

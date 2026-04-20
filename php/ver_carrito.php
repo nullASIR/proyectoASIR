@@ -10,12 +10,12 @@ if (!isset($_SESSION['usuario_id'])) {
 
 <head>
     <meta charset="UTF-8">
-    <title>Carrito - PokeNexus Premium</title>
+    <title>Carrito - PokePimas Premium</title>
     <!-- Premium Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/style.css?v=12">
 </head>
 
 <body onload="mostrarCarrito()">
@@ -24,7 +24,7 @@ if (!isset($_SESSION['usuario_id'])) {
     <nav class="navbar">
         <div class="nav-container">
             <a href="inicio.php" class="logo">
-                <span class="logo-icon">⚡</span> POKENEXUS
+                <span class="logo-icon">⚡</span> POKEPIMAS
             </a>
 
             <div class="nav-links">
@@ -57,14 +57,16 @@ endif; ?>
         </div>
     </nav>
 
-    <div class="main-content" style="max-width: 800px; margin: 0 auto;">
-        <h2>Tu Carrito de Compras</h2>
+    <div class="container main-content" style="max-width: 800px; margin: 0 auto;">
+        <div class="section-head">
+            <h2>Tu Carrito de Compras</h2>
+        </div>
 
-        <div id="lista-carrito" style="color: white; margin-bottom: 20px;">
+        <div id="lista-carrito" style="margin-bottom: 20px;">
             <!-- Cargado via JS -->
         </div>
 
-        <div style="text-align: right; color: white;">
+        <div style="text-align: right;">
             <h3>Total: <span id="total-carrito">0.00 €</span></h3>
             <br>
             <button onclick="vaciarCarrito()" class="btn btn-outline" style="margin-right: 15px;">Vaciar Carrito</button>
@@ -73,6 +75,7 @@ endif; ?>
     </div>
 
     <script src="../js/carrito.js"></script>
+    <script src="../js/chatbot.js?v=4"></script>
 
 </body>
 

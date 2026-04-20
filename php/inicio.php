@@ -7,12 +7,12 @@ include 'database.php';
 
 <head>
     <meta charset="UTF-8">
-    <title>PokeNexus - Inicio</title>
+    <title>PokePimas - Inicio</title>
     <!-- Premium Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/style.css?v=12">
 </head>
 
 <body>
@@ -21,7 +21,7 @@ include 'database.php';
     <nav class="navbar">
         <div class="nav-container">
             <a href="inicio.php" class="logo">
-                <span class="logo-icon">⚡</span> POKENEXUS
+                <span class="logo-icon">⚡</span> POKEPIMAS
             </a>
 
             <div class="nav-links">
@@ -129,7 +129,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                         <div class="precio-row">
                             <div class="precio"><?php echo $row['precio']; ?> €</div>
                             <?php if (isset($_SESSION['usuario_id'])): ?>
-                                <button onclick="addToCart(<?php echo $row['id_producto']; ?>, '<?php echo htmlspecialchars(addslashes($row['nombre'])); ?>', <?php echo $row['precio']; ?>)">Añadir</button>
+                                <button onclick="addToCart(<?php echo $row['id_producto']; ?>, '<?php echo htmlspecialchars(addslashes($row['nombre'])); ?>', <?php echo $row['precio']; ?>, '<?php echo htmlspecialchars($imgUrl); ?>')">Añadir</button>
                             <?php
         else: ?>
                                 <button onclick="window.location.href='index.php?msg=Debes iniciar sesión para comprar'">Añadir</button>
@@ -152,7 +152,7 @@ else {
     <footer class="site-footer">
         <div class="container footer-grid">
             <div class="footer-brand">
-                <a href="inicio.php" class="logo"><span class="logo-icon">⚡</span> POKENEXUS</a>
+                <a href="inicio.php" class="logo"><span class="logo-icon">⚡</span> POKEPIMAS</a>
                 <p>El paraíso para coleccionistas y jugadores del Trading Card Game. La mayor selección de cartas y productos sellados.</p>
             </div>
             <div class="footer-links">
@@ -169,10 +169,11 @@ else {
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 PokeNexus TCG. Todos los derechos reservados. Desarrollado con ❤️ para entrenadores.</p>
+            <p>&copy; 2026 PokePimas TCG. Todos los derechos reservados. Desarrollado con ❤️ para entrenadores.</p>
         </div>
     </footer>
 
     <script src="../js/carrito.js"></script>
+    <script src="../js/chatbot.js?v=4"></script>
 </body>
 </html>

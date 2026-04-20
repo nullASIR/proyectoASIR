@@ -7,12 +7,12 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacto - PokeNexus Premium</title>
+    <title>Contacto - PokePimas Premium</title>
     <!-- Premium Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/style.css?v=12">
 </head>
 
 <body>
@@ -21,7 +21,7 @@ session_start();
     <nav class="navbar">
         <div class="nav-container">
             <a href="inicio.php" class="logo">
-                <span class="logo-icon">⚡</span> POKENEXUS
+                <span class="logo-icon">⚡</span> POKEPIMAS
             </a>
 
             <div class="nav-links">
@@ -79,7 +79,7 @@ endif; ?>
                         <div class="icon-box">📍</div>
                         <div>
                             <h4>Nuestra Tienda</h4>
-                            <p>Calle Pueblo Paleta, Nº 123<br>Kanto, Región Principal</p>
+                            <p>IES Ribera del Tajo<br>Talavera de la Reina</p>
                         </div>
                     </div>
                     
@@ -87,7 +87,7 @@ endif; ?>
                         <div class="icon-box">✉️</div>
                         <div>
                             <h4>Soporte Email</h4>
-                            <p>soporte@pokenexus.tcg.com<br>info@pokenexus.tcg.com</p>
+                            <p>soporte@pokepimas.tcg.com<br>info@pokepimas.tcg.com</p>
                         </div>
                     </div>
                     
@@ -155,7 +155,7 @@ endif; ?>
     <footer class="site-footer">
         <div class="container footer-grid">
             <div class="footer-brand">
-                <a href="inicio.php" class="logo"><span class="logo-icon">⚡</span> POKENEXUS</a>
+                <a href="inicio.php" class="logo"><span class="logo-icon">⚡</span> POKEPIMAS</a>
                 <p>El paraíso para coleccionistas y jugadores del Trading Card Game. La mayor selección de cartas y productos sellados.</p>
             </div>
             <div class="footer-links">
@@ -172,10 +172,12 @@ endif; ?>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 PokeNexus TCG. Todos los derechos reservados. Desarrollado con ❤️ para entrenadores.</p>
+            <p>&copy; 2026 PokePimas TCG. Todos los derechos reservados. Desarrollado con ❤️ para entrenadores.</p>
         </div>
     </footer>
 
+    <script src="../js/carrito.js"></script>
+    <script src="../js/chatbot.js?v=4"></script>
 </body>
 
 </html>

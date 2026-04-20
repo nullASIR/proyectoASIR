@@ -1,0 +1,438 @@
+/* ================= NAVIGATION ================= */
+.navbar {
+    background: #ffffff;
+    border-bottom: 1px solid var(--border-light);
+    padding: 15px 0;
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1400px;
+    /* Más espacio habilitado */
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    /* Prohíbe que el logo y los enlaces se solapen */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.6rem;
+    color: var(--primary);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+    /* Prohíbe que el logo se aplaste */
+}
+
+.logo-icon {
+    color: var(--accent-blue);
+    font-size: 1.8rem;
+    filter: drop-shadow(0 2px 4px rgba(59, 130, 246, 0.4));
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+    /* Reducido desde 30px para ahorrar espacio */
+    flex-shrink: 1;
+    /* Permite que se encoja si es necesario pero sin juntarse */
+}
+
+.nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    /* Ajuste sutil para encajar mejor */
+    transition: var(--trans-fast);
+    position: relative;
+    padding: 5px 0;
+    white-space: nowrap;
+    /* Mágia preventiva: PROHÍBE separar palabras como 'Cartas' y 'Sueltas' */
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--accent-blue);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background-color: var(--accent-blue);
+    transition: var(--trans-bounce);
+    border-radius: 2px;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* Reducido para compactar los botones */
+    flex-shrink: 0;
+    /* Evita que los botones rompan sus líneas de texto */
+}
+
+.nav-icon {
+    color: var(--text-secondary);
+    transition: var(--trans-bounce);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f5f9;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 1px solid var(--border-light);
+}
+
+.nav-icon:hover {
+    background: var(--accent-blue);
+    color: white;
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: var(--glow-primary);
+    border-color: transparent;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg-surface);
+    padding: 5px 15px 5px 5px;
+    border-radius: 30px;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+}
+
+.user-avatar {
+    width: 38px;
+    height: 38px;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    color: #fff;
+    font-size: 1.2rem;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+.user-dropdown {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-weight: 800;
+    color: var(--primary);
+    font-size: 0.95rem;
+}
+
+.logout-btn {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.logout-btn:hover {
+    color: var(--accent-red);
+}
+
+/* ================= FOOTER ================= */
+.site-footer {
+    background: var(--bg-surface);
+    color: var(--text-secondary);
+    padding: 60px 0 20px;
+    margin-top: auto;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--border-light);
+    text-align: center;
+    /* Fuerza todo el texto al centro */
+}
+
+.site-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple), var(--accent-red));
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    /* Mejor 3 columnas iguales si todo está centrado */
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.footer-brand .logo {
+    color: var(--primary);
+    margin-bottom: 15px;
+    justify-content: center;
+    /* Centrar el icono SVG con el texto */
+}
+
+.footer-brand p {
+    color: var(--text-secondary);
+    max-width: 300px;
+    margin: 0 auto;
+    /* Centrar el párrafo en su contenedor */
+}
+
+.footer-links h4 {
+    color: var(--primary);
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.footer-links a {
+    display: block;
+    color: var(--text-secondary);
+    text-decoration: none;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    transition: var(--trans-fast);
+    font-weight: 600;
+    text-align: center;
+    /* Asegura el centrado de los links */
+}
+
+.footer-links a:hover {
+    color: var(--accent-blue);
+    transform: translateY(-3px) scale(1.02);
+    /* TranslateY en lugar de TranslateX para elementos centrados */
+}
+
+.footer-bottom {
+    text-align: center;
+    border-top: 1px solid var(--border-light);
+    padding-top: 25px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+/* Botón hamburguesa oculto en desktop */
+.mobile-menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.mobile-menu-toggle:hover {
+    background: var(--bg-body);
+}
+
+/* ================= RESPONSIVE (TABLETS Y MÓVILES) ================= */
+@media (max-width: 1150px) {
+
+    /* Navbar Flex y Hamburguesa */
+    .nav-container {
+        flex-wrap: wrap;
+        /* Permitir que los items bajen */
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .logo {
+        order: 0;
+    }
+
+    .mobile-menu-toggle {
+        display: flex;
+        order: 1;
+        /* Al lado del logo en la línea de arriba */
+        margin-left: auto;
+        /* Empuja la hamburguesa al borde derecho */
+        color: var(--primary);
+        /* Color para currentColor del SVG */
+    }
+
+    .user-actions {
+        order: 2;
+        width: 100%;
+        /* Fuerza a que ocupe toda la línea inferior */
+        justify-content: center;
+        /* Centra los botones de login/registro/carrito */
+        padding-top: 10px;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        gap: 15px;
+    }
+
+    .user-actions .btn {
+        flex: 1;
+        /* Que los botones se estiren simétricamente */
+        text-align: center;
+        padding: 12px 10px;
+        font-size: 0.9rem;
+    }
+
+    /* El Menú colapsa con animación en vez de desaparecer */
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        order: 3;
+        /* Va debajo de todo */
+        background: #ffffff;
+        gap: 0;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        border-radius: 0 0 12px 12px;
+
+        /* Animación de apertura suave */
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        padding: 0;
+        margin-top: 0;
+        transition: max-height 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease, margin-top 0.3s ease, padding 0.3s ease;
+    }
+
+    /* JavaScript Toggle Activado */
+    .nav-links.active {
+        max-height: 500px;
+        /* Suficiente para que entren todo los links */
+        opacity: 1;
+        margin-top: 10px;
+        padding: 5px 0 15px 0;
+        border-top: 1px solid var(--border-light);
+    }
+
+    .nav-links a {
+        padding: 15px 25px;
+        font-size: 1.1rem;
+        border-bottom: 1px solid #f1f5f9;
+        text-align: left;
+    }
+
+    .nav-links a:last-child {
+        border-bottom: none;
+    }
+
+    /* Prevenir que la animación inferior estorbe */
+    .nav-links a::after {
+        display: none;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+
+
+/* ================= FOOTER ACORDEÓN (MOBILE) ================= */
+@media (max-width: 600px) {
+    .site-footer {
+        padding: 40px 0 15px;
+        text-align: center;
+    }
+
+    .footer-brand .logo {
+        justify-content: center;
+    }
+
+    .footer-grid {
+        gap: 10px;
+        /* Reduce espacio muerto vertical */
+    }
+
+    .footer-brand p {
+        font-size: 0.9rem;
+        margin: 0 auto 20px auto;
+    }
+
+    .footer-links {
+        border-bottom: 1px solid var(--border-light);
+    }
+
+    /* El título actúa como botón para desplegar */
+    .footer-links h4 {
+        margin-bottom: 0;
+        padding: 15px 0;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        /* Centrado absoluto */
+        gap: 15px;
+        /* Separación con la crucecita */
+        align-items: center;
+        font-size: 1.1rem;
+        transition: color 0.3s;
+    }
+
+    /* Flecha decorativa (usamos el simbolo '+') */
+    .footer-links h4::after {
+        content: '+';
+        font-size: 1.5rem;
+        font-weight: 400;
+        transition: transform 0.3s ease, color 0.3s;
+        color: var(--accent-blue);
+    }
+
+    /* Estado desplegado: Cambia color y rota el + a una X (o -) */
+    .footer-links.active h4 {
+        color: var(--accent-blue);
+    }
+
+    .footer-links.active h4::after {
+        transform: rotate(45deg);
+        /* Se convierte en una x muy fina */
+        color: var(--accent-red);
+    }
+
+    /* Ocultar enlaces por defecto */
+    .footer-links a {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        margin-bottom: 0;
+        padding: 0 10px;
+        transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
+        pointer-events: none;
+    }
+
+    /* Mostrar enlaces al activar con JavaScript */
+    .footer-links.active a {
+        max-height: 150px;
+        /* Suficiente alto para alojar enlaces */
+        opacity: 1;
+        margin-bottom: 15px;
+        pointer-events: auto;
+    }
+}

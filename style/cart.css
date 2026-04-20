@@ -1,0 +1,57 @@
+/* ================= CART SPECIFICS ================= */
+.item-carrito {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-light);
+    color: var(--text-primary);
+}
+
+.item-carrito:last-child {
+    border-bottom: none;
+}
+
+.item-carrito strong.item-name {
+    font-size: 1.1rem;
+    color: var(--primary);
+}
+
+.item-carrito span.item-price {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.item-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.item-subtotal {
+    font-weight: 800;
+    color: var(--accent-blue);
+    font-size: 1.1rem;
+}
+
+.btn-remove {
+    background: transparent;
+    color: var(--accent-red);
+    border: 1px solid var(--accent-red);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--trans-fast);
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.btn-remove:hover {
+    background: var(--accent-red);
+    color: white;
+    transform: scale(1.1);
+}
