@@ -9,25 +9,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     // Permitir login con Name o Mail
-    $sql = "SELECT * FROM user WHERE name = '$usuario_input' OR mail = '$usuario_input'";
+    $sql = "SELECT * FROM user WHERE Name = '$usuario_input' OR Mail = '$usuario_input'";
     $result = mysqli_query($conexion, $sql);
 
     if (mysqli_num_rows($result) === 1) {
         $row = mysqli_fetch_assoc($result);
 
         // Verificamos si la cuenta está bloqueada temporalmente
-        if (!empty($row['lockout_time'])) {
-            $lockout_time = strtotime($row['lockout_time']);
+        if (!empty($row['LockoutTime'])) {
+            $lockout_time = strtotime($row['LockoutTime']);
             if (time() < $lockout_time) {
                 $minutos_restantes = ceil(($lockout_time - time()) / 60);
                 $mensaje = "Cuenta bloqueada por seguridad. Por favor, inténtelo de nuevo en " . $minutos_restantes . " minutos.";
             }
             else {
                 // Si el tiempo de bloqueo ya expiró, reseteamos el contador
-                $update_lockout = "UPDATE user SET failed_attempts = 0, lockout_time = NULL WHERE id = " . $row['id'];
+                $update_lockout = "UPDATE user SET FailedAttempts = 0, LockoutTime = NULL WHERE Id = " . $row['Id'];
                 mysqli_query($conexion, $update_lockout);
-                $row['failed_attempts'] = 0;
-                $row['lockout_time'] = NULL;
+                $row['FailedAttempts'] = 0;
+                $row['LockoutTime'] = NULL;
             }
         }
 
@@ -37,24 +37,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $is_password_correct = false;
             $old_hash = substr(sha1($password), 0, 20);
 
-            if (password_verify($password, $row['password'])) {
+            if (password_verify($password, $row['Password'])) {
                 $is_password_correct = true;
             }
-            elseif ($old_hash === $row['password']) {
+            elseif ($old_hash === $row['Password']) {
                 $is_password_correct = true;
             // (Opcional) Re-hashear aquí la contraseña a formato seguro (BCRYPT) y guardar en DB
             }
 
             if ($is_password_correct) {
                 // Resetear intentos fallidos al tener éxito
-                if ($row['failed_attempts'] > 0) {
-                    $reset_sql = "UPDATE user SET failed_attempts = 0, lockout_time = NULL WHERE id = " . $row['id'];
+                if ($row['FailedAttempts'] > 0) {
+                    $reset_sql = "UPDATE user SET FailedAttempts = 0, LockoutTime = NULL WHERE Id = " . $row['Id'];
                     mysqli_query($conexion, $reset_sql);
                 }
 
-                if ($row['verified'] == 1) {
-                    $_SESSION['usuario_id'] = $row['id'];
-                    $_SESSION['nombre'] = $row['name'];
+                if ($row['Verified'] == 1) {
+                    $_SESSION['usuario_id'] = $row['Id'];
+                    $_SESSION['nombre'] = $row['Name'];
+                    $_SESSION['is_admin'] = isset($row['IsAdmin']) ? $row['IsAdmin'] : false;
                     header("Location: inicio.php");
                     exit();
                 }
@@ -64,17 +65,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             else {
                 // Contraseña incorrecta, incrementamos el contador de intentos
-                $intentos_fallidos = $row['failed_attempts'] + 1;
+                $intentos_fallidos = $row['FailedAttempts'] + 1;
 
                 if ($intentos_fallidos >= 3) {
                     // Bloquear por 15 minutos en el 3er intento fallido
                     $bloqueo_hasta = date('Y-m-d H:i:s', strtotime('+15 minutes'));
-                    $query_update = "UPDATE user SET failed_attempts = $intentos_fallidos, lockout_time = '$bloqueo_hasta' WHERE id = " . $row['id'];
+                    $query_update = "UPDATE user SET FailedAttempts = $intentos_fallidos, LockoutTime = '$bloqueo_hasta' WHERE Id = " . $row['Id'];
                     mysqli_query($conexion, $query_update);
                     $mensaje = "Demasiados intentos fallidos. Su cuenta ha sido bloqueada temporalmente por seguridad.";
                 }
                 else {
-                    $query_update = "UPDATE user SET failed_attempts = $intentos_fallidos WHERE id = " . $row['id'];
+                    $query_update = "UPDATE user SET FailedAttempts = $intentos_fallidos WHERE Id = " . $row['Id'];
                     mysqli_query($conexion, $query_update);
                     $intentos_restantes = 3 - $intentos_fallidos;
                     $mensaje = "Contraseña incorrecta. Te quedan $intentos_restantes intentos antes del bloqueo.";
@@ -120,6 +121,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
 
         <a href="registro.php">¿No tienes cuenta? Regístrate aquí</a>
+        <br><br>
+        <a href="olvide_contrasena.php">¿Olvidaste tu contraseña?</a>
         <br><br>
         <a href="inicio.php" style="color: #666; font-size: 0.9em;">Entrar sin registrarse</a>
     </div>

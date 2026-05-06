@@ -31,16 +31,24 @@
 \contentsline {section}{\numberline {15}Migración a Entornos Linux y Virtualización (Docker)}{19}{section.15}%
 \contentsline {subsection}{\numberline {15.1}Estructura de Contenedores}{19}{subsection.15.1}%
 \contentsline {subsection}{\numberline {15.2}Beneficios escalables en el despliegue}{20}{subsection.15.2}%
-\contentsline {section}{\numberline {16}Monitorización y Supervisión del Sistema}{20}{section.16}%
-\contentsline {subsection}{\numberline {16.1}Parámetros Múltiples y Métricas Sensibles}{20}{subsection.16.1}%
-\contentsline {section}{\numberline {17}Ciberseguridad Continua y Hardening del Host}{21}{section.17}%
-\contentsline {subsection}{\numberline {17.1}El Aseguramiento Técnico sobre el Acceso de Terminal Remoto (SSH)}{21}{subsection.17.1}%
-\contentsline {subsection}{\numberline {17.2}Transmisión Web Blindada y Cifrado mediante Certificados Libres (HTTPS TSL/SSL)}{22}{subsection.17.2}%
-\contentsline {subsection}{\numberline {17.3}Reglas Exclusivas de Permisividad Externa: Cortafuegos de Host Local (UFW)}{23}{subsection.17.3}%
-\contentsline {section}{\numberline {18}Anexo: Galería de la Página Web}{24}{section.18}%
-\contentsline {subsection}{\numberline {18.1}Navegación e Inicio de la Tienda}{24}{subsection.18.1}%
-\contentsline {subsection}{\numberline {18.2}Proceso de Compra}{25}{subsection.18.2}%
-\contentsline {subsection}{\numberline {18.3}Verificación y Acceso}{26}{subsection.18.3}%
-\contentsline {subsection}{\numberline {18.4}Herramientas de Inteligencia Artificial}{28}{subsection.18.4}%
-\contentsline {subsection}{\numberline {18.5}Atención al Cliente}{31}{subsection.18.5}%
-\contentsline {subsection}{\numberline {18.6}Vista Móvil (Diseño Responsive)}{32}{subsection.18.6}%
+\contentsline {section}{\numberline {16}Memoria Técnica Detallada: Infraestructura de Alta Disponibilidad}{21}{section.16}%
+\contentsline {subsection}{\numberline {16.1}Introducción y Objetivos}{21}{subsection.16.1}%
+\contentsline {subsection}{\numberline {16.2}Detalle de los Sistemas Implementados}{21}{subsection.16.2}%
+\contentsline {subsubsection}{\numberline {16.2.1}Firewall Perimetral (pfSense)}{21}{subsubsection.16.2.1}%
+\contentsline {subsubsection}{\numberline {16.2.2}Balanceador de Carga (HAProxy)}{21}{subsubsection.16.2.2}%
+\contentsline {subsubsection}{\numberline {16.2.3}Servidores Web (Hosting)}{22}{subsubsection.16.2.3}%
+\contentsline {subsubsection}{\numberline {16.2.4}Clúster de Bases de Datos (MariaDB Master-Master)}{22}{subsubsection.16.2.4}%
+\contentsline {subsection}{\numberline {16.3}Metodología de Implementación}{22}{subsection.16.3}%
+\contentsline {section}{\numberline {17}Monitorización y Supervisión del Sistema}{24}{section.17}%
+\contentsline {subsection}{\numberline {17.1}Parámetros Múltiples y Métricas Sensibles}{24}{subsection.17.1}%
+\contentsline {section}{\numberline {18}Ciberseguridad Continua y Hardening del Host}{25}{section.18}%
+\contentsline {subsection}{\numberline {18.1}El Aseguramiento Técnico sobre el Acceso de Terminal Remoto (SSH)}{25}{subsection.18.1}%
+\contentsline {subsection}{\numberline {18.2}Transmisión Web Blindada y Cifrado mediante Certificados Libres (HTTPS TSL/SSL)}{26}{subsection.18.2}%
+\contentsline {subsection}{\numberline {18.3}Reglas Exclusivas de Permisividad Externa: Cortafuegos de Host Local (UFW)}{27}{subsection.18.3}%
+\contentsline {section}{\numberline {19}Anexo: Galería de la Página Web}{28}{section.19}%
+\contentsline {subsection}{\numberline {19.1}Navegación e Inicio de la Tienda}{28}{subsection.19.1}%
+\contentsline {subsection}{\numberline {19.2}Proceso de Compra}{29}{subsection.19.2}%
+\contentsline {subsection}{\numberline {19.3}Verificación y Acceso}{30}{subsection.19.3}%
+\contentsline {subsection}{\numberline {19.4}Herramientas de Inteligencia Artificial}{32}{subsection.19.4}%
+\contentsline {subsection}{\numberline {19.5}Atención al Cliente}{35}{subsection.19.5}%
+\contentsline {subsection}{\numberline {19.6}Vista Móvil (Diseño Responsive)}{36}{subsection.19.6}%

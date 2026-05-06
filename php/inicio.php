@@ -41,6 +41,10 @@ include 'database.php';
                         <span class="user-avatar"><?php echo strtoupper(substr($_SESSION['nombre'], 0, 1)); ?></span>
                         <div class="user-dropdown">
                             <span class="user-name"><?php echo htmlspecialchars($_SESSION['nombre']); ?></span>
+                            <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
+                                <a href="admin.php" class="dropdown-item">Panel Admin</a>
+                            <?php endif; ?>
+                            <a href="wishlist.php" class="dropdown-item">Mi Wishlist</a>
                             <a href="logout.php" class="logout-btn">Cerrar Sesión</a>
                         </div>
                     </div>
@@ -102,12 +106,12 @@ endif; ?>
         <div class="catalogo">
             <?php
 // Sacar los 4 productos más caros o los últimos 4
-$sql = "SELECT * FROM productos ORDER BY id_producto DESC LIMIT 4";
+$sql = "SELECT * FROM Productos ORDER BY IdProducto DESC LIMIT 4";
 $result = mysqli_query($conexion, $sql);
 
 if ($result && mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
-        $imgUrl = !empty($row['imagen']) ? "../" . htmlspecialchars($row['imagen']) : "";
+        $imgUrl = isset($row['Imagen']) && !empty($row['Imagen']) ? "../" . htmlspecialchars($row['Imagen']) : "";
 ?>
                     <div class="carta">
                         <div class="foto-placeholder" style="background: white;">
@@ -119,17 +123,20 @@ if ($result && mysqli_num_rows($result) > 0) {
                             <?php
         endif; ?>
                         </div>
-                        <h4><?php echo htmlspecialchars($row['nombre']); ?></h4>
+                        <h4><?php echo htmlspecialchars($row['Nombre']); ?></h4>
                         
                         <div class="ficha-tec">
-                            <strong>Estado:</strong> <?php echo htmlspecialchars($row['estado']); ?><br>
-                            <strong>Stock:</strong> <?php echo htmlspecialchars($row['stock']); ?> unid.
+                            <strong>Estado:</strong> <?php echo htmlspecialchars($row['Estado']); ?><br>
+                            <strong>Stock:</strong> <?php echo htmlspecialchars($row['Stock']); ?> unid.
                         </div>
                         
                         <div class="precio-row">
-                            <div class="precio"><?php echo $row['precio']; ?> €</div>
+                            <div class="precio"><?php echo $row['Precio']; ?> €</div>
                             <?php if (isset($_SESSION['usuario_id'])): ?>
-                                <button onclick="addToCart(<?php echo $row['id_producto']; ?>, '<?php echo htmlspecialchars(addslashes($row['nombre'])); ?>', <?php echo $row['precio']; ?>, '<?php echo htmlspecialchars($imgUrl); ?>')">Añadir</button>
+                                <div style="display:flex; gap:5px;">
+                                    <button id="wishlist-btn-<?php echo $row['IdProducto']; ?>" style="background: #e74c3c; padding: 6px 10px; border:none; border-radius:4px; cursor:pointer;" onclick="toggleWishlist(<?php echo $row['IdProducto']; ?>)">🤍</button>
+                                    <button onclick="addToCart(<?php echo $row['IdProducto']; ?>, '<?php echo htmlspecialchars(addslashes($row['Nombre'])); ?>', <?php echo $row['Precio']; ?>, '<?php echo htmlspecialchars($imgUrl); ?>')">Añadir</button>
+                                </div>
                             <?php
         else: ?>
                                 <button onclick="window.location.href='index.php?msg=Debes iniciar sesión para comprar'">Añadir</button>

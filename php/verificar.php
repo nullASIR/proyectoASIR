@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mail_post = mysqli_real_escape_string($conexion, $_POST['mail']);
     $codigo_ingresado = mysqli_real_escape_string($conexion, $_POST['codigo']);
 
-    $sql = "SELECT id, verified, verification_code FROM user WHERE mail = '$mail_post'";
+    $sql = "SELECT Id, Verified, VerificationCode FROM user WHERE Mail = '$mail_post'";
     $result = mysqli_query($conexion, $sql);
 
     // Verificar si el correo existe
@@ -17,15 +17,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = mysqli_fetch_assoc($result);
 
         // Comprobar si ya está verificado
-        if ($row['verified'] == 1) {
+        if ($row['Verified'] == 1) {
             $mensaje = "Tu cuenta ya estaba verificada anteriormente.";
             $exito = true;
         }
         else {
             // Validar código
-            if ($codigo_ingresado === $row['verification_code']) {
+            if ($codigo_ingresado === $row['VerificationCode']) {
                 // Token correcto, verificamos la cuenta y eliminamos el código por seguridad
-                $update_sql = "UPDATE user SET verified = 1, verification_code = NULL WHERE mail = '$mail_post'";
+                $update_sql = "UPDATE user SET Verified = 1, VerificationCode = NULL WHERE Mail = '$mail_post'";
                 if (mysqli_query($conexion, $update_sql)) {
                     $mensaje = "¡Cuenta verificada con éxito! Ya puedes entrar como Entrenador.";
                     $exito = true;

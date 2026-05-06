@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.5)  5 MAY 2026 18:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.5)  5 MAY 2026 18:52
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**c:/xampp/htdocs/proyectoPIMAS/proyectoASIR/documentation/documentation.tex
-(c:/xampp/htdocs/proyectoPIMAS/proyectoASIR/documentation/documentation.tex
+**"c:/xampp/htdocs/proyectoPIMAS/proyectoASIR/documentation/documentation copy.tex"
+(c:/xampp/htdocs/proyectoPIMAS/proyectoASIR/documentation/documentation copy.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
 (C:\Users\nullm\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
@@ -214,13 +214,13 @@ LaTeX Info: Redefining \cite on input line 694.
 ) (C:\Users\nullm\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count301
-) (documentation.aux
+) (documentation copy.aux
 LaTeX Info: Redefining \. on input line 11.
 LaTeX Info: Redefining \% on input line 11.
 Package babel Info: 'spanish' activates 'spanish' shorthands.
 (babel)             Reported on input line 11.
 )
-\openout1 = `documentation.aux'.
+\openout1 = `"documentation copy.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
 LaTeX Font Info:    ... okay on input line 14.
@@ -262,9 +262,9 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 Package hyperref Info: Link coloring OFF on input line 14.
- (documentation.out) (documentation.out)
+ (documentation copy.out) (documentation copy.out)
 \@outlinefile=\write3
-\openout3 = `documentation.out'.
+\openout3 = `"documentation copy.out"'.
 
 <images/LogoRiberaNuevo.png, id=215, 2875.74374pt x 1977.3875pt>
 File: images/LogoRiberaNuevo.png Graphic file (type png)
@@ -273,7 +273,7 @@ Package pdftex.def Info: images/LogoRiberaNuevo.png  used on input line 17.
 (pdftex.def)             Requested size: 155.99762pt x 107.2631pt.
  [1
 
-{C:/Users/nullm/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./images/LogoRiberaNuevo.png>] (documentation.toc
+{C:/Users/nullm/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./images/LogoRiberaNuevo.png>] (documentation copy.toc
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -286,234 +286,279 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.31 ... Virtualización (Docker)}{19}{section.15}
+l.30 ...�ticas Centralizadas}{18}{subsection.14.1}
                                                   % [1])
 \tf@toc=\write4
-\openout4 = `documentation.toc'.
+\openout4 = `"documentation copy.toc"'.
 
- [2] [3] [4] [5] [6] [7] [8]
-<images/dbdiagram.png, id=318, 559.33969pt x 571.38469pt>
+ [2] [3]
+Overfull \hbox (22.12769pt too wide) in paragraph at lines 54--55
+\OT1/cmr/m/n/12 ci^^Son de en-tor-nos de ser-vi-dor (Win-dows Ser-ver y dis-tri-bu-cio-nes GNU/Linux).
+ []
+
+[4] [5] [6] [7]
+Overfull \hbox (9.3712pt too wide) in paragraph at lines 137--137
+[]\OT1/cmr/bx/n/14.4 Pol^^S^^Pti-cas de Res-tric-ci^^Son y Ca-li-dad de Ser-vi-cio (QoS) 
+ []
+
+[8] [9]
+<images/dbdiagram.png, id=323, 559.33969pt x 571.38469pt>
 File: images/dbdiagram.png Graphic file (type png)
 <use images/dbdiagram.png>
-Package pdftex.def Info: images/dbdiagram.png  used on input line 159.
+Package pdftex.def Info: images/dbdiagram.png  used on input line 152.
 (pdftex.def)             Requested size: 312.00119pt x 318.72647pt.
- [9
+ [10
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.163 \newpage
+l.156 \newpage
                <./images/dbdiagram.png>]
-Overfull \hbox (1.45013pt too wide) in paragraph at lines 171--172
-[]\OT1/cmr/m/n/12 Frontend (Di-se~no web): Lo he pro-gra-ma-do des-de ce-ro em-plean-do HTML
+Overfull \hbox (6.60767pt too wide) in paragraph at lines 164--165
+[]\OT1/cmr/bx/n/12 Capa de Pre-sen-ta-ci^^Son (Fron-tend): \OT1/cmr/m/n/12 De-sa-rro-lla-da en HTML5 sem^^Santi-
  []
 
 
-Overfull \hbox (15.72176pt too wide) in paragraph at lines 172--173
-[]\OT1/cmr/m/n/12 Backend (Ser-vi-dor lo-cal): Uti-lic^^Se c^^Sodi-go na-ti-vo de PHP usan-do \TS1/cmr/m/n/12 $[]\OT1/cmr/m/n/12 SESSION
+Overfull \hbox (28.99162pt too wide) in paragraph at lines 166--167
+\OT1/cmr/m/n/12 zan-do sen-ten-cias pre-pa-ra-das (Pre-pa-red Sta-te-ments) en PHP (PDO/MySQLi)
  []
 
-[10] [11] [12]
-Overfull \hbox (21.8002pt too wide) in paragraph at lines 217--234
+[11] [12]
+Overfull \hbox (69.72192pt too wide) in paragraph at lines 182--182
+[]\OT1/cmr/bx/n/17.28 Integraci^^Son de Sis-te-mas Em-pre-sa-ria-les (API/ERP) 
+ []
+
+
+Overfull \hbox (3.13776pt too wide) in paragraph at lines 189--189
+[]\OT1/cmr/bx/n/17.28 Estudio de Via-bi-li-dad T^^Secni-ca y Econ^^Somi-
+ []
+
+[13]
+Overfull \hbox (76.42422pt too wide) in paragraph at lines 209--226
  [][] 
  []
 
-[13
+
+Overfull \hbox (120.43979pt too wide) in paragraph at lines 241--241
+[]\OT1/cmr/bx/n/17.28 Cumplimiento Nor-ma-ti-vo y Pri-va-ci-dad (RGPD/LOPD) 
+ []
+
+[14
 pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.245     \item L
-                 a contratación de un empleado / mozo de almacén para real...] [14] [15]
-<images/esquemaRed.png, id=359, 614.295pt x 444.91219pt>
+l.245 
+      ] [15] [16]
+<images/esquemaRed.png, id=365, 614.295pt x 444.91219pt>
 File: images/esquemaRed.png Graphic file (type png)
 <use images/esquemaRed.png>
-Package pdftex.def Info: images/esquemaRed.png  used on input line 282.
+Package pdftex.def Info: images/esquemaRed.png  used on input line 273.
 (pdftex.def)             Requested size: 350.99762pt x 254.21356pt.
- [16
+
+Overfull \hbox (2.5389pt too wide) in paragraph at lines 282--283
+[]\OT1/cmr/bx/n/12 Red In-ter-na Pro-te-gi-da (Bac-kend / VLAN 20): \OT1/cmr/m/n/12 Seg-men-to herm^^Seti-
+ []
+
+[17
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.292 \end{itemize}
-                    <./images/esquemaRed.png>]
-Overfull \hbox (8.97981pt too wide) in paragraph at lines 294--294
-[]\OT1/cmr/bx/n/17.28 Sistemas Ope-ra-ti-vos y Con-fi-gu-ra-cio-nes Es-
- []
-
-[17] [18] [19] [20] [21] [22] [23] [24]
-Overfull \hbox (2.39774pt too wide) in paragraph at lines 388--388
-[]\OT1/cmr/bx/n/17.28 Ciberseguridad Con-ti-nua y Har-de-ning del
+l.283 \end{itemize}
+                    <./images/esquemaRed.png>] [18] [19] [20]
+Overfull \hbox (58.60696pt too wide) in paragraph at lines 348--349
+\OT1/cmr/m/n/12 ra-do des-pla-za-mien-tos en los in-cre-men-tos au-tom^^Sati-cos (\OT1/cmtt/m/n/12 auto[]increment[]increment
  []
 
 
-Overfull \hbox (36.39977pt too wide) in paragraph at lines 398--399
-[]\OT1/cmr/m/n/12 Implementaci^^Son ex-clu-si-va con Cla-ves Asim^^Setri-cas Avan-za-das (RSA/ED25519):
+Overfull \hbox (2.13208pt too wide) in paragraph at lines 350--351
+[]\OT1/cmr/bx/n/12 Resiliencia Ope-ra-ti-va: \OT1/cmr/m/n/12 Ha-bi-li-ta-ci^^Son de pol^^S^^Pti-cas \OT1/cmtt/m/n/12 relay[]log[]recovery
  []
 
-[25] [26]
-Overfull \hbox (0.84456pt too wide) in paragraph at lines 413--414
-[]\OT1/cmr/m/n/12 Desde aqu^^S^^P, ex-clu-si-va-men-te pro-gra-ma-re-mos co-man-dos y abri-re-mos a mano
+[21] [22]
+Overfull \hbox (0.57928pt too wide) in paragraph at lines 369--370
+[]\OT1/cmr/m/n/12 El ser-vi-dor de mo-ni-to-ri-za-ci^^Son des-plie-ga agen-tes pa-si-vos ("Zab-bix Agents")
  []
 
-[27]
-<images/paginaInicio.png, id=417, 1241.38782pt x 686.565pt>
+[23]
+Overfull \hbox (80.87299pt too wide) in paragraph at lines 383--384
+\OT1/cmr/m/n/12 te-ra-cio-nes res-tric-ti-vas en sus ar-chi-vos de con-fi-gu-ra-ci^^Son sub-ya-cen-tes (\OT1/cmtt/m/n/12 /etc/ssh/sshd[]config\OT1/cmr/m/n/12 ): 
+ []
+
+
+Overfull \hbox (1.62993pt too wide) in paragraph at lines 386--387
+[]\OT1/cmr/bx/n/12 Inhabilitaci^^Son de Au-ten-ti-ca-ci^^Son Cl^^Sasi-ca y Es-ca-la-da Root: \OT1/cmr/m/n/12 Prohi-
+ []
+
+
+Overfull \hbox (69.75504pt too wide) in paragraph at lines 386--387
+\OT1/cmr/m/n/12 bi-ci^^Son ab-so-lu-ta de ac-ce-sos re-mo-tos ba-sa-dos en con-tra-se~na (\OT1/cmtt/m/n/12 PasswordAuthentication
+ []
+
+
+Overfull \hbox (20.91939pt too wide) in paragraph at lines 391--391
+[]\OT1/cmr/bx/n/14.4 Criptograf^^S^^Pa en Tr^^Sansi-to (TLS/SSL y Let's Encrypt) 
+ []
+
+[24] [25]
+<images/paginaInicio.png, id=410, 1241.38782pt x 686.565pt>
 File: images/paginaInicio.png Graphic file (type png)
 <use images/paginaInicio.png>
-Package pdftex.def Info: images/paginaInicio.png  used on input line 424.
+Package pdftex.def Info: images/paginaInicio.png  used on input line 411.
 (pdftex.def)             Requested size: 312.00119pt x 172.55225pt.
-<images/inicioIngles.png, id=418, 1236.87094pt x 688.07062pt>
+<images/inicioIngles.png, id=411, 1236.87094pt x 688.07062pt>
 File: images/inicioIngles.png Graphic file (type png)
 <use images/inicioIngles.png>
-Package pdftex.def Info: images/inicioIngles.png  used on input line 430.
+Package pdftex.def Info: images/inicioIngles.png  used on input line 417.
 (pdftex.def)             Requested size: 312.00119pt x 173.5606pt.
-<images/productosSellados+añadirArticulo.png, id=419, 1236.11812pt x 685.05937pt>
+<images/productosSellados+añadirArticulo.png, id=412, 1236.11812pt x 685.05937pt>
 File: images/productosSellados+añadirArticulo.png Graphic file (type png)
 <use images/productosSellados+añadirArticulo.png>
-Package pdftex.def Info: images/productosSellados+añadirArticulo.png  used on input line 437.
+Package pdftex.def Info: images/productosSellados+añadirArticulo.png  used on input line 424.
 (pdftex.def)             Requested size: 312.00119pt x 172.90556pt.
- [28
+ [26
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.440 
+l.427 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.440 
+l.427 
        <./images/paginaInicio.png> <./images/inicioIngles.png>]
-<images/carrito.png, id=428, 1227.83719pt x 670.75594pt>
+<images/carrito.png, id=421, 1227.83719pt x 670.75594pt>
 File: images/carrito.png Graphic file (type png)
 <use images/carrito.png>
-Package pdftex.def Info: images/carrito.png  used on input line 443.
+Package pdftex.def Info: images/carrito.png  used on input line 430.
 (pdftex.def)             Requested size: 312.00119pt x 170.44176pt.
-<images/accesoLogin.png, id=429, 341.02406pt x 389.20406pt>
+<images/accesoLogin.png, id=422, 341.02406pt x 389.20406pt>
 File: images/accesoLogin.png Graphic file (type png)
 <use images/accesoLogin.png>
-Package pdftex.def Info: images/accesoLogin.png  used on input line 450.
+Package pdftex.def Info: images/accesoLogin.png  used on input line 437.
 (pdftex.def)             Requested size: 312.00119pt x 356.1004pt.
- [29
+ [27
 pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.453 
+l.440 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.453 
+l.440 
        <./images/productosSellados+añadirArticulo.png> <./images/carrito.png>]
-<images/correoVerificación.png, id=438, 462.22687pt x 234.8775pt>
+<images/correoVerificación.png, id=431, 462.22687pt x 234.8775pt>
 File: images/correoVerificación.png Graphic file (type png)
 <use images/correoVerificación.png>
-Package pdftex.def Info: images/correoVerificación.png  used on input line 456.
+Package pdftex.def Info: images/correoVerificación.png  used on input line 443.
 (pdftex.def)             Requested size: 312.00119pt x 158.54263pt.
- [30
+ [28
 pdfTeX warning (ext4): destination with the same identifier (name{figure.7}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.459 
+l.446 
        <./images/accesoLogin.png>]
-<images/verificacion.png, id=446, 351.56343pt x 383.18156pt>
+<images/verificacion.png, id=438, 351.56343pt x 383.18156pt>
 File: images/verificacion.png Graphic file (type png)
 <use images/verificacion.png>
-Package pdftex.def Info: images/verificacion.png  used on input line 462.
+Package pdftex.def Info: images/verificacion.png  used on input line 449.
 (pdftex.def)             Requested size: 312.00119pt x 340.05992pt.
-<images/ejemploBot.png, id=447, 298.86656pt x 474.27188pt>
+<images/ejemploBot.png, id=439, 298.86656pt x 474.27188pt>
 File: images/ejemploBot.png Graphic file (type png)
 <use images/ejemploBot.png>
-Package pdftex.def Info: images/ejemploBot.png  used on input line 469.
+Package pdftex.def Info: images/ejemploBot.png  used on input line 456.
 (pdftex.def)             Requested size: 312.00119pt x 495.14888pt.
- [31
+ [29
 pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.472 
+l.459 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.9}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.472 
+l.459 
        <./images/correoVerificación.png> <./images/verificacion.png>]
-<images/ejemploBot2.png, id=456, 298.86656pt x 465.99094pt>
+<images/ejemploBot2.png, id=448, 298.86656pt x 465.99094pt>
 File: images/ejemploBot2.png Graphic file (type png)
 <use images/ejemploBot2.png>
-Package pdftex.def Info: images/ejemploBot2.png  used on input line 475.
+Package pdftex.def Info: images/ejemploBot2.png  used on input line 462.
 (pdftex.def)             Requested size: 312.00119pt x 486.5034pt.
- [32
+ [30
 pdfTeX warning (ext4): destination with the same identifier (name{figure.10}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.478 
+l.465 
        <./images/ejemploBot.png>]
-<images/pokeLensWorking.png, id=463, 1227.83719pt x 683.55376pt>
+<images/pokeLensWorking.png, id=456, 1227.83719pt x 683.55376pt>
 File: images/pokeLensWorking.png Graphic file (type png)
 <use images/pokeLensWorking.png>
-Package pdftex.def Info: images/pokeLensWorking.png  used on input line 481.
+Package pdftex.def Info: images/pokeLensWorking.png  used on input line 468.
 (pdftex.def)             Requested size: 312.00119pt x 173.69374pt.
- [33
+ [31
 pdfTeX warning (ext4): destination with the same identifier (name{figure.11}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.484 
+l.471 
        <./images/ejemploBot2.png>]
-<images/pokeLensNot.png, id=470, 1242.14063pt x 686.565pt>
+<images/pokeLensNot.png, id=463, 1242.14063pt x 686.565pt>
 File: images/pokeLensNot.png Graphic file (type png)
 <use images/pokeLensNot.png>
-Package pdftex.def Info: images/pokeLensNot.png  used on input line 487.
+Package pdftex.def Info: images/pokeLensNot.png  used on input line 474.
 (pdftex.def)             Requested size: 312.00119pt x 172.44748pt.
-<images/contacto.png, id=471, 1236.87094pt x 684.30656pt>
+<images/contacto.png, id=464, 1236.87094pt x 684.30656pt>
 File: images/contacto.png Graphic file (type png)
 <use images/contacto.png>
-Package pdftex.def Info: images/contacto.png  used on input line 494.
+Package pdftex.def Info: images/contacto.png  used on input line 481.
 (pdftex.def)             Requested size: 312.00119pt x 172.61115pt.
- [34
+ [32
 pdfTeX warning (ext4): destination with the same identifier (name{figure.12}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.497 
+l.484 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.13}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.497 
+l.484 
        <./images/pokeLensWorking.png> <./images/pokeLensNot.png>]
-<images/movil1.jpeg, id=480, 1003.75pt x 2055.68pt>
+<images/movil1.jpeg, id=473, 1003.75pt x 2055.68pt>
 File: images/movil1.jpeg Graphic file (type jpg)
 <use images/movil1.jpeg>
-Package pdftex.def Info: images/movil1.jpeg  used on input line 501.
+Package pdftex.def Info: images/movil1.jpeg  used on input line 488.
 (pdftex.def)             Requested size: 175.49881pt x 359.40436pt.
- [35
+ [33
 pdfTeX warning (ext4): destination with the same identifier (name{figure.14}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.504 
+l.491 
        <./images/contacto.png>]
-<images/movil2.jpeg, id=487, 1100.11pt x 2055.68pt>
+<images/movil2.jpeg, id=480, 1100.11pt x 2055.68pt>
 File: images/movil2.jpeg Graphic file (type jpg)
 <use images/movil2.jpeg>
-Package pdftex.def Info: images/movil2.jpeg  used on input line 507.
+Package pdftex.def Info: images/movil2.jpeg  used on input line 494.
 (pdftex.def)             Requested size: 175.49881pt x 327.94315pt.
- [36
+ [34
 pdfTeX warning (ext4): destination with the same identifier (name{figure.15}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.510 
+l.497 
        <./images/movil1.jpeg>]
-<images/movil3.jpeg, id=494, 1294.8375pt x 917.4275pt>
+<images/movil3.jpeg, id=486, 1294.8375pt x 917.4275pt>
 File: images/movil3.jpeg Graphic file (type jpg)
 <use images/movil3.jpeg>
-Package pdftex.def Info: images/movil3.jpeg  used on input line 513.
+Package pdftex.def Info: images/movil3.jpeg  used on input line 500.
 (pdftex.def)             Requested size: 175.49881pt x 124.33733pt.
- [37
+ [35
 pdfTeX warning (ext4): destination with the same identifier (name{figure.16}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.517 \end{document}
+l.504 \end{document}
                     
 pdfTeX warning (ext4): destination with the same identifier (name{figure.17}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.517 \end{document}
-                     <./images/movil2.jpeg> <./images/movil3.jpeg>] (documentation.aux
+l.504 \end{document}
+                     <./images/movil2.jpeg> <./images/movil3.jpeg>] (documentation copy.aux
 LaTeX Info: Redefining \. on input line 11.
 LaTeX Info: Redefining \% on input line 11.
 )
@@ -521,21 +566,21 @@ LaTeX Info: Redefining \% on input line 11.
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
-Package rerunfilecheck Info: File `documentation.out' has not changed.
-(rerunfilecheck)             Checksum: 9C0DEC86DDB4CA8B001EA385DC35BF84;12398.
+Package rerunfilecheck Info: File `"documentation copy".out' has not changed.
+(rerunfilecheck)             Checksum: 4BE5AD5CDFA14DC04BCF612133553C91;13546.
  ) 
 Here is how much of TeX's memory you used:
- 10897 strings out of 467870
- 172784 string characters out of 5418356
- 599514 words of memory out of 5000000
- 39553 multiletter control sequences out of 15000+600000
- 634216 words of font info for 61 fonts, out of 8000000 for 9000
+ 10895 strings out of 467870
+ 172954 string characters out of 5418356
+ 599738 words of memory out of 5000000
+ 39551 multiletter control sequences out of 15000+600000
+ 634726 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,9n,79p,909b,773s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\nullm\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/nullm/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/nullm/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/nullm/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/nullm/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/nullm/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/nullm/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/nullm/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/nullm/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on documentation.pdf (38 pages, 2462398 bytes).
+ 75i,9n,79p,747b,787s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\nullm\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcbx1200.pk> <C:\Users\nullm\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/nullm/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/nullm/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Users/nullm/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/nullm/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/nullm/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/nullm/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/nullm/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/nullm/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on "documentation copy.pdf" (36 pages, 2458970 bytes).
 PDF statistics:
- 569 PDF objects out of 1000 (max. 8388607)
- 119 named destinations out of 1000 (max. 500000)
+ 562 PDF objects out of 1000 (max. 8388607)
+ 117 named destinations out of 1000 (max. 500000)
  515 words of extra memory for PDF output out of 10000 (max. 10000000)
 

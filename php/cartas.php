@@ -41,6 +41,10 @@ include 'database.php';
                         <span class="user-avatar"><?php echo strtoupper(substr($_SESSION['nombre'], 0, 1)); ?></span>
                         <div class="user-dropdown">
                             <span class="user-name"><?php echo htmlspecialchars($_SESSION['nombre']); ?></span>
+                            <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
+                                <a href="admin.php" class="dropdown-item">Panel Admin</a>
+                            <?php endif; ?>
+                            <a href="wishlist.php" class="dropdown-item">Mi Wishlist</a>
                             <a href="logout.php" class="logout-btn">Cerrar Sesión</a>
                         </div>
                     </div>
@@ -442,14 +446,25 @@ endif; ?>
             }
         </style>
 
+        <div class="search-filter" style="margin-bottom: 20px; display: flex; gap: 10px;">
+            <form method="GET" action="cartas.php" style="display: flex; gap: 10px; width: 100%;">
+                <input type="text" name="q" placeholder="Buscar cartas..." value="<?php echo isset($_GET['q']) ? htmlspecialchars($_GET['q']) : ''; ?>" style="flex: 1; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
+        </div>
+
         <div class="cartas-lista">
             <?php
-$sql = "SELECT * FROM productos WHERE tipo = 'carta'";
+$search = isset($_GET['q']) ? mysqli_real_escape_string($conexion, $_GET['q']) : '';
+$sql = "SELECT * FROM Productos WHERE Tipo = 'Carta Suelta'";
+if ($search) {
+    $sql .= " AND Nombre LIKE '%$search%'";
+}
 $result = mysqli_query($conexion, $sql);
 
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
-        $imgUrl = !empty($row['imagen']) ? "../" . htmlspecialchars($row['imagen']) : "";
+        $imgUrl = isset($row['Imagen']) && !empty($row['Imagen']) ? "../" . htmlspecialchars($row['Imagen']) : "";
 ?>
                 <div class="carta-row">
                     <!-- INFO Y HOVER DE FOTO -->
@@ -469,7 +484,7 @@ if (mysqli_num_rows($result) > 0) {
                             <div class="carta-hover-popover">
                                 <div class="carta-popover-inner">
                                     <?php if ($imgUrl): ?>
-                                        <img src="<?php echo $imgUrl; ?>" alt="Foto de <?php echo htmlspecialchars($row['nombre']); ?>">
+                                        <img src="<?php echo $imgUrl; ?>" alt="Foto de <?php echo htmlspecialchars($row['Nombre']); ?>">
                                     <?php
         else: ?>
                                         <div style="padding: 20px; background: #0f172a; text-align: center; color: #94a3b8; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 350px; gap: 10px;">
@@ -483,7 +498,7 @@ if (mysqli_num_rows($result) > 0) {
                         </div>
                         
                         <div class="carta-title">
-                            <h4><?php echo htmlspecialchars($row['nombre']); ?></h4>
+                            <h4><?php echo htmlspecialchars($row['Nombre']); ?></h4>
                         </div>
                     </div>
                     
@@ -491,19 +506,20 @@ if (mysqli_num_rows($result) > 0) {
                     <div class="carta-stats">
                         <div class="stat-badge estado-badge">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f39c12" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                            <span>Estado: <strong><?php echo htmlspecialchars($row['estado']); ?></strong></span>
+                            <span>Estado: <strong><?php echo htmlspecialchars($row['Estado']); ?></strong></span>
                         </div>
                         <div class="stat-badge stock-badge">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-                            <span>Stock: <strong><?php echo htmlspecialchars($row['stock']); ?></strong></span>
+                            <span>Stock: <strong><?php echo htmlspecialchars($row['Stock']); ?></strong></span>
                         </div>
                     </div>
                     
                     <!-- PRECIO Y COMPRA -->
                     <div class="carta-actions">
-                        <div class="precio"><?php echo $row['precio']; ?> €</div>
+                        <div class="precio"><?php echo $row['Precio']; ?> €</div>
                         <?php if (isset($_SESSION['usuario_id'])): ?>
-                            <button class="btn-buy" onclick="addToCart(<?php echo $row['id_producto']; ?>, '<?php echo htmlspecialchars(addslashes($row['nombre'])); ?>', <?php echo $row['precio']; ?>, '<?php echo htmlspecialchars($imgUrl); ?>')">
+                            <button id="wishlist-btn-<?php echo $row['IdProducto']; ?>" class="btn-buy" style="background: #e74c3c; margin-right: 10px;" onclick="toggleWishlist(<?php echo $row['IdProducto']; ?>)">🤍</button>
+                            <button class="btn-buy" onclick="addToCart(<?php echo $row['IdProducto']; ?>, '<?php echo htmlspecialchars(addslashes($row['Nombre'])); ?>', <?php echo $row['Precio']; ?>, '<?php echo htmlspecialchars($imgUrl); ?>')">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
                                 Añadir
                             </button>

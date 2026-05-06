@@ -9,25 +9,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
-    if ($password === $confirm_password) {
+    $captcha = $_POST['captcha'];
+    $captcha_result = $_POST['captcha_result'];
+
+    if ($captcha != $captcha_result) {
+        $mensaje = "El Captcha es incorrecto. Eres un robot?";
+    } else if ($password === $confirm_password) {
         // Creamos un hash seguro con BCRYPT
         $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
         // Verificar si el correo ya existe
-        $check_email = "SELECT * FROM user WHERE mail = '$correo'";
+        $check_email = "SELECT * FROM user WHERE Mail = '$correo'";
         $result = mysqli_query($conexion, $check_email);
 
         if (mysqli_num_rows($result) > 0) {
             $mensaje = "El correo ya está registrado.";
         }
         else {
-            // Calcular el siguiente ID manualmente
-            $resultado_max_id = mysqli_query($conexion, "SELECT MAX(id) AS max_id FROM user");
-            $fila_max_id = mysqli_fetch_assoc($resultado_max_id);
-            $siguiente_id = ($fila_max_id['max_id'] !== null) ? $fila_max_id['max_id'] + 1 : 1;
-
             $verification_code = sprintf("%06d", mt_rand(1, 999999));
-            $sql = "INSERT INTO user (id, name, mail, password, verified, verification_code) VALUES ($siguiente_id, '$nombre', '$correo', '$password_hash', 0, '$verification_code')";
+            $sql = "INSERT INTO user (Name, Mail, Password, Verified, VerificationCode) VALUES ('$nombre', '$correo', '$password_hash', 0, '$verification_code')";
 
             if (mysqli_query($conexion, $sql)) {
                 // Generar token para verificación real con mail()
@@ -60,6 +60,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mensaje = "Las contraseñas no coinciden.";
     }
 }
+
+$num1 = rand(1, 10);
+$num2 = rand(1, 10);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -95,6 +98,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <label>Repetir Contraseña:</label>
             <input type="password" name="confirm_password" required>
+
+            <div style="margin-bottom: 15px;">
+                <label>Resuelve para verificar que eres humano: <?php echo $num1 . " + " . $num2; ?> =</label>
+                <input type="number" name="captcha" required>
+                <input type="hidden" name="captcha_result" value="<?php echo ($num1 + $num2); ?>">
+            </div>
 
             <button type="submit" class="btn btn-primary btn-block">Unirse a la Aventura</button>
         </form>
