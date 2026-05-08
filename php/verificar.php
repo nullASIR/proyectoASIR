@@ -6,15 +6,15 @@ $exito = false;
 $mail = isset($_GET['mail']) ? htmlspecialchars($_GET['mail']) : "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $mail_post = mysqli_real_escape_string($conexion, $_POST['mail']);
-    $codigo_ingresado = mysqli_real_escape_string($conexion, $_POST['codigo']);
+    $mail_post = substr($conexion->quote($_POST['mail']), 1, -1);
+    $codigo_ingresado = substr($conexion->quote($_POST['codigo']), 1, -1);
 
     $sql = "SELECT Id, Verified, VerificationCode FROM user WHERE Mail = '$mail_post'";
-    $result = mysqli_query($conexion, $sql);
+    $result = $conexion->query($sql);
 
     // Verificar si el correo existe
-    if (mysqli_num_rows($result) === 1) {
-        $row = mysqli_fetch_assoc($result);
+    if ($result->rowCount() === 1) {
+        $row = $result->fetch(PDO::FETCH_ASSOC);
 
         // Comprobar si ya está verificado
         if ($row['Verified'] == 1) {
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($codigo_ingresado === $row['VerificationCode']) {
                 // Token correcto, verificamos la cuenta y eliminamos el código por seguridad
                 $update_sql = "UPDATE user SET Verified = 1, VerificationCode = NULL WHERE Mail = '$mail_post'";
-                if (mysqli_query($conexion, $update_sql)) {
+                if ($conexion->query($update_sql)) {
                     $mensaje = "¡Cuenta verificada con éxito! Ya puedes entrar como Entrenador.";
                     $exito = true;
                 }

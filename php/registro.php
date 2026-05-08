@@ -4,8 +4,8 @@ include 'database.php';
 $mensaje = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nombre = mysqli_real_escape_string($conexion, $_POST['nombre']);
-    $correo = mysqli_real_escape_string($conexion, $_POST['correo']);
+    $nombre = substr($conexion->quote($_POST['nombre']), 1, -1);
+    $correo = substr($conexion->quote($_POST['correo']), 1, -1);
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
@@ -20,16 +20,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Verificar si el correo ya existe
         $check_email = "SELECT * FROM user WHERE Mail = '$correo'";
-        $result = mysqli_query($conexion, $check_email);
+        $result = $conexion->query($check_email);
 
-        if (mysqli_num_rows($result) > 0) {
+        if ($result->rowCount() > 0) {
             $mensaje = "El correo ya está registrado.";
         }
         else {
             $verification_code = sprintf("%06d", mt_rand(1, 999999));
             $sql = "INSERT INTO user (Name, Mail, Password, Verified, VerificationCode) VALUES ('$nombre', '$correo', '$password_hash', 0, '$verification_code')";
 
-            if (mysqli_query($conexion, $sql)) {
+            if ($conexion->query($sql)) {
                 // Generar token para verificación real con mail()
                 $to = $correo;
                 $subject = "Verifica tu cuenta de Entrenador - PokePimas";
@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 exit();
             }
             else {
-                $mensaje = "Error: " . mysqli_error($conexion);
+                $mensaje = "Error: " . implode(" ", $conexion->errorInfo() ?? []);
             }
         }
     }

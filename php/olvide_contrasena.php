@@ -6,13 +6,13 @@ $exito = false;
 $debug_link = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $correo = mysqli_real_escape_string($conexion, $_POST['correo']);
+    $correo = substr($conexion->quote($_POST['correo']), 1, -1);
 
     $sql = "SELECT Id, Name FROM user WHERE Mail = '$correo'";
-    $result = mysqli_query($conexion, $sql);
+    $result = $conexion->query($sql);
 
-    if (mysqli_num_rows($result) === 1) {
-        $row = mysqli_fetch_assoc($result);
+    if ($result->rowCount() === 1) {
+        $row = $result->fetch(PDO::FETCH_ASSOC);
         $nombre = $row['Name'];
         
         $token = bin2hex(random_bytes(32));
@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         $update_sql = "UPDATE user SET ResetToken = '$token', ResetExpires = '$expira' WHERE Mail = '$correo'";
         
-        if (mysqli_query($conexion, $update_sql)) {
+        if ($conexion->query($update_sql)) {
             $reset_link = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . "/reset_password.php?token=" . urlencode($token);
             
             $to = $correo;

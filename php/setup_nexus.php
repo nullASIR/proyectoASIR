@@ -26,9 +26,9 @@ foreach ($files as $f) {
 include 'database.php';
 
 // Clear current products for a clean run
-mysqli_query($conexion, "SET FOREIGN_KEY_CHECKS=0");
-mysqli_query($conexion, "ALTER TABLE productos ADD COLUMN imagen VARCHAR(255)");
-mysqli_query($conexion, "TRUNCATE TABLE productos");
+$conexion->query("SET FOREIGN_KEY_CHECKS=0");
+$conexion->query("ALTER TABLE productos ADD COLUMN imagen VARCHAR(255)");
+$conexion->query("TRUNCATE TABLE productos");
 
 // Insert 16 products
 $productos = [
@@ -58,10 +58,10 @@ foreach ($productos as $p) {
     $sql = "INSERT INTO productos (id_producto, ean, nombre, precio, stock, estado, impuesto, tipo, imagen) VALUES (
         {$p[0]}, {$p[1]}, '{$p[2]}', {$p[3]}, {$p[4]}, '{$p[5]}', {$p[6]}, '{$p[7]}', '{$p[8]}'
     )";
-    mysqli_query($conexion, $sql);
+    $conexion->query($sql);
 }
 
-mysqli_query($conexion, "SET FOREIGN_KEY_CHECKS=1");
+$conexion->query("SET FOREIGN_KEY_CHECKS=1");
 
 echo "OK - PokeNexus configured with products.";
 ?>

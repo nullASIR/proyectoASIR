@@ -107,10 +107,10 @@ endif; ?>
             <?php
 // Sacar los 4 productos más caros o los últimos 4
 $sql = "SELECT * FROM Productos ORDER BY IdProducto DESC LIMIT 4";
-$result = mysqli_query($conexion, $sql);
+$result = $conexion->query($sql);
 
-if ($result && mysqli_num_rows($result) > 0) {
-    while ($row = mysqli_fetch_assoc($result)) {
+if ($result && $result->rowCount() > 0) {
+    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
         $imgUrl = isset($row['Imagen']) && !empty($row['Imagen']) ? htmlspecialchars($row['Imagen']) : "";
 ?>
                     <div class="carta">

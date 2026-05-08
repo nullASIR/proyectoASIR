@@ -7,38 +7,38 @@ $token_valido = false;
 $correo_usuario = "";
 
 if (isset($_GET['token'])) {
-    $token = mysqli_real_escape_string($conexion, $_GET['token']);
+    $token = substr($conexion->quote($_GET['token']), 1, -1);
     
     // Verificar si el token es válido y no ha expirado
     $sql = "SELECT Mail FROM user WHERE ResetToken = '$token' AND ResetExpires > NOW()";
-    $result = mysqli_query($conexion, $sql);
+    $result = $conexion->query($sql);
     
-    if (mysqli_num_rows($result) === 1) {
+    if ($result->rowCount() === 1) {
         $token_valido = true;
-        $row = mysqli_fetch_assoc($result);
+        $row = $result->fetch(PDO::FETCH_ASSOC);
         $correo_usuario = $row['Mail'];
     } else {
         $mensaje = "El enlace de recuperación es inválido o ha expirado.";
     }
 } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $token = mysqli_real_escape_string($conexion, $_POST['token']);
+    $token = substr($conexion->quote($_POST['token']), 1, -1);
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
     
     // Validar token de nuevo por seguridad
     $sql = "SELECT Mail FROM user WHERE ResetToken = '$token' AND ResetExpires > NOW()";
-    $result = mysqli_query($conexion, $sql);
+    $result = $conexion->query($sql);
     
-    if (mysqli_num_rows($result) === 1) {
+    if ($result->rowCount() === 1) {
         if ($password === $confirm_password) {
-            $row = mysqli_fetch_assoc($result);
+            $row = $result->fetch(PDO::FETCH_ASSOC);
             $correo = $row['Mail'];
             $password_hash = password_hash($password, PASSWORD_BCRYPT);
             
             // Actualizar contraseña y resetear token/intentos
             $update_sql = "UPDATE user SET Password = '$password_hash', ResetToken = NULL, ResetExpires = NULL, FailedAttempts = 0, LockoutTime = NULL WHERE Mail = '$correo'";
             
-            if (mysqli_query($conexion, $update_sql)) {
+            if ($conexion->query($update_sql)) {
                 $mensaje = "¡Contraseña actualizada con éxito! Ya puedes iniciar sesión.";
                 $exito = true;
             } else {

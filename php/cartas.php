@@ -447,15 +447,15 @@ endif; ?>
 
         <div class="cartas-lista">
             <?php
-$search = isset($_GET['q']) ? mysqli_real_escape_string($conexion, $_GET['q']) : '';
+$search = isset($_GET['q']) ? substr($conexion->quote($_GET['q']), 1, -1) : '';
 $sql = "SELECT * FROM Productos WHERE Tipo = 'Carta Suelta'";
 if ($search) {
     $sql .= " AND Nombre LIKE '%$search%'";
 }
-$result = mysqli_query($conexion, $sql);
+$result = $conexion->query($sql);
 
-if (mysqli_num_rows($result) > 0) {
-    while ($row = mysqli_fetch_assoc($result)) {
+if ($result->rowCount() > 0) {
+    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
         $imgUrl = isset($row['Imagen']) && !empty($row['Imagen']) ? htmlspecialchars($row['Imagen']) : "";
 ?>
                 <div class="carta-row">

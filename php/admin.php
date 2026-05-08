@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stock = (int)$_POST['stock'];
         
         $sql = "UPDATE Productos SET Precio = $precio, Stock = $stock WHERE IdProducto = $id";
-        if (mysqli_query($conexion, $sql)) {
+        if ($conexion->query($sql)) {
             $mensaje = "Producto actualizado correctamente.";
         } else {
             $mensaje = "Error al actualizar.";
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif ($action == 'delete') {
         $id = (int)$_POST['id_producto'];
         $sql = "DELETE FROM Productos WHERE IdProducto = $id";
-        if (mysqli_query($conexion, $sql)) {
+        if ($conexion->query($sql)) {
             $mensaje = "Producto eliminado correctamente.";
         } else {
             $mensaje = "Error al eliminar. Asegúrate de que no está en carritos activos.";
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 $sql = "SELECT * FROM Productos ORDER BY IdProducto DESC";
-$result = mysqli_query($conexion, $sql);
+$result = $conexion->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -336,7 +336,7 @@ $result = mysqli_query($conexion, $sql);
                 <div>Acciones</div>
             </div>
             
-            <?php while ($row = mysqli_fetch_assoc($result)): ?>
+            <?php while ($row = $result->fetch(PDO::FETCH_ASSOC)): ?>
             <form method="POST" action="admin.php" class="admin-grid-row">
                 <input type="hidden" name="id_producto" value="<?php echo $row['IdProducto']; ?>">
                 

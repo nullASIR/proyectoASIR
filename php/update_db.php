@@ -27,10 +27,10 @@ $queries = [
 ];
 
 foreach ($queries as $q) {
-    if (mysqli_query($conexion, $q)) {
+    if ($conexion->query($q)) {
         echo "OK: $q\n";
     } else {
-        echo "ERROR: " . mysqli_error($conexion) . " - $q\n";
+        echo "ERROR: " . implode(" ", $conexion->errorInfo() ?? []) . " - $q\n";
     }
 }
 ?>

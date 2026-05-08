@@ -11,7 +11,8 @@ if (file_exists($envPath)) {
     $lines = explode("\n", $envContent);
     foreach ($lines as $line) {
         $line = trim($line);
-        if (strpos($line, '#') === 0 || empty($line)) continue;
+        if (strpos($line, '#') === 0 || empty($line))
+            continue;
         if (strpos($line, '=') !== false) {
             list($key, $value) = explode('=', $line, 2);
             if (trim($key) === 'GEMINI_API_KEY') {
@@ -55,7 +56,7 @@ $body = [
     ]
 ];
 
-$ch = curl_init("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" . $apiKey);
+$ch = curl_init("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" . $apiKey);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Fix para XAMPP local
@@ -76,7 +77,12 @@ $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
 
 if ($httpCode !== 200) {
-    echo json_encode(["error" => "Error de la API de Gemini: " . $response]);
+    $errorData = json_decode($response, true);
+    if (isset($errorData['error']['code']) && $errorData['error']['code'] == 503) {
+        echo json_encode(["error" => "Hay mucha demanda, espera unos segundos"]);
+    } else {
+        echo json_encode(["error" => "Error de la API de Gemini: " . $response]);
+    }
     exit;
 }
 
