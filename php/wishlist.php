@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario_id'])) {
-    header("Location: index.php?msg=Debes iniciar sesión para ver tu wishlist.");
+    header("Location: ../index.php?msg=Debes iniciar sesión para ver tu wishlist.");
     exit();
 }
 ?>
@@ -37,7 +37,7 @@ if (!isset($_SESSION['usuario_id'])) {
         .wishlist-item img {
             width: 100%;
             height: 200px;
-            object-fit: cover;
+            object-fit: contain;
             border-radius: 8px;
             margin-bottom: 10px;
         }
@@ -82,7 +82,7 @@ if (!isset($_SESSION['usuario_id'])) {
         </div>
     </div>
 
-    <script src="../js/carrito.js"></script>
+    <script src="../js/carrito.js?v=2"></script>
     <script>
         async function cargarWishlist() {
             let contenedor = document.getElementById('wishlist-container');
@@ -97,13 +97,13 @@ if (!isset($_SESSION['usuario_id'])) {
                 
                 if (data.success && data.items.length > 0) {
                     data.items.forEach(item => {
-                        let img = item.Imagen ? `<img src="../${item.Imagen}" alt="${item.Nombre}">` : `<div style="height:200px;background:#334155;display:flex;align-items:center;justify-content:center;border-radius:8px;margin-bottom:10px;">📦</div>`;
+                        let img = item.Imagen ? `<img src="${item.Imagen}" alt="${item.Nombre}">` : `<div style="height:200px;background:#334155;display:flex;align-items:center;justify-content:center;border-radius:8px;margin-bottom:10px;">📦</div>`;
                         contenedor.innerHTML += `
                             <div class="wishlist-item" id="wl-item-${item.IdProducto}">
                                 ${img}
                                 <h4>${item.Nombre}</h4>
                                 <p>${item.Precio} €</p>
-                                <button onclick="addToCart(${item.IdProducto}, '${item.Nombre.replace(/'/g, "\\'")}', ${item.Precio}, '../${item.Imagen}')" style="background:#3498db;color:white;border:none;padding:8px;border-radius:4px;cursor:pointer;width:100%;margin-bottom:5px;">Añadir al Carrito</button>
+                                <button onclick="addToCart(${item.IdProducto}, '${item.Nombre.replace(/'/g, "\\'")}', ${item.Precio}, '${item.Imagen ? item.Imagen : ''}')" style="background:#3498db;color:white;border:none;padding:8px;border-radius:4px;cursor:pointer;width:100%;margin-bottom:5px;">Añadir al Carrito</button>
                                 <button onclick="removerWishlist(${item.IdProducto})" class="btn-remove">Eliminar</button>
                             </div>
                         `;

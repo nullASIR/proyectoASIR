@@ -108,7 +108,7 @@ $num2 = rand(1, 10);
             <button type="submit" class="btn btn-primary btn-block">Unirse a la Aventura</button>
         </form>
 
-        <a href="index.php">Volver al Login</a>
+        <a href="../index.php">Volver al Login</a>
     </div>
 
 </body>

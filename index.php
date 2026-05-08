@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'database.php';
+include 'php/database.php';
 
 $mensaje = "";
 
@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION['usuario_id'] = $row['Id'];
                     $_SESSION['nombre'] = $row['Name'];
                     $_SESSION['is_admin'] = isset($row['IsAdmin']) ? $row['IsAdmin'] : false;
-                    header("Location: inicio.php");
+                    header("Location: php/inicio.php");
                     exit();
                 }
                 else {
@@ -98,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../style/style.css?v=12">
+    <link rel="stylesheet" href="style/style.css?v=12">
 </head>
 
 <body>
@@ -120,11 +120,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <button type="submit" class="btn btn-primary btn-block">Entrar</button>
         </form>
 
-        <a href="registro.php">¿No tienes cuenta? Regístrate aquí</a>
+        <a href="php/registro.php">¿No tienes cuenta? Regístrate aquí</a>
         <br><br>
-        <a href="olvide_contrasena.php">¿Olvidaste tu contraseña?</a>
+        <a href="php/olvide_contrasena.php">¿Olvidaste tu contraseña?</a>
         <br><br>
-        <a href="inicio.php" style="color: #666; font-size: 0.9em;">Entrar sin registrarse</a>
+        <a href="php/inicio.php" style="color: #666; font-size: 0.9em;">Entrar sin registrarse</a>
     </div>
 
 </body>

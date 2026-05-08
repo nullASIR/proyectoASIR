@@ -50,7 +50,7 @@ include 'database.php';
                     </div>
                 <?php
 else: ?>
-                    <a href="index.php" class="btn btn-outline">Iniciar Sesión</a>
+                    <a href="../index.php" class="btn btn-outline">Iniciar Sesión</a>
                     <a href="registro.php" class="btn btn-primary">Registrarse</a>
                 <?php
 endif; ?>
@@ -164,25 +164,16 @@ endif; ?>
                 transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, border-color 0.3s ease;
                 box-shadow: 0 4px 15px rgba(0,0,0,0.3);
                 position: relative;
-                overflow: hidden;
+                overflow: visible;
+                z-index: 1;
             }
-            .carta-row::before {
-                content: '';
-                position: absolute;
-                top: 0; left: 0; width: 100%; height: 100%;
-                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
-                transform: translateX(-100%);
-                transition: transform 0.6s ease;
-                pointer-events: none;
-            }
+
             .carta-row:hover {
                 background: linear-gradient(145deg, rgba(51, 65, 85, 0.9), rgba(30, 41, 59, 0.95));
                 transform: translateY(-4px) scale(1.02);
                 box-shadow: 0 12px 25px rgba(0,0,0,0.5), 0 0 15px rgba(59, 130, 246, 0.3);
                 border-color: rgba(96, 165, 250, 0.5);
-            }
-            .carta-row:hover::before {
-                transform: translateX(100%);
+                z-index: 100;
             }
             
             /* Info Principal y Hover Imagen */
@@ -236,7 +227,7 @@ endif; ?>
             .carta-img-trigger img.thumb {
                 width: 100%;
                 height: 100%;
-                object-fit: cover;
+                object-fit: contain;
                 border-radius: 4px;
             }
 
@@ -446,10 +437,11 @@ endif; ?>
             }
         </style>
 
-        <div class="search-filter" style="margin-bottom: 20px; display: flex; gap: 10px;">
-            <form method="GET" action="cartas.php" style="display: flex; gap: 10px; width: 100%;">
-                <input type="text" name="q" placeholder="Buscar cartas..." value="<?php echo isset($_GET['q']) ? htmlspecialchars($_GET['q']) : ''; ?>" style="flex: 1; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
-                <button type="submit" class="btn btn-primary">Buscar</button>
+        <div class="search-filter" style="margin-bottom: 40px; display: flex; justify-content: center; width: 100%;">
+            <form method="GET" action="cartas.php" style="display: flex; gap: 8px; width: 100%; max-width: 450px; background: rgba(30, 41, 59, 0.7); padding: 6px; border-radius: 50px; border: 1px solid rgba(148, 163, 184, 0.2); box-shadow: 0 4px 20px rgba(0,0,0,0.15); align-items: center; box-sizing: border-box;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 15px; flex-shrink: 0;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" name="q" placeholder="Buscar cartas..." value="<?php echo isset($_GET['q']) ? htmlspecialchars($_GET['q']) : ''; ?>" style="flex: 1; padding: 10px 10px; border-radius: 50px; border: none; background: transparent; color: #fff; outline: none; font-size: 15px; min-width: 0;">
+                <button type="submit" class="btn btn-primary" style="border-radius: 50px; padding: 10px 25px; margin: 0; flex-shrink: 0; white-space: nowrap;">Buscar</button>
             </form>
         </div>
 
@@ -464,7 +456,7 @@ $result = mysqli_query($conexion, $sql);
 
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
-        $imgUrl = isset($row['Imagen']) && !empty($row['Imagen']) ? "../" . htmlspecialchars($row['Imagen']) : "";
+        $imgUrl = isset($row['Imagen']) && !empty($row['Imagen']) ? htmlspecialchars($row['Imagen']) : "";
 ?>
                 <div class="carta-row">
                     <!-- INFO Y HOVER DE FOTO -->
@@ -525,7 +517,7 @@ if (mysqli_num_rows($result) > 0) {
                             </button>
                         <?php
         else: ?>
-                            <button class="btn-buy" onclick="window.location.href='index.php?msg=Debes iniciar sesión para comprar'">
+                            <button class="btn-buy" onclick="window.location.href='../index.php?msg=Debes iniciar sesión para comprar'">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
                                 Añadir
                             </button>
@@ -569,7 +561,7 @@ else {
         </div>
     </footer>
 
-    <script src="../js/carrito.js"></script>
+    <script src="../js/carrito.js?v=2"></script>
     <script src="../js/chatbot.js?v=4"></script>
     <script src="../js/pokelens.js?v=1"></script>
 

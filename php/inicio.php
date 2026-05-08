@@ -50,7 +50,7 @@ include 'database.php';
                     </div>
                 <?php
 else: ?>
-                    <a href="index.php" class="btn btn-outline">Iniciar Sesión</a>
+                    <a href="../index.php" class="btn btn-outline">Iniciar Sesión</a>
                     <a href="registro.php" class="btn btn-primary">Registrarse</a>
                 <?php
 endif; ?>
@@ -111,7 +111,7 @@ $result = mysqli_query($conexion, $sql);
 
 if ($result && mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
-        $imgUrl = isset($row['Imagen']) && !empty($row['Imagen']) ? "../" . htmlspecialchars($row['Imagen']) : "";
+        $imgUrl = isset($row['Imagen']) && !empty($row['Imagen']) ? htmlspecialchars($row['Imagen']) : "";
 ?>
                     <div class="carta">
                         <div class="foto-placeholder" style="background: white;">
@@ -126,8 +126,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                         <h4><?php echo htmlspecialchars($row['Nombre']); ?></h4>
                         
                         <div class="ficha-tec">
-                            <strong>Estado:</strong> <?php echo htmlspecialchars($row['Estado']); ?><br>
-                            <strong>Stock:</strong> <?php echo htmlspecialchars($row['Stock']); ?> unid.
+                            <strong>Estado:</strong> <?php echo htmlspecialchars($row['Estado']); ?>
                         </div>
                         
                         <div class="precio-row">
@@ -139,7 +138,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                                 </div>
                             <?php
         else: ?>
-                                <button onclick="window.location.href='index.php?msg=Debes iniciar sesión para comprar'">Añadir</button>
+                                <button onclick="window.location.href='../index.php?msg=Debes iniciar sesión para comprar'">Añadir</button>
                             <?php
         endif; ?>
                         </div>
@@ -180,7 +179,7 @@ else {
         </div>
     </footer>
 
-    <script src="../js/carrito.js"></script>
+    <script src="../js/carrito.js?v=2"></script>
     <script src="../js/chatbot.js?v=4"></script>
 </body>
 </html>

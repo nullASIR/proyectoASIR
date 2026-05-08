@@ -50,7 +50,7 @@ include 'database.php';
                     </div>
                 <?php
 else: ?>
-                    <a href="index.php" class="btn btn-outline">Iniciar Sesión</a>
+                    <a href="../index.php" class="btn btn-outline">Iniciar Sesión</a>
                     <a href="registro.php" class="btn btn-primary">Registrarse</a>
                 <?php
 endif; ?>
@@ -65,10 +65,11 @@ endif; ?>
             <h2>Productos Sellados & Accesorios</h2>
         </div>
 
-        <div class="search-filter" style="margin-bottom: 20px; display: flex; gap: 10px;">
-            <form method="GET" action="productos.php" style="display: flex; gap: 10px; width: 100%;">
-                <input type="text" name="q" placeholder="Buscar productos..." value="<?php echo isset($_GET['q']) ? htmlspecialchars($_GET['q']) : ''; ?>" style="flex: 1; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
-                <button type="submit" class="btn btn-primary">Buscar</button>
+        <div class="search-filter" style="margin-bottom: 40px; display: flex; justify-content: center; width: 100%;">
+            <form method="GET" action="productos.php" style="display: flex; gap: 8px; width: 100%; max-width: 450px; background: rgba(30, 41, 59, 0.7); padding: 6px; border-radius: 50px; border: 1px solid rgba(148, 163, 184, 0.2); box-shadow: 0 4px 20px rgba(0,0,0,0.15); align-items: center; box-sizing: border-box;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 15px; flex-shrink: 0;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" name="q" placeholder="Buscar productos..." value="<?php echo isset($_GET['q']) ? htmlspecialchars($_GET['q']) : ''; ?>" style="flex: 1; padding: 10px 10px; border-radius: 50px; border: none; background: transparent; color: #fff; outline: none; font-size: 15px; min-width: 0;">
+                <button type="submit" class="btn btn-primary" style="border-radius: 50px; padding: 10px 25px; margin: 0; flex-shrink: 0; white-space: nowrap;">Buscar</button>
             </form>
         </div>
 
@@ -84,7 +85,7 @@ $result = mysqli_query($conexion, $sql);
 
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
-        $imgUrl = isset($row['Imagen']) && !empty($row['Imagen']) ? "../" . htmlspecialchars($row['Imagen']) : "";
+        $imgUrl = isset($row['Imagen']) && !empty($row['Imagen']) ? htmlspecialchars($row['Imagen']) : "";
 ?>
                     <div class="carta">
                         <div class="foto-placeholder" style="background: white;">
@@ -99,9 +100,7 @@ if (mysqli_num_rows($result) > 0) {
                         <h4><?php echo htmlspecialchars($row['Nombre']); ?></h4>
                         
                         <div class="ficha-tec">
-                            <strong>Estado:</strong> <?php echo htmlspecialchars($row['Estado']); ?><br>
-                            <strong>Stock:</strong> <?php echo htmlspecialchars($row['Stock']); ?> unid.<br>
-                            <small style="color:var(--text-secondary);">EAN: <?php echo htmlspecialchars($row['Ean']); ?></small>
+                            <strong>Estado:</strong> <?php echo htmlspecialchars($row['Estado']); ?>
                         </div>
                         
                         <div class="precio-row">
@@ -113,7 +112,7 @@ if (mysqli_num_rows($result) > 0) {
                                 </div>
                             <?php
         else: ?>
-                                <button onclick="window.location.href='index.php?msg=Debes iniciar sesión para comprar'">Añadir</button>
+                                <button onclick="window.location.href='../index.php?msg=Debes iniciar sesión para comprar'">Añadir</button>
                             <?php
         endif; ?>
                         </div>
@@ -154,7 +153,7 @@ else {
         </div>
     </footer>
 
-    <script src="../js/carrito.js"></script>
+    <script src="../js/carrito.js?v=2"></script>
     <script src="../js/chatbot.js?v=4"></script>
 
 </body>

@@ -21,6 +21,7 @@ CREATE TABLE Productos (
     Stock INTEGER,
     Estado VARCHAR(100),
     Impuesto DECIMAL(10,2),
+    Imagen VARCHAR(100),
     Tipo VARCHAR(100),
     INDEX IdxNombreProducto (Nombre)
 ) ENGINE=InnoDB;

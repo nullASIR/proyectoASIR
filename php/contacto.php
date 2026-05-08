@@ -46,7 +46,7 @@ session_start();
                     </div>
                 <?php
 else: ?>
-                    <a href="index.php" class="btn btn-outline">Iniciar Sesión</a>
+                    <a href="../index.php" class="btn btn-outline">Iniciar Sesión</a>
                     <a href="registro.php" class="btn btn-primary">Registrarse</a>
                 <?php
 endif; ?>
@@ -176,7 +176,7 @@ endif; ?>
         </div>
     </footer>
 
-    <script src="../js/carrito.js"></script>
+    <script src="../js/carrito.js?v=2"></script>
     <script src="../js/chatbot.js?v=4"></script>
 </body>
 

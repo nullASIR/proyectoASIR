@@ -319,42 +319,37 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ============================================
-    // INTEGRACIÓN API GEMINI 2.0 FLASH
-    const GEMINI_API_KEY = "AIzaSyAUdeHqIAdT4O48tnVglygfcRikZeDmYv8";
+    // INTEGRACIÓN API BACKEND
+    // La clave de API ahora está oculta en .env y gestionada por PHP
     // ============================================
 
     async function getGeminiResponse(userText) {
         try {
-            const systemPrompt = "Eres PimasBot, el asistente Inteligente TCG de la prestigiosa tienda PokePimas. Eres experto, amable y breve. Das soluciones rápidas de e-commerce (envíos en 24h/48h asegurados, metodos de pago como tarjeta, bizum y paypal seguros, productos 100% verificados y devoluciones en 14 dias para sellados). Usa unos pocos emojis si es necesario, sin pasarte. Responde medianamente breve. Responde la siguiente duda del usuario: ";
-
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+            // Determinar la ruta correcta al backend dependiendo de dónde estemos
+            const basePath = window.location.pathname.includes('/php/') ? 'api_chatbot.php' : 'php/api_chatbot.php';
+            
+            const response = await fetch(basePath, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    contents: [{
-                        parts: [{ text: systemPrompt + userText }]
-                    }],
-                    generationConfig: {
-                        temperature: 0.7,
-                        maxOutputTokens: 2500
-                    }
-                })
+                body: JSON.stringify({ text: userText })
             });
 
             if (!response.ok) {
-                console.error("Error from API:", response.status, await response.text());
-                return "Ay... mis circuitos 🤖. Ha ocurrido un error al conectar con los servidores.";
+                const text = await response.text();
+                console.error("Error from backend:", response.status, text);
+                return "Ay... mis circuitos 🤖. HTTP " + response.status + ". Revisa la consola (F12).";
             }
 
             const data = await response.json();
+            
+            if (data.error) {
+                console.error("Backend error:", data.error);
+                return "⚠️ Error del servidor: " + data.error;
+            }
 
-            let modelReply = (data.candidates && data.candidates[0].content && data.candidates[0].content.parts[0].text)
-                ? data.candidates[0].content.parts[0].text
-                : "Uf, mis pensamientos se entrecruzaron. 😵 ¿Podrías repetirlo?";
-            modelReply = modelReply.replace(/\n/g, "<br>");
-            return modelReply;
+            return data.reply || "Uf, mis pensamientos se entrecruzaron. 😵 ¿Podrías repetirlo?";
 
         } catch (error) {
             console.error("Fetch error:", error);

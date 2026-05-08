@@ -77,7 +77,7 @@ if (isset($_GET['token'])) {
                 <strong>Correcto:</strong> <?php echo $mensaje; ?>
             </div>
             
-            <a href="index.php" class="btn btn-primary btn-block" style="text-align: center;">Iniciar Sesión</a>
+            <a href="../index.php" class="btn btn-primary btn-block" style="text-align: center;">Iniciar Sesión</a>
         <?php else: ?>
             <?php if ($mensaje != ""): ?>
                 <div class="msg-error" style="color: red; border: 1px solid red; padding: 15px; border-radius: 8px; text-align: center; margin-bottom: 20px;">
@@ -108,7 +108,7 @@ if (isset($_GET['token'])) {
                 <a href="olvide_contrasena.php" class="btn btn-outline btn-block" style="text-align: center; margin-top: 15px;">Solicitar nuevo enlace</a>
             <?php endif; ?>
             
-            <a href="index.php" style="display: block; text-align: center; margin-top: 15px;">Volver al Inicio</a>
+            <a href="../index.php" style="display: block; text-align: center; margin-top: 15px;">Volver al Inicio</a>
         <?php endif; ?>
     </div>
 </body>

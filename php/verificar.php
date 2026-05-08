@@ -77,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <strong>Correcto:</strong> <?php echo $mensaje; ?>
             </div>
             <br>
-            <a href="index.php" class="btn btn-primary btn-block" style="text-align: center;">
+            <a href="../index.php" class="btn btn-primary btn-block" style="text-align: center;">
                 Ir a Iniciar Sesión
             </a>
         <?php
@@ -114,7 +114,7 @@ else: ?>
                 <button type="submit" class="btn btn-primary btn-block">Verificar y Entrar</button>
             </form>
             
-            <a href="index.php" style="display: block; text-align: center; margin-top: 15px;">Volver al Inicio</a>
+            <a href="../index.php" style="display: block; text-align: center; margin-top: 15px;">Volver al Inicio</a>
         <?php
 endif; ?>
     </div>

@@ -7,4 +7,8 @@ $DB = "pimas";
 
 $conexion = mysqli_connect($servidor, $usuario, $password, $DB);
 
+if (!$conexion) {
+    die("Error de conexión: " . mysqli_connect_error());
+}
+
 ?>

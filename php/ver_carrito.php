@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario_id'])) {
-    header("Location: index.php?msg=Debes iniciar sesión para ver tu carrito.");
+    header("Location: ../index.php?msg=Debes iniciar sesión para ver tu carrito.");
     exit();
 }
 ?>
@@ -49,7 +49,7 @@ if (!isset($_SESSION['usuario_id'])) {
                     </div>
                 <?php
 else: ?>
-                    <a href="index.php" class="btn btn-outline">Iniciar Sesión</a>
+                    <a href="../index.php" class="btn btn-outline">Iniciar Sesión</a>
                     <a href="registro.php" class="btn btn-primary">Registrarse</a>
                 <?php
 endif; ?>
@@ -70,11 +70,11 @@ endif; ?>
             <h3>Total: <span id="total-carrito">0.00 €</span></h3>
             <br>
             <button onclick="vaciarCarrito()" class="btn btn-outline" style="margin-right: 15px;">Vaciar Carrito</button>
-            <button class="btn btn-primary">Finalizar Compra</button>
+            <button onclick="finalizarCompra()" class="btn btn-primary">Finalizar Compra</button>
         </div>
     </div>
 
-    <script src="../js/carrito.js"></script>
+    <script src="../js/carrito.js?v=3"></script>
     <script src="../js/chatbot.js?v=4"></script>
 
 </body>

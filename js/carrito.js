@@ -1,25 +1,48 @@
-// Carrito.js - Lógica del carrito de compras
+// Carrito.js - Lógica del carrito de compras usando LocalStorage
+
+function getCart() {
+    try {
+        let cart = localStorage.getItem('pokepimas_cart');
+        if (cart) {
+            let parsed = JSON.parse(cart);
+            return Array.isArray(parsed) ? parsed : [];
+        }
+    } catch (e) {
+        console.error("Error al leer el carrito:", e);
+    }
+    return [];
+}
+
+function saveCart(cart) {
+    localStorage.setItem('pokepimas_cart', JSON.stringify(cart));
+}
 
 // Función para añadir al carrito
-async function addToCart(id, nombre, precio, imagen = '') {
-    let formData = new FormData();
-    formData.append('action', 'add');
-    formData.append('id', id);
-
+function addToCart(id, nombre, precio, imagen = '') {
     try {
-        let res = await fetch('api_cart.php', { method: 'POST', body: formData });
-        let data = await res.json();
-        
-        if (data.success) {
-            showToast(`<strong>${nombre}</strong> añadido al carrito`);
-            if (document.getElementById('lista-carrito')) {
-                mostrarCarrito();
-            }
+        let cart = getCart();
+        let existingItem = cart.find(item => item.id == id);
+
+        if (existingItem) {
+            existingItem.cantidad += 1;
         } else {
-            showToast(`Error: ${data.message || 'No se pudo añadir'}`);
+            cart.push({
+                id: id,
+                nombre: nombre,
+                precio: parseFloat(precio),
+                imagen: imagen,
+                cantidad: 1
+            });
+        }
+
+        saveCart(cart);
+        showToast(`<strong>${nombre}</strong> añadido al carrito`);
+        
+        if (document.getElementById('lista-carrito')) {
+            mostrarCarrito();
         }
     } catch(e) {
-        showToast("Error de conexión al añadir al carrito.");
+        showToast("Error al añadir al carrito.");
         console.error(e);
     }
 }
@@ -57,79 +80,66 @@ function showToast(message) {
 }
 
 // Función para mostrar el carrito (usada en ver_carrito.php)
-async function mostrarCarrito() {
+function mostrarCarrito() {
     let contenedor = document.getElementById('lista-carrito');
     let totalElement = document.getElementById('total-carrito');
     
     if (!contenedor) return;
     
-    let formData = new FormData();
-    formData.append('action', 'get');
-
     try {
-        let res = await fetch('api_cart.php', { method: 'POST', body: formData });
-        let data = await res.json();
-        
-        if (data.success) {
-            contenedor.innerHTML = '';
-            let carrito = data.items;
-            let total = 0;
+        contenedor.innerHTML = '';
+        let carrito = getCart();
+        let total = 0;
 
-            if (carrito.length === 0) {
-                contenedor.innerHTML = '<p>El carrito está vacío.</p>';
-                totalElement.innerText = '0.00 €';
-                return;
-            }
-
-            carrito.forEach((item, index) => {
-                let subtotal = item.precio * item.cantidad;
-                total += subtotal;
-
-                let div = document.createElement('div');
-                div.classList.add('item-carrito');
-
-                let imgHtml = item.imagen ? `<img src="${item.imagen}" alt="${item.nombre}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">` : `<div style="width: 50px; height: 50px; background: #e2e8f0; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 20px;">📦</div>`;
-
-                div.innerHTML = `
-                    <div style="display: flex; align-items: center; gap: 15px;">
-                        ${imgHtml}
-                        <div>
-                            <strong class="item-name">${item.nombre}</strong><br>
-                            <span class="item-price">${item.precio} € x ${item.cantidad}</span>
-                        </div>
-                    </div>
-                    <div class="item-actions">
-                        <span class="item-subtotal">${subtotal.toFixed(2)} €</span>
-                        <button onclick="eliminarDelCarrito(${item.id})" class="btn-remove" title="Eliminar">&times;</button>
-                    </div>
-                `;
-
-                contenedor.appendChild(div);
-            });
-
-            totalElement.innerText = total.toFixed(2) + ' €';
-        } else {
-            contenedor.innerHTML = `<p>${data.message}</p>`;
+        if (carrito.length === 0) {
+            contenedor.innerHTML = '<p>El carrito está vacío.</p>';
+            if (totalElement) totalElement.innerText = '0.00 €';
+            return;
         }
+
+        carrito.forEach((item, index) => {
+            let precio = parseFloat(item.precio) || 0;
+            let subtotal = precio * (item.cantidad || 1);
+            total += subtotal;
+
+            let div = document.createElement('div');
+            div.classList.add('item-carrito');
+
+            let imgHtml = item.imagen ? `<img src="${item.imagen}" alt="${item.nombre}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">` : `<div style="width: 50px; height: 50px; background: #e2e8f0; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 20px;">📦</div>`;
+
+            div.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    ${imgHtml}
+                    <div>
+                        <strong class="item-name">${item.nombre || 'Producto'}</strong><br>
+                        <span class="item-price">${precio.toFixed(2)} € x ${item.cantidad || 1}</span>
+                    </div>
+                </div>
+                <div class="item-actions">
+                    <span class="item-subtotal">${subtotal.toFixed(2)} €</span>
+                    <button onclick="eliminarDelCarrito(${item.id})" class="btn-remove" title="Eliminar">&times;</button>
+                </div>
+            `;
+
+            contenedor.appendChild(div);
+        });
+
+        if (totalElement) totalElement.innerText = total.toFixed(2) + ' €';
     } catch(e) {
         contenedor.innerHTML = '<p>Error cargando carrito.</p>';
+        console.error(e);
     }
 }
 
-async function eliminarDelCarrito(id) {
-    let formData = new FormData();
-    formData.append('action', 'remove');
-    formData.append('id', id);
-
-    await fetch('api_cart.php', { method: 'POST', body: formData });
+function eliminarDelCarrito(id) {
+    let cart = getCart();
+    cart = cart.filter(item => item.id != id);
+    saveCart(cart);
     mostrarCarrito();
 }
 
-async function vaciarCarrito() {
-    let formData = new FormData();
-    formData.append('action', 'clear');
-
-    await fetch('api_cart.php', { method: 'POST', body: formData });
+function vaciarCarrito() {
+    localStorage.removeItem('pokepimas_cart');
     mostrarCarrito();
 }
 
@@ -208,3 +218,50 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+function finalizarCompra() {
+    let cart = getCart();
+    if (cart.length === 0) {
+        showToast("No tienes artículos en el carrito para comprar.");
+        return;
+    }
+    
+    // Crear el overlay
+    let overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100vw';
+    overlay.style.height = '100vh';
+    overlay.style.backgroundColor = 'rgba(0,0,0,0.6)';
+    overlay.style.display = 'flex';
+    overlay.style.alignItems = 'center';
+    overlay.style.justifyContent = 'center';
+    overlay.style.zIndex = '9999';
+    overlay.style.backdropFilter = 'blur(5px)';
+    
+    // Crear el modal
+    let modal = document.createElement('div');
+    modal.style.backgroundColor = '#fff';
+    modal.style.padding = '40px';
+    modal.style.borderRadius = '12px';
+    modal.style.boxShadow = '0 10px 25px rgba(0,0,0,0.2)';
+    modal.style.maxWidth = '400px';
+    modal.style.textAlign = 'center';
+    
+    modal.innerHTML = `
+        <div style="font-size: 40px; margin-bottom: 15px;">🚧</div>
+        <h3 style="margin-bottom: 15px; color: #333; font-family: 'Montserrat', sans-serif;">Mantenimiento</h3>
+        <p style="color: #666; line-height: 1.5; margin-bottom: 25px; font-family: 'Nunito Sans', sans-serif;">
+            El sistema de pago seguro se encuentra temporalmente en mantenimiento o en fase de pruebas. Por favor, inténtelo más tarde. Disculpe las molestias.
+        </p>
+        <button id="cerrar-modal-btn" class="btn btn-primary" style="width: 100%;">Entendido</button>
+    `;
+    
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+    
+    document.getElementById('cerrar-modal-btn').addEventListener('click', () => {
+        document.body.removeChild(overlay);
+    });
+}

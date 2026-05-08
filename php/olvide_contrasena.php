@@ -78,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
             <?php endif; ?>
             
-            <a href="index.php" class="btn btn-outline btn-block" style="text-align: center;">Volver al Login</a>
+            <a href="../index.php" class="btn btn-outline btn-block" style="text-align: center;">Volver al Login</a>
         <?php else: ?>
             <?php if ($mensaje != ""): ?>
                 <p style='color:red; text-align: center;'><?php echo $mensaje; ?></p>
@@ -95,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <button type="submit" class="btn btn-primary btn-block">Enviar Enlace</button>
             </form>
 
-            <a href="index.php" style="display: block; text-align: center; margin-top: 15px;">Volver al Inicio de Sesión</a>
+            <a href="../index.php" style="display: block; text-align: center; margin-top: 15px;">Volver al Inicio de Sesión</a>
         <?php endif; ?>
     </div>
 </body>
