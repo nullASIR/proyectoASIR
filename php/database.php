@@ -1,8 +1,8 @@
 <?php
 
-$servidor = "localhost";
-$usuario = "root";
-$password = "";
+$servidor = "192.168.10.10";
+$usuario = "web";
+$password = "Abc1234";
 $DB = "Pimas";
 
 try {
