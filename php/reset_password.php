@@ -7,21 +7,21 @@ $token_valido = false;
 $correo_usuario = "";
 
 if (isset($_GET['token'])) {
-    $token = substr($conexion->quote($_GET['token']), 1, -1);
+    $token = mysqli_real_escape_string($conexion, $_GET['token']);
     
     // Verificar si el token es válido y no ha expirado
     $sql = "SELECT Mail FROM user WHERE ResetToken = '$token' AND ResetExpires > NOW()";
     $result = $conexion->query($sql);
     
-    if ($result->rowCount() === 1) {
+    if ($result->num_rows === 1) {
         $token_valido = true;
-        $row = $result->fetch(PDO::FETCH_ASSOC);
+        $row = $result->fetch_assoc();
         $correo_usuario = $row['Mail'];
     } else {
         $mensaje = "El enlace de recuperación es inválido o ha expirado.";
     }
 } else if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $token = substr($conexion->quote($_POST['token']), 1, -1);
+    $token = mysqli_real_escape_string($conexion, $_POST['token']);
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
     
@@ -29,9 +29,9 @@ if (isset($_GET['token'])) {
     $sql = "SELECT Mail FROM user WHERE ResetToken = '$token' AND ResetExpires > NOW()";
     $result = $conexion->query($sql);
     
-    if ($result->rowCount() === 1) {
+    if ($result->num_rows === 1) {
         if ($password === $confirm_password) {
-            $row = $result->fetch(PDO::FETCH_ASSOC);
+            $row = $result->fetch_assoc();
             $correo = $row['Mail'];
             $password_hash = password_hash($password, PASSWORD_BCRYPT);
             

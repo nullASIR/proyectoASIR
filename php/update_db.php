@@ -30,7 +30,7 @@ foreach ($queries as $q) {
     if ($conexion->query($q)) {
         echo "OK: $q\n";
     } else {
-        echo "ERROR: " . implode(" ", $conexion->errorInfo() ?? []) . " - $q\n";
+        echo "ERROR: " . $conexion->error . " - $q\n";
     }
 }
 ?>

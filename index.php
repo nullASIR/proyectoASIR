@@ -5,15 +5,15 @@ include 'php/database.php';
 $mensaje = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $usuario_input = substr($conexion->quote($_POST['usuario']), 1, -1);
+    $usuario_input = mysqli_real_escape_string($conexion, $_POST['usuario']);
     $password = $_POST['password'];
 
     // Permitir login con Name o Mail
     $sql = "SELECT * FROM user WHERE Name = '$usuario_input' OR Mail = '$usuario_input'";
     $result = $conexion->query($sql);
 
-    if ($result->rowCount() === 1) {
-        $row = $result->fetch(PDO::FETCH_ASSOC);
+    if ($result->num_rows === 1) {
+        $row = $result->fetch_assoc();
 
         // Verificamos si la cuenta está bloqueada temporalmente
         if (!empty($row['LockoutTime'])) {

@@ -76,15 +76,15 @@ endif; ?>
         <div class="catalogo">
             <?php
 // Mostramos todos los productos que no sean cartas sueltas (productos sellados, accesorios, etc)
-$search = isset($_GET['q']) ? substr($conexion->quote($_GET['q']), 1, -1) : '';
+$search = isset($_GET['q']) ? mysqli_real_escape_string($conexion, $_GET['q']) : '';
 $sql = "SELECT * FROM Productos WHERE Tipo != 'Carta Suelta'";
 if ($search) {
     $sql .= " AND Nombre LIKE '%$search%'";
 }
 $result = $conexion->query($sql);
 
-if ($result->rowCount() > 0) {
-    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
         $imgUrl = isset($row['Imagen']) && !empty($row['Imagen']) ? htmlspecialchars($row['Imagen']) : "";
 ?>
                     <div class="carta">

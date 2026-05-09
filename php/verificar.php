@@ -6,15 +6,15 @@ $exito = false;
 $mail = isset($_GET['mail']) ? htmlspecialchars($_GET['mail']) : "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $mail_post = substr($conexion->quote($_POST['mail']), 1, -1);
-    $codigo_ingresado = substr($conexion->quote($_POST['codigo']), 1, -1);
+    $mail_post = mysqli_real_escape_string($conexion, $_POST['mail']);
+    $codigo_ingresado = mysqli_real_escape_string($conexion, $_POST['codigo']);
 
     $sql = "SELECT Id, Verified, VerificationCode FROM user WHERE Mail = '$mail_post'";
     $result = $conexion->query($sql);
 
     // Verificar si el correo existe
-    if ($result->rowCount() === 1) {
-        $row = $result->fetch(PDO::FETCH_ASSOC);
+    if ($result->num_rows === 1) {
+        $row = $result->fetch_assoc();
 
         // Comprobar si ya está verificado
         if ($row['Verified'] == 1) {

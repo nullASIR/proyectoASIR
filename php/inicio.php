@@ -109,8 +109,8 @@ endif; ?>
 $sql = "SELECT * FROM Productos ORDER BY IdProducto DESC LIMIT 4";
 $result = $conexion->query($sql);
 
-if ($result && $result->rowCount() > 0) {
-    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
         $imgUrl = isset($row['Imagen']) && !empty($row['Imagen']) ? htmlspecialchars($row['Imagen']) : "";
 ?>
                     <div class="carta">

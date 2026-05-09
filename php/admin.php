@@ -336,7 +336,7 @@ $result = $conexion->query($sql);
                 <div>Acciones</div>
             </div>
             
-            <?php while ($row = $result->fetch(PDO::FETCH_ASSOC)): ?>
+            <?php while ($row = $result->fetch_assoc()): ?>
             <form method="POST" action="admin.php" class="admin-grid-row">
                 <input type="hidden" name="id_producto" value="<?php echo $row['IdProducto']; ?>">
                 

@@ -6,13 +6,13 @@ $exito = false;
 $debug_link = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $correo = substr($conexion->quote($_POST['correo']), 1, -1);
+    $correo = mysqli_real_escape_string($conexion, $_POST['correo']);
 
     $sql = "SELECT Id, Name FROM user WHERE Mail = '$correo'";
     $result = $conexion->query($sql);
 
-    if ($result->rowCount() === 1) {
-        $row = $result->fetch(PDO::FETCH_ASSOC);
+    if ($result->num_rows === 1) {
+        $row = $result->fetch_assoc();
         $nombre = $row['Name'];
         
         $token = bin2hex(random_bytes(32));

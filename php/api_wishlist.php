@@ -14,7 +14,7 @@ $idProd = isset($_POST['id']) ? (int)$_POST['id'] : 0;
 
 if ($action == 'toggle' && $idProd > 0) {
     $q = $conexion->query("SELECT Id FROM Wishlist WHERE UserId = $userId AND ProductoId = $idProd");
-    if ($q->rowCount() > 0) {
+    if ($q->num_rows > 0) {
         $conexion->query("DELETE FROM Wishlist WHERE UserId = $userId AND ProductoId = $idProd");
         echo json_encode(['success' => true, 'status' => 'removed']);
     } else {
@@ -24,7 +24,7 @@ if ($action == 'toggle' && $idProd > 0) {
 } elseif ($action == 'get') {
     $q = $conexion->query("SELECT p.* FROM Wishlist w JOIN Productos p ON w.ProductoId = p.IdProducto WHERE w.UserId = $userId");
     $items = [];
-    while ($r = $q->fetch(PDO::FETCH_ASSOC)) {
+    while ($r = $q->fetch_assoc()) {
         $items[] = $r;
     }
     echo json_encode(['success' => true, 'items' => $items]);

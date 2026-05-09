@@ -4,8 +4,8 @@ include 'database.php';
 $mensaje = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nombre = substr($conexion->quote($_POST['nombre']), 1, -1);
-    $correo = substr($conexion->quote($_POST['correo']), 1, -1);
+    $nombre = mysqli_real_escape_string($conexion, $_POST['nombre']);
+    $correo = mysqli_real_escape_string($conexion, $_POST['correo']);
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $check_email = "SELECT * FROM user WHERE Mail = '$correo'";
         $result = $conexion->query($check_email);
 
-        if ($result->rowCount() > 0) {
+        if ($result->num_rows > 0) {
             $mensaje = "El correo ya está registrado.";
         }
         else {
@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 exit();
             }
             else {
-                $mensaje = "Error: " . implode(" ", $conexion->errorInfo() ?? []);
+                $mensaje = "Error: " . $conexion->error;
             }
         }
     }
