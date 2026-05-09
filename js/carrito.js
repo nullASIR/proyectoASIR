@@ -1,5 +1,3 @@
-// Carrito.js - Lógica del carrito de compras usando LocalStorage
-
 function getCart() {
     try {
         let cart = localStorage.getItem('pokepimas_cart');
@@ -17,7 +15,6 @@ function saveCart(cart) {
     localStorage.setItem('pokepimas_cart', JSON.stringify(cart));
 }
 
-// Función para añadir al carrito
 function addToCart(id, nombre, precio, imagen = '') {
     try {
         let cart = getCart();
@@ -37,17 +34,16 @@ function addToCart(id, nombre, precio, imagen = '') {
 
         saveCart(cart);
         showToast(`<strong>${nombre}</strong> añadido al carrito`);
-        
+
         if (document.getElementById('lista-carrito')) {
             mostrarCarrito();
         }
-    } catch(e) {
+    } catch (e) {
         showToast("Error al añadir al carrito.");
         console.error(e);
     }
 }
 
-// ==== Sistema de Notificaciones Toast ====
 function showToast(message) {
     let toastContainer = document.getElementById('toast-container');
     if (!toastContainer) {
@@ -69,23 +65,20 @@ function showToast(message) {
 
     toastContainer.appendChild(toast);
 
-    // Desencadenar animación de entrada
     setTimeout(() => toast.classList.add('show'), 10);
 
-    // Auto-eliminar después de 3 segundos
     setTimeout(() => {
         toast.classList.remove('show');
-        setTimeout(() => toast.remove(), 400); // Esperar a que acabe la transición css
+        setTimeout(() => toast.remove(), 400);
     }, 3000);
 }
 
-// Función para mostrar el carrito (usada en ver_carrito.php)
 function mostrarCarrito() {
     let contenedor = document.getElementById('lista-carrito');
     let totalElement = document.getElementById('total-carrito');
-    
+
     if (!contenedor) return;
-    
+
     try {
         contenedor.innerHTML = '';
         let carrito = getCart();
@@ -125,7 +118,7 @@ function mostrarCarrito() {
         });
 
         if (totalElement) totalElement.innerText = total.toFixed(2) + ' €';
-    } catch(e) {
+    } catch (e) {
         contenedor.innerHTML = '<p>Error cargando carrito.</p>';
         console.error(e);
     }
@@ -151,27 +144,25 @@ async function toggleWishlist(id) {
     try {
         let res = await fetch('api_wishlist.php', { method: 'POST', body: formData });
         let data = await res.json();
-        
+
         if (data.success) {
             let btn = document.getElementById(`wishlist-btn-${id}`);
             if (data.status === 'added') {
                 showToast('Añadido a Wishlist');
-                if(btn) btn.innerHTML = '❤️';
+                if (btn) btn.innerHTML = '❤️';
             } else {
                 showToast('Eliminado de Wishlist');
-                if(btn) btn.innerHTML = '🤍';
+                if (btn) btn.innerHTML = '🤍';
             }
         } else {
             showToast(data.message || "Error");
         }
-    } catch(e) {
+    } catch (e) {
         showToast("Error de conexión");
     }
 }
 
-// ==== Footer Acordeón Móvil (Menú desplegable) ====
 document.addEventListener('DOMContentLoaded', () => {
-    // Lógica Footer
     const footerHeaders = document.querySelectorAll('.footer-links h4');
     footerHeaders.forEach(header => {
         header.addEventListener('click', () => {
@@ -185,29 +176,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ==== Navbar Desplegable Móvil ====
     const navContainer = document.querySelector('.nav-container');
     const navLinks = document.querySelector('.nav-links');
 
     if (navContainer && navLinks && !document.querySelector('.mobile-menu-toggle')) {
-        // Crear botón Hamburguesa
         const menuBtn = document.createElement('button');
         menuBtn.className = 'mobile-menu-toggle';
         menuBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
         menuBtn.setAttribute('aria-label', 'Abrir menú de navegación');
 
-        // Insertarlo antes de las acciones de usuario
         const userActions = document.querySelector('.user-actions');
         if (userActions) {
             navContainer.insertBefore(menuBtn, userActions);
         } else {
             navContainer.appendChild(menuBtn);
         }
-
-        // Toggle del menú
         menuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            // Animación y rotación de estado
             if (navLinks.classList.contains('active')) {
                 menuBtn.classList.add('is-active');
                 menuBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
@@ -225,7 +210,7 @@ function finalizarCompra() {
         showToast("No tienes artículos en el carrito para comprar.");
         return;
     }
-    
+
     // Crear el overlay
     let overlay = document.createElement('div');
     overlay.style.position = 'fixed';
@@ -239,7 +224,7 @@ function finalizarCompra() {
     overlay.style.justifyContent = 'center';
     overlay.style.zIndex = '9999';
     overlay.style.backdropFilter = 'blur(5px)';
-    
+
     // Crear el modal
     let modal = document.createElement('div');
     modal.style.backgroundColor = '#fff';
@@ -248,7 +233,7 @@ function finalizarCompra() {
     modal.style.boxShadow = '0 10px 25px rgba(0,0,0,0.2)';
     modal.style.maxWidth = '400px';
     modal.style.textAlign = 'center';
-    
+
     modal.innerHTML = `
         <div style="font-size: 40px; margin-bottom: 15px;">🚧</div>
         <h3 style="margin-bottom: 15px; color: #333; font-family: 'Montserrat', sans-serif;">Mantenimiento</h3>
@@ -257,10 +242,10 @@ function finalizarCompra() {
         </p>
         <button id="cerrar-modal-btn" class="btn btn-primary" style="width: 100%;">Entendido</button>
     `;
-    
+
     overlay.appendChild(modal);
     document.body.appendChild(overlay);
-    
+
     document.getElementById('cerrar-modal-btn').addEventListener('click', () => {
         document.body.removeChild(overlay);
     });

@@ -6,17 +6,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultBox = document.getElementById('pokelens-result');
     const cartas = document.querySelectorAll('.carta, .carta-row');
 
-    // Mismo API KEY que usa el chatbot (Flash)
-    const GEMINI_API_KEY = "AIzaSyAUdeHqIAdT4O48tnVglygfcRikZeDmYv8";
+    const GEMINI_API_KEY = "[ENCRYPTION_KEY]";
 
     input.addEventListener('change', async (e) => {
         const file = e.target.files[0];
         if (!file) return;
 
-        // Reset state
         resultBox.style.display = 'none';
         cartas.forEach(c => {
-            c.style.display = 'flex'; // Vuelve a mostrar todas las cartas
+            c.style.display = 'flex';
             c.style.border = '';
             c.style.boxShadow = '';
             c.style.transform = '';
@@ -27,11 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
         reader.onload = (event) => {
             const img = new Image();
             img.onload = async () => {
-                // Comprimir la imagen usando Canvas para evitar errores "Failed to fetch" por payloads gigantes
                 const canvas = document.createElement('canvas');
                 let width = img.width;
                 let height = img.height;
-                const MAX_SIZE = 800; // Resolución óptima para IA
+                const MAX_SIZE = 800;
 
                 if (width > height) {
                     if (width > MAX_SIZE) {
@@ -50,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const ctx = canvas.getContext('2d');
                 ctx.drawImage(img, 0, 0, width, height);
 
-                // Obtener base64 comprimido (JPEG 80% calidad)
                 const dataURL = canvas.toDataURL('image/jpeg', 0.8);
                 const base64String = dataURL.split(',')[1];
                 const mimeType = 'image/jpeg';
@@ -94,18 +90,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     loading.style.display = 'none';
 
-                    // Mostrar el nombre identificado (saneado de punto finales etc)
                     cardName = cardName.replace(/[^\w\s-]/gi, '').trim();
 
                     let foundCardsCount = 0;
 
-                    // Filtrar en el DOM las cartas que coincidan parcialmente con el nombre detectado
                     cartas.forEach(c => {
                         const titleElement = c.querySelector('h4');
                         if (titleElement) {
                             const title = titleElement.textContent.toLowerCase();
 
-                            // Busca si la respuesta de Gemini está en el titulo o al reves
                             let nameParts = cardName.split(' ');
                             let isMatch = title.includes(cardName) || cardName.includes(title);
                             if (!isMatch && nameParts.length > 0) {
@@ -114,19 +107,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
                             if (isMatch) {
                                 foundCardsCount++;
-                                // Destacar la carta en el listado visual
                                 c.style.display = 'flex';
                                 c.style.border = '2px solid #10b981';
                                 c.style.boxShadow = '0 0 20px rgba(16, 185, 129, 0.4)';
                                 c.style.transform = 'scale(1.02)';
                                 c.style.transition = 'all 0.3s';
                             } else {
-                                c.style.display = 'none'; // Ocultar las que no son
+                                c.style.display = 'none';
                             }
                         }
                     });
-
-                    // Presentar el resultado final en el contenedor dedicado
                     resultBox.style.display = 'block';
 
                     let answerHTML = `
@@ -186,13 +176,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     resultBox.innerHTML = answerHTML;
 
-                    // Hacer scroll suave hacia los resultados para que el usuario los vea instantáneamente
                     resultBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
                 } catch (err) {
                     loading.style.display = 'none';
                     console.error(err);
-                    cartas.forEach(c => c.style.display = 'flex'); // Restaurar
+                    cartas.forEach(c => c.style.display = 'flex');
                     resultBox.style.display = 'block';
                     resultBox.innerHTML = `
                     <div style="background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(16px); padding: 20px; border-left: 4px solid #ef4444; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); animation: slideDown 0.3s ease-out; margin-bottom: 30px; display: flex; align-items: center; justify-content: space-between; gap: 15px; flex-wrap: wrap;">
@@ -205,7 +194,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
                 }
             };
-            // Iniciar la carga de la imagen para comprimirla
             img.src = event.target.result;
         };
     });

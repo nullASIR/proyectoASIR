@@ -8,7 +8,7 @@ include 'database.php';
 <head>
     <meta charset="UTF-8">
     <title>Cartas Sueltas - PokePimas Premium</title>
-    <!-- Premium Google Fonts -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -17,7 +17,6 @@ include 'database.php';
 
 <body>
 
-    <!-- NAV BAR PREMIUM -->
     <nav class="navbar">
         <div class="nav-container">
             <a href="inicio.php" class="logo">
@@ -139,7 +138,6 @@ endif; ?>
         </div>
 
         <div id="pokelens-result" style="display: none;">
-            <!-- Resultados inyectados por JS -->
         </div>
 
         <style>
@@ -188,10 +186,9 @@ endif; ?>
                 margin-right: 20px;
             }
             
-            /* THUMBNAILS COMO CARTAS REALES TCG */
             .carta-img-trigger {
                 width: 60px;
-                height: 84px; /* Proporción real de cartas coleccionables */
+                height: 84px; 
                 background-color: #0f172a;
                 border: 2px solid #475569;
                 border-radius: 6px;
@@ -204,7 +201,6 @@ endif; ?>
                 overflow: hidden;
                 box-shadow: 0 4px 8px rgba(0,0,0,0.6);
             }
-            /* Brillo Foil Diagonal Interactivo para Thumbnails */
             .carta-img-trigger::after {
                 content: '';
                 position: absolute;
@@ -231,7 +227,6 @@ endif; ?>
                 border-radius: 4px;
             }
 
-            /* POPOVER GRAN TAMAÑO - EFECTO PREMIUM FOIL ESTRUCTURAL */
             .carta-hover-popover {
                 position: absolute;
                 top: -120px;
@@ -264,7 +259,6 @@ endif; ?>
                 border: 1px solid rgba(255, 255, 255, 0.15);
             }
             
-            /* Brillo holográfico TCG base al popover */
             .carta-popover-inner::before {
                 content: '';
                 position: absolute;
@@ -286,14 +280,14 @@ endif; ?>
             .carta-hover-popover img {
                 width: 100%;
                 height: auto;
-                max-height: 350px; /* Asegura visualización correcta si no está cropeada en sistema */
+                max-height: 350px; 
                 display: block;
                 border-radius: 12px;
                 position: relative;
                 z-index: 1;
             }
 
-            /* Títulos y Metadatos */
+           
             .carta-title {
                 display: flex;
                 flex-direction: column;
@@ -307,7 +301,7 @@ endif; ?>
                 font-family: 'Montserrat', sans-serif;
             }
 
-            /* Tags de Especificaciones */
+            
             .carta-stats {
                 display: flex;
                 flex-direction: row;
@@ -397,7 +391,7 @@ endif; ?>
                     border-top: 1px solid rgba(255, 255, 255, 0.1);
                     padding-top: 15px;
                 }
-                /* Disable massive hover popovers on touch devices to avoid breaking viewport */
+                
                 .carta-hover-popover {
                     display: none !important;
                 }
@@ -414,7 +408,7 @@ endif; ?>
                     gap: 10px;
                 }
                 .stat-badge {
-                    flex: 1; /* Make badges fill width on small screens */
+                    flex: 1; 
                     justify-content: center;
                     font-size: 13px;
                     padding: 8px 10px;
@@ -459,7 +453,7 @@ if ($result->num_rows > 0) {
         $imgUrl = isset($row['Imagen']) && !empty($row['Imagen']) ? htmlspecialchars($row['Imagen']) : "";
 ?>
                 <div class="carta-row">
-                    <!-- INFO Y HOVER DE FOTO -->
+                    
                     <div class="carta-info">
                         <div class="carta-icon-wrapper">
                             <div class="carta-img-trigger">
@@ -472,7 +466,7 @@ if ($result->num_rows > 0) {
         endif; ?>
                             </div>
                             
-                            <!-- El Visualizador Oculto Premium -->
+                            
                             <div class="carta-hover-popover">
                                 <div class="carta-popover-inner">
                                     <?php if ($imgUrl): ?>
@@ -494,7 +488,7 @@ if ($result->num_rows > 0) {
                         </div>
                     </div>
                     
-                    <!-- FICHA TECNICA -->
+                    
                     <div class="carta-stats">
                         <div class="stat-badge estado-badge">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f39c12" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
@@ -506,7 +500,7 @@ if ($result->num_rows > 0) {
                         </div>
                     </div>
                     
-                    <!-- PRECIO Y COMPRA -->
+                    
                     <div class="carta-actions">
                         <div class="precio"><?php echo $row['Precio']; ?> €</div>
                         <?php if (isset($_SESSION['usuario_id'])): ?>
@@ -536,7 +530,6 @@ else {
 
     </div>
 
-    <!-- FOOTER PREMIUM -->
     <footer class="site-footer">
         <div class="container footer-grid">
             <div class="footer-brand">

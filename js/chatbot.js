@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Inyectar estilos para el chatbot sin blur
     const style = document.createElement('style');
     style.innerHTML = `
         .nav-chatbot-wrapper { display: none !important; }
@@ -318,16 +317,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (indicator) indicator.remove();
     }
 
-    // ============================================
-    // INTEGRACIÓN API BACKEND
-    // La clave de API ahora está oculta en .env y gestionada por PHP
-    // ============================================
-
     async function getGeminiResponse(userText) {
         try {
-            // Determinar la ruta correcta al backend dependiendo de dónde estemos
             const basePath = window.location.pathname.includes('/php/') ? 'api_chatbot.php' : 'php/api_chatbot.php';
-            
+
             const response = await fetch(basePath, {
                 method: 'POST',
                 headers: {
@@ -343,7 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const data = await response.json();
-            
+
             if (data.error) {
                 console.error("Backend error:", data.error);
                 return "⚠️ Error del servidor: " + data.error;
@@ -372,10 +365,6 @@ document.addEventListener('DOMContentLoaded', () => {
         removeTypingIndicator();
         addMessage(reply, 'bot');
     });
-
-    // ============================================
-    // INTEGRACIÓN BOTÓN BILINGÜE EN HEADER (Banderas)
-    // ============================================
 
     const langStyle = document.createElement('style');
     langStyle.innerHTML = `
@@ -422,10 +411,8 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     document.head.appendChild(langStyle);
 
-    // Identificar el idioma activo por la URL/cookie
     const isEnglish = document.cookie.includes('googtrans=/es/en');
 
-    // Inicializar Google Translate Oculto
     const gtDiv = document.createElement('div');
     gtDiv.id = 'google_translate_element';
     document.body.appendChild(gtDiv);
@@ -439,12 +426,10 @@ document.addEventListener('DOMContentLoaded', () => {
     gtScript.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
     document.head.appendChild(gtScript);
 
-    // Insertar el botón en la barra superior existente
     const userActionsContainer = document.querySelector('.user-actions');
     if (userActionsContainer) {
         const langBtn = document.createElement('div');
         langBtn.className = 'lang-nav-btn';
-        // Mostrar imagen de bandera Americana o Española real (SVGs externos ultraligeros)
         const flagSrc = isEnglish
             ? 'https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/us.svg'
             : 'https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/es.svg';
@@ -452,19 +437,15 @@ document.addEventListener('DOMContentLoaded', () => {
         langBtn.innerHTML = `<img src="${flagSrc}" alt="${isEnglish ? 'EN' : 'ES'}">`;
         langBtn.title = isEnglish ? 'Change language to Spanish' : 'Cambiar idioma al Inglés';
 
-        // Lo colocamos al principio del contenedor de acciones de usuario
         userActionsContainer.prepend(langBtn);
 
         langBtn.addEventListener('click', () => {
-            // Toggle language via Cookie and Reload
             if (isEnglish) {
-                // Restore proper Spanish
                 document.cookie = "googtrans=/es/es; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
                 document.cookie = "googtrans=/es/es; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + location.hostname + ";";
                 document.cookie = "googtrans=/es/es; path=/;";
                 window.location.reload();
             } else {
-                // Trigger English using googtrans
                 document.cookie = "googtrans=/es/en; path=/;";
                 document.cookie = "googtrans=/es/en; path=/; domain=" + location.hostname + ";";
                 window.location.reload();

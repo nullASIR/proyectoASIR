@@ -15,22 +15,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($captcha != $captcha_result) {
         $mensaje = "El Captcha es incorrecto. Eres un robot?";
     } else if ($password === $confirm_password) {
-        // Creamos un hash seguro con BCRYPT
         $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
-        // Verificar si el correo ya existe
         $check_email = "SELECT * FROM user WHERE Mail = '$correo'";
         $result = $conexion->query($check_email);
 
         if ($result->num_rows > 0) {
             $mensaje = "El correo ya está registrado.";
-        }
-        else {
+        } else {
             $verification_code = sprintf("%06d", mt_rand(1, 999999));
             $sql = "INSERT INTO user (Name, Mail, Password, Verified, VerificationCode) VALUES ('$nombre', '$correo', '$password_hash', 0, '$verification_code')";
 
             if ($conexion->query($sql)) {
-                // Generar token para verificación real con mail()
                 $to = $correo;
                 $subject = "Verifica tu cuenta de Entrenador - PokePimas";
                 $message = "Hola $nombre,\n\nBienvenido a PokePimas.\n\nTu codigo secreto de verificacion es: $verification_code\n\nIntroducelo en nuestra web para completar el registro y comenzar tu aventura.\n\nAtentamente,\nEl Equipo de PokePimas (No responder a este correo).";
@@ -38,25 +34,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $headers .= "Reply-To: soporte@pokepimas.com\r\n";
                 $headers .= "X-Mailer: PHP/" . phpversion();
 
-                // Enviar correo real (requiere tener servidor SMTP / Sendmail configurado en el servidor/PHP.ini)
                 $correo_enviado = @mail($to, $subject, $message, $headers);
 
                 if ($correo_enviado) {
-                    // Si se envió correctamente, redirigimos limpiamente
                     header("Location: verificar.php?mail=" . urlencode($correo));
-                }
-                else {
-                    // Si falla el envío (muy común en XAMPP sin SMTP), mandamos el código por URL para el Modo Desarrollador
+                } else {
                     header("Location: verificar.php?mail=" . urlencode($correo) . "&debug_code=" . urlencode($verification_code));
                 }
                 exit();
-            }
-            else {
+            } else {
                 $mensaje = "Error: " . $conexion->error;
             }
         }
-    }
-    else {
+    } else {
         $mensaje = "Las contraseñas no coinciden.";
     }
 }
@@ -70,10 +60,11 @@ $num2 = rand(1, 10);
 <head>
     <meta charset="UTF-8">
     <title>Registro - PokePimas Premium</title>
-    <!-- Premium Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Nunito+Sans:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../style/style.css?v=12">
 </head>
 
@@ -83,8 +74,8 @@ $num2 = rand(1, 10);
         <h2>Registro Nuevo Entrenador</h2>
 
         <?php if ($mensaje != "") {
-    echo "<p style='color:red'>$mensaje</p>";
-}?>
+            echo "<p style='color:red'>$mensaje</p>";
+        } ?>
 
         <form action="registro.php" method="POST">
             <label>Nombre:</label>

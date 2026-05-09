@@ -1,5 +1,4 @@
 <?php
-// 1. Rename strings in files
 $files = [
     '../style/style.css?v=12',
     'ver_carrito.php',
@@ -22,15 +21,12 @@ foreach ($files as $f) {
     }
 }
 
-// 2. Insert dummy data into DB
 include 'database.php';
 
-// Clear current products for a clean run
 $conexion->query("SET FOREIGN_KEY_CHECKS=0");
 $conexion->query("ALTER TABLE productos ADD COLUMN imagen VARCHAR(255)");
 $conexion->query("TRUNCATE TABLE productos");
 
-// Insert 16 products
 $productos = [
     [1, 10001, 'Charizard Base Set Holo', 350.00, 2, 'Casi Nuevo', 21.00, 'carta', 'img/card.png'],
     [2, 10002, 'Pikachu Illustrator', 15000.00, 1, 'Graduado PSA 9', 21.00, 'carta', 'img/card.png'],
@@ -65,4 +61,3 @@ $conexion->query("SET FOREIGN_KEY_CHECKS=1");
 
 echo "OK - PokeNexus configured with products.";
 ?>
-

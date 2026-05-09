@@ -4,12 +4,10 @@
     align-items: center;
     justify-content: center;
     padding: 10px 20px;
-    /* Reducido para que no ocupe demasiado espacio en el header */
     border-radius: 30px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 800;
     font-size: 0.85rem;
-    /* Letra un poco más ajustada */
     text-transform: uppercase;
     letter-spacing: 0.5px;
     text-decoration: none;
@@ -17,7 +15,6 @@
     transition: var(--trans-bounce);
     border: none;
     white-space: nowrap;
-    /* Evita que INICIAR y SESIÓN partan el botón por la mitad */
 }
 
 .btn-primary {
@@ -66,14 +63,12 @@
 #toast-container {
     position: fixed;
     top: 80px;
-    /* Movido arriba para evitar el chatbot y bajarlo del navbar */
     right: 20px;
     z-index: 9999;
     display: flex;
     flex-direction: column;
     gap: 10px;
     pointer-events: none;
-    /* Allows clicking through the container */
 }
 
 .custom-toast {
@@ -94,7 +89,6 @@
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
     min-width: 250px;
     pointer-events: auto;
-    /* Re-enable pointer events for the toast itself */
 }
 
 .custom-toast.show {

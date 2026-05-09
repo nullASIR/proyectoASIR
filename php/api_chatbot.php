@@ -1,8 +1,6 @@
 <?php
-// Evitar errores de CORS si fuera necesario y establecer el tipo de contenido
 header('Content-Type: application/json; charset=utf-8');
 
-// Leer variables de entorno del archivo .env
 $envPath = __DIR__ . '/../.env';
 $apiKey = '';
 
@@ -17,7 +15,6 @@ if (file_exists($envPath)) {
             list($key, $value) = explode('=', $line, 2);
             if (trim($key) === 'GEMINI_API_KEY') {
                 $apiKey = trim($value);
-                // Quitar posibles comillas
                 $apiKey = trim($apiKey, '"\'');
                 break;
             }
@@ -30,7 +27,6 @@ if (empty($apiKey)) {
     exit;
 }
 
-// Recibir el mensaje del frontend
 $data = json_decode(file_get_contents("php://input"), true);
 $userText = $data['text'] ?? '';
 
@@ -39,7 +35,6 @@ if (empty($userText)) {
     exit;
 }
 
-// Prompt del sistema para el comportamiento del bot
 $systemPrompt = "Eres PimasBot, el asistente Inteligente TCG de la prestigiosa tienda PokePimas. Eres experto, amable y breve. Das soluciones rápidas de e-commerce (envíos en 24h/48h asegurados, metodos de pago como tarjeta, bizum y paypal seguros, productos 100% verificados y devoluciones en 14 dias para sellados). Usa unos pocos emojis si es necesario, sin pasarte. Responde medianamente breve. Responde la siguiente duda del usuario: ";
 
 $body = [
@@ -59,7 +54,7 @@ $body = [
 $ch = curl_init("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" . $apiKey);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // Fix para XAMPP local
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
     'Content-Type: application/json'
 ]);
@@ -93,7 +88,6 @@ if (isset($responseData['candidates'][0]['content']['parts'][0]['text'])) {
     $modelReply = $responseData['candidates'][0]['content']['parts'][0]['text'];
 }
 
-// Reemplazar saltos de línea por br para HTML
 $modelReply = str_replace("\n", "<br>", $modelReply);
 
 echo json_encode(["reply" => $modelReply]);

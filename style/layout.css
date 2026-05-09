@@ -11,14 +11,12 @@
 
 .nav-container {
     max-width: 1400px;
-    /* Más espacio habilitado */
     margin: 0 auto;
     padding: 0 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 15px;
-    /* Prohíbe que el logo y los enlaces se solapen */
 }
 
 .logo {
@@ -33,7 +31,6 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     flex-shrink: 0;
-    /* Prohíbe que el logo se aplaste */
 }
 
 .logo-icon {
@@ -45,9 +42,7 @@
 .nav-links {
     display: flex;
     gap: 15px;
-    /* Reducido desde 30px para ahorrar espacio */
     flex-shrink: 1;
-    /* Permite que se encoja si es necesario pero sin juntarse */
 }
 
 .nav-links a {
@@ -55,12 +50,10 @@
     text-decoration: none;
     font-weight: 700;
     font-size: 0.95rem;
-    /* Ajuste sutil para encajar mejor */
     transition: var(--trans-fast);
     position: relative;
     padding: 5px 0;
     white-space: nowrap;
-    /* Mágia preventiva: PROHÍBE separar palabras como 'Cartas' y 'Sueltas' */
 }
 
 .nav-links a:hover,
@@ -89,9 +82,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    /* Reducido para compactar los botones */
     flex-shrink: 0;
-    /* Evita que los botones rompan sus líneas de texto */
 }
 
 .nav-icon {
@@ -173,7 +164,6 @@
     overflow: hidden;
     border-top: 1px solid var(--border-light);
     text-align: center;
-    /* Fuerza todo el texto al centro */
 }
 
 .site-footer::before {
@@ -189,7 +179,6 @@
 .footer-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    /* Mejor 3 columnas iguales si todo está centrado */
     gap: 30px;
     margin-bottom: 40px;
 }
@@ -198,14 +187,12 @@
     color: var(--primary);
     margin-bottom: 15px;
     justify-content: center;
-    /* Centrar el icono SVG con el texto */
 }
 
 .footer-brand p {
     color: var(--text-secondary);
     max-width: 300px;
     margin: 0 auto;
-    /* Centrar el párrafo en su contenedor */
 }
 
 .footer-links h4 {
@@ -223,13 +210,11 @@
     transition: var(--trans-fast);
     font-weight: 600;
     text-align: center;
-    /* Asegura el centrado de los links */
 }
 
 .footer-links a:hover {
     color: var(--accent-blue);
     transform: translateY(-3px) scale(1.02);
-    /* TranslateY en lugar de TranslateX para elementos centrados */
 }
 
 .footer-bottom {
@@ -241,7 +226,6 @@
     font-weight: 600;
 }
 
-/* Botón hamburguesa oculto en desktop */
 .mobile-menu-toggle {
     display: none;
     background: transparent;
@@ -258,13 +242,9 @@
     background: var(--bg-body);
 }
 
-/* ================= RESPONSIVE (TABLETS Y MÓVILES) ================= */
 @media (max-width: 1150px) {
-
-    /* Navbar Flex y Hamburguesa */
     .nav-container {
         flex-wrap: wrap;
-        /* Permitir que los items bajen */
         padding: 15px;
         gap: 15px;
     }
@@ -276,19 +256,14 @@
     .mobile-menu-toggle {
         display: flex;
         order: 1;
-        /* Al lado del logo en la línea de arriba */
         margin-left: auto;
-        /* Empuja la hamburguesa al borde derecho */
         color: var(--primary);
-        /* Color para currentColor del SVG */
     }
 
     .user-actions {
         order: 2;
         width: 100%;
-        /* Fuerza a que ocupe toda la línea inferior */
         justify-content: center;
-        /* Centra los botones de login/registro/carrito */
         padding-top: 10px;
         border-top: 1px solid rgba(0, 0, 0, 0.05);
         gap: 15px;
@@ -296,25 +271,21 @@
 
     .user-actions .btn {
         flex: 1;
-        /* Que los botones se estiren simétricamente */
         text-align: center;
         padding: 12px 10px;
         font-size: 0.9rem;
     }
 
-    /* El Menú colapsa con animación en vez de desaparecer */
     .nav-links {
         display: flex;
         flex-direction: column;
         width: 100%;
         order: 3;
-        /* Va debajo de todo */
         background: #ffffff;
         gap: 0;
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         border-radius: 0 0 12px 12px;
 
-        /* Animación de apertura suave */
         max-height: 0;
         opacity: 0;
         overflow: hidden;
@@ -323,10 +294,8 @@
         transition: max-height 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease, margin-top 0.3s ease, padding 0.3s ease;
     }
 
-    /* JavaScript Toggle Activado */
     .nav-links.active {
         max-height: 500px;
-        /* Suficiente para que entren todo los links */
         opacity: 1;
         margin-top: 10px;
         padding: 5px 0 15px 0;
@@ -344,7 +313,6 @@
         border-bottom: none;
     }
 
-    /* Prevenir que la animación inferior estorbe */
     .nav-links a::after {
         display: none;
     }
@@ -369,7 +337,6 @@
 
     .footer-grid {
         gap: 10px;
-        /* Reduce espacio muerto vertical */
     }
 
     .footer-brand p {
@@ -381,22 +348,18 @@
         border-bottom: 1px solid var(--border-light);
     }
 
-    /* El título actúa como botón para desplegar */
     .footer-links h4 {
         margin-bottom: 0;
         padding: 15px 0;
         cursor: pointer;
         display: flex;
         justify-content: center;
-        /* Centrado absoluto */
         gap: 15px;
-        /* Separación con la crucecita */
         align-items: center;
         font-size: 1.1rem;
         transition: color 0.3s;
     }
 
-    /* Flecha decorativa (usamos el simbolo '+') */
     .footer-links h4::after {
         content: '+';
         font-size: 1.5rem;
@@ -405,18 +368,15 @@
         color: var(--accent-blue);
     }
 
-    /* Estado desplegado: Cambia color y rota el + a una X (o -) */
     .footer-links.active h4 {
         color: var(--accent-blue);
     }
 
     .footer-links.active h4::after {
         transform: rotate(45deg);
-        /* Se convierte en una x muy fina */
         color: var(--accent-red);
     }
 
-    /* Ocultar enlaces por defecto */
     .footer-links a {
         max-height: 0;
         opacity: 0;
@@ -427,10 +387,8 @@
         pointer-events: none;
     }
 
-    /* Mostrar enlaces al activar con JavaScript */
     .footer-links.active a {
         max-height: 150px;
-        /* Suficiente alto para alojar enlaces */
         opacity: 1;
         margin-bottom: 15px;
         pointer-events: auto;

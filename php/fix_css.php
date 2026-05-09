@@ -1,6 +1,6 @@
 <?php
 $lines = file('../style/style.css?v=12');
-$valid_lines = array_slice($lines, 0, 695); // up to index 694
+$valid_lines = array_slice($lines, 0, 695);
 $valid_lines[] = "}\n\n";
 
 $contact_css = <<<EOT
@@ -279,4 +279,3 @@ $valid_lines[] = $contact_css;
 file_put_contents('../style/style.css?v=12', implode("", $valid_lines));
 echo "CSS fixed and properly appended.";
 ?>
-
