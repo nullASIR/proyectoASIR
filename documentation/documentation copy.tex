@@ -42,7 +42,7 @@ La plataforma se estructura en módulos funcionales diferenciados: una tienda en
 
 A nivel de interfaz de usuario (UI) y experiencia de usuario (UX), el diseño se basa en principios de accesibilidad, usabilidad y diseño adaptativo (Responsive Web Design), garantizando la correcta visualización en dispositivos de escritorio y móviles. Adicionalmente, se ha implementado soporte multi-idioma (español e inglés) para facilitar la internacionalización del servicio.
 
-El desarrollo de esta infraestructura tecnológica constituye la aplicación práctica de los conocimientos adquiridos durante el ciclo formativo de grado superior en Administración de Sistemas Informáticos en Red (ASIR). Esto abarca desde el despliegue de la capa de presentación (frontend) y lógica de negocio (backend), hasta el diseño de la persistencia de datos, la configuración de topologías de red seguras, la contenerización de servicios y el establecimiento de políticas de alta disponibilidad.
+El desarrollo de esta infraestructura tecnológica constituye la aplicación práctica de los conocimientos adquiridos durante el ciclo formativo de grado superior en Administración de Sistemas Informáticos en Red (ASIR). Esto abarca desde el despliegue de la capa de presentación (frontend) y lógica de negocio (backend), hasta el diseño de la persistencia de datos, la configuración de topologías de red seguras y el establecimiento de políticas de alta disponibilidad.
 
 \newpage
 \section{Módulos Implicados}
@@ -179,12 +179,6 @@ La integridad y disponibilidad de la información son críticas. Se han establec
 La estrategia de respaldos se automatiza a nivel de sistema operativo mediante tareas programadas (Cron jobs en Linux) y scripts Bash, encargados de ejecutar volcados (Dumps) de la base de datos a intervalos regulares. Estos archivos resultantes son comprimidos y almacenados en repositorios aislados de la red pública, posibilitando una restauración rápida (RTO/RPO optimizados) en caso de contingencia.
 
 \newpage
-\section{Integración de Sistemas Empresariales (API/ERP)}
-\label{Conexiones_externas}
-
-A medio plazo, la infraestructura tecnológica contempla la integración del entorno LAMP/LEMP de producción con plataformas de gestión de recursos empresariales (ERP) y soluciones Low-Code (e.g., Appian) utilizadas para la gestión logística de inventarios.
-
-Esta integración se realizará mediante el diseño de una API RESTful, permitiendo la sincronización bidireccional de datos en formato JSON. Cuando se ejecute una transacción en la pasarela web, el servidor notificará automáticamente al sistema de gestión de almacén (WMS), automatizando el flujo de trabajo (Workflow) de recolección, empaquetado y envío.
 
 \section{Estudio de Viabilidad Técnica y Económica}
 \label{PlanNegocio}
@@ -263,116 +257,10 @@ Atendiendo a la naturaleza de las operaciones técnicas y logísticas, se establ
 \end{itemize}
 
 \newpage
-\section{Infraestructura y Segmentación de Red}
-\label{RedInterna}
-
-El diseño de la topología de red local (LAN) constituye el núcleo crítico del despliegue. La arquitectura se fundamenta en principios de defensa en profundidad y segmentación lógica para aislar los entornos de producción y mitigar los movimientos laterales en caso de compromiso.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.9\linewidth]{images/esquemaRed.png}
-    \caption{Topología de red y segmentación lógica.}
-\end{figure}
-
-\subsection{Enrutamiento y Segmentación (VLANs)}
-La red corporativa se administra mediante switches gestionables de Capa 2/3, dividiendo el direccionamiento base (192.168.1.0/24) en zonas lógicas estancas:
-
-\begin{itemize}
-    \item \textbf{Zona Desmilitarizada (DMZ / VLAN 10):} Red perimetral destinada al alojamiento del servidor web proxy/frontal. El cortafuegos perimetral (pfSense) aplica políticas de filtrado estrictas (NAT y Port Forwarding), permitiendo exclusivamente el tráfico entrante hacia los puertos HTTP (80) y HTTPS (443). El servidor expuesto permanece aislado del resto de la organización.
-    \item \textbf{Red Interna Protegida (Backend / VLAN 20):} Segmento hermético donde residen los clústeres de bases de datos y los equipos de gestión logística corporativa. Carece de visibilidad hacia Internet. Las comunicaciones entre la DMZ (aplicación web) y la VLAN 20 (base de datos) están rigurosamente auditadas mediante reglas estáticas de cortafuegos que permiten el flujo de datos unidireccional y cifrado solo sobre los puertos requeridos (ej. TCP 3306).
-\end{itemize}
-
 \section{Sistemas Operativos y Directorios Corporativos}
 \label{SistemasOperativos}
 
-La arquitectura prescinde de entornos monolíticos de desarrollo (como XAMPP), apostando por infraestructuras distribuidas y robustas basadas en entornos Microsoft Windows Server para la gestión interna corporativa y distribuciones GNU/Linux para los sistemas productivos en red.
-
-\subsection{Directorio Activo y Políticas Centralizadas}
-Se desplegará una infraestructura de dominio basada en Windows Server 2022 para gestionar la identidad y el acceso en los equipos de gestión corporativa, implementando los siguientes servicios:
-
-\begin{itemize}
-    \item \textbf{Servicios de Dominio de Active Directory (AD DS):} Implementación del "Principio de Menor Privilegio" (PoLP) mediante el Control de Acceso Basado en Roles (RBAC). Se estructuran Unidades Organizativas (OU) jerárquicas que impiden a usuarios no autorizados (ej. operarios de almacén) acceder a servidores de bases de datos o recursos compartidos críticos.
-    \item \textbf{Resolución de Nombres DNS (Split-Brain DNS):} Configuración de zonas de búsqueda locales (ej. db.pokepimas.local) para abstraer la topología IP, garantizando que las migraciones de red o asignaciones DHCP no comprometan la configuración de los aplicativos internos.
-    \item \textbf{Políticas de Grupo (GPO) como vector defensivo:} Despliegue de políticas de seguridad automatizadas aplicadas a nivel de equipo. Se deshabilitará preventivamente el almacenamiento masivo USB en terminales de operarios, erradicando los vectores de infección clásicos por malware físico y previniendo la exfiltración de datos (DLP).
-\end{itemize}
-
-\newpage
-\section{Contenerización de Servicios (Docker / Linux)}
-\label{DockerLinux}
-
-Mientras que el plano de gestión interna opera bajo Windows Server, el entorno de producción web de alta disponibilidad se despliega íntegramente sobre infraestructuras GNU/Linux (Ubuntu Server 24.04 LTS), garantizando eficiencia, mínima huella de recursos y ausencia de superficies de ataque derivadas de interfaces gráficas (GUI).
-
-\subsection{Arquitectura de Microservicios}
-La pila tecnológica se empaqueta mediante el motor de Docker. A través de un orquestador declarativo (Docker Compose), la infraestructura se divide en contenedores aislados que corren en el mismo plano de host:
-
-\begin{itemize}
-    \item \textbf{Contenedor de Aplicación (Web/PHP):} Utilización de imágenes inmutables (php:8.2-apache) optimizadas. Este contenedor gestiona el ciclo de vida de la aplicación y expone únicamente los puertos necesarios al proxy inverso.
-    \item \textbf{Contenedor de Persistencia (MariaDB/MySQL):} Aislado operativamente del exterior mediante redes definidas por software (Docker Networks). Este contenedor no expone puertos al host físico local, asegurando que la base de datos solo es accesible desde el contenedor de aplicación en la misma red virtual.
-    \item \textbf{Almacenamiento Persistente (Docker Volumes):} Los datos transaccionales se disocian del ciclo de vida efímero del contenedor. Se mapean volúmenes encriptados hacia el sistema de archivos del anfitrión, garantizando que reinicios, caídas o actualizaciones del motor no provoquen la pérdida de la información corporativa.
-\end{itemize}
-
-\subsection{Ventajas Operativas y Escalabilidad Horizontal}
-La contenerización proporciona una portabilidad absoluta. Ante la eventual necesidad de escalar la plataforma, los contenedores sin estado (Stateless) pueden ser replicados instantáneamente. El diseño preparatorio es compatible con la migración futura hacia clústeres de orquestación masiva (Kubernetes), permitiendo el auto-escalado horizontal de los nodos de aplicación para gestionar picos volumétricos de tráfico transaccional.
-
-\newpage
-\section{Memoria Técnica Detallada: Infraestructura de Alta Disponibilidad}
-\label{AltaDisponibilidad}
-
-\subsection{Introducción y Objetivos}
-Este proyecto se centra en el diseño e implementación de un entorno de servicios web y bases de datos con redundancia. El objetivo principal ha sido eliminar los puntos únicos de fallo (Single Points of Failure), garantizando que el servicio continúe operativo ante la caída de cualquier componente crítico.
-
-\subsection{Detalle de los Sistemas Implementados}
-
-\subsubsection{Firewall Perimetral (pfSense)}
-El appliance virtual pfSense actúa como el guardián de toda la red. Su función en la arquitectura es:
-\begin{itemize}
-    \item \textbf{Segmentación (VLANs/Subredes):} Aislamiento de las máquinas en redes distintas (DMZ de balanceo, servidores web de backend y clúster de bases de datos), forzando que el tráfico intra-red sea auditado por las listas de control de acceso (ACLs) del firewall.
-    \item \textbf{NAT (Network Address Translation):} Redirección de las peticiones externas (puertos TCP 80/443) hacia la IP virtual (VIP) del balanceador de carga.
-    \item \textbf{Filtrado de Egress (Salida):} Implementación de reglas restrictivas para limitar la conectividad exterior de los servidores, autorizando exclusivamente el tráfico necesario (resolución DNS, repositorios de parches), mitigando severamente los movimientos laterales o exfiltración en caso de brecha ("Command and Control").
-\end{itemize}
-
-\subsubsection{Balanceador de Carga (HAProxy)}
-El servicio HAProxy opera como el nodo director que distribuye la carga transaccional:
-\begin{itemize}
-    \item \textbf{Distribución de Carga (Round Robin / Leastconn):} Reparte el tráfico entrante de forma dinámica entre el "pool" de servidores web, optimizando el uso de recursos computacionales.
-    \item \textbf{Health Checks (Sondeo de Salud):} Supervisión activa de la operatividad de los servidores web (Capa 7 HTTP) y bases de datos (Capa 4 TCP). Ante respuestas anómalas o caídas temporales (Timeouts), el nodo afectado es retirado automáticamente del "pool" de balanceo.
-    \item \textbf{Terminación SSL/TLS (Offloading):} Centralización de la validación criptográfica. El proxy recibe y descifra el tráfico HTTPS, reenviándolo en texto plano a la granja de servidores backend, aliviando la carga de procesamiento criptográfico (CPU overhead) en los nodos de aplicación y facilitando la rotación de certificados.
-\end{itemize}
-
-\subsubsection{Granja de Servidores Web (Application Nodes)}
-Constituyen el clúster de alojamiento de la lógica PHP. La configuración de los nodos se diseña bajo un patrón de inmutabilidad (Stateless), garantizando la paridad entre servidores para que el balanceador conmute peticiones entre ellos de manera transparente y sin disrupciones de sesión ("Sticky sessions").
-
-\subsubsection{Clúster de Bases de Datos (MariaDB Active-Active)}
-El subsistema de mayor complejidad técnica recae en el aseguramiento de la disponibilidad de datos:
-\begin{itemize}
-    \item \textbf{Replicación Multi-Master:} Topología circular donde múltiples nodos ejecutan escrituras y lecturas de forma concurrente. Se han configurado desplazamientos en los incrementos automáticos (\texttt{auto\_increment\_increment} y \texttt{auto\_increment\_offset}) para prevenir colisiones de claves primarias.
-    \item \textbf{Sincronización por Identificador Global (GTID):} La réplica prescinde del método obsoleto por posición de archivo binario, basándose en la trazabilidad transaccional global (GTID). Este protocolo asegura la resolución de conflictos y evita el desajuste o pérdida de transacciones durante la resincronización de un nodo tras una interrupción eléctrica.
-    \item \textbf{Resiliencia Operativa:} Habilitación de políticas \texttt{relay\_log\_recovery} que obligan al motor a purgar logs corruptos y solicitar las transacciones faltantes al nodo par tras reinicios inesperados ("Crash-safe replication").
-\end{itemize}
-
-\subsection{Metodología de Implementación}
-El proceso de ingeniería se ha ejecutado bajo el paradigma de "Seguridad por Diseño":
-\begin{itemize}
-    \item \textbf{Despliegue Base:} Definición de topología de red virtual, VLAN tagging y direccionamiento IP estático interno.
-    \item \textbf{Aseguramiento Perimetral:} Configuración del firewall (Deny-All por defecto) de manera previa a la exposición de servicios web.
-    \item \textbf{Orquestación Inversa:} Configuración de HAProxy como barrera y encaminador intermedio.
-    \item \textbf{Sincronía de Estado:} Despliegue del túnel de replicación GTID, aplicando directivas estrictas de \texttt{bind-address} e implementando usuarios SQL con privilegios hiper-restringidos exclusivamente autorizados para ejecutar procesos de sincronización.
-\end{itemize}
-
-\newpage
-\section{Monitorización y Telemetría de la Infraestructura}
-\label{Monitorizacion}
-
-Garantizar la continuidad operativa requiere una observabilidad ininterrumpida de los componentes (SLA 24/7). Para este propósito, la infraestructura incorpora servicios centralizados de monitorización reactiva y proactiva basados en Zabbix.
-
-\subsection{Parámetros de Auditoría Sensible}
-El servidor de monitorización despliega agentes pasivos ("Zabbix Agents") en los nodos anfitriones, recolectando la telemetría del estado crítico de los recursos con alta frecuencia de sondeo:
-
-\begin{itemize}
-    \item \textbf{Consumo Intensivo de CPU/RAM:} La detección de picos abruptos o desviaciones sostenidas en el consumo de memoria o procesamiento alerta sobre escenarios anómalos, tales como ataques de Denegación de Servicio (DDoS volumétricos o agostamiento de recursos) o fugas de memoria (Memory Leaks) en el código, permitiendo la intervención manual o escalado antes del colapso del nodo.
-    \item \textbf{Cuotas de Almacenamiento y Repositorios de Backup:} La saturación silenciosa del disco duro constituye un vector crítico de interrupción en entornos Linux. Los agentes de Zabbix sondean constantemente las particiones y sistemas de archivos, generando alertas (Triggers de severidad naranja/alta) si la ocupación del almacenamiento destinado a copias de seguridad supera el 85\%, mitigando caídas operativas ("Kernel Panic" o rotura de tablas SQL).
-    \item \textbf{Sondeos Sintéticos (Web Scenarios):} Monitorización externa automatizada de la disponibilidad de la plataforma web. Zabbix ejecuta comprobaciones transaccionales completas (validación de respuestas HTTP 200 OK y tiempo de latencia). Ante divergencias o latencias superiores al umbral aceptable, el sistema notifica de forma inmediata al centro de operaciones a través de pasarelas de correo electrónico.
-\end{itemize}
+La arquitectura prescinde de entornos monolíticos de desarrollo (como XAMPP), apostando por infraestructuras distribuidas y robustas. Se emplean entornos Microsoft Windows Server para alojar la lógica de negocio en producción (IIS) y distribuciones GNU/Linux para asegurar la persistencia de datos y el balanceo de carga perimetral.
 
 \section{Bastionado de Servidores (Hardening) y Ciberseguridad Activa}
 \label{Hardening}
@@ -398,6 +286,63 @@ La confidencialidad de la información transaccionada entre la capa de presentac
 
 \subsection{Cortafuegos de Nivel de Host (UFW / IPtables)}
 Con independencia del cortafuegos perimetral (pfSense), cada nodo anfitrión incluye una política de denegación predeterminada ("Deny-All / Drop by Default") en su cortafuegos lógico (Uncomplicated Firewall - UFW). Exclusivamente se autoriza la apertura (Allow In) de puertos esenciales: el servicio SSH ofuscado y el puerto de escucha del contenedor inverso, cerrando de forma absoluta el acceso directo a los restantes 65.535 puertos lógicos.
+
+\section{Infraestructura y Segmentación de Red}
+\label{sec:Infraestructura}
+El diseño de la topología de red constituye el núcleo crítico del despliegue. La arquitectura se fundamenta en principios de defensa en profundidad y segmentación lógica para aislar los entornos de producción y mitigar posibles brechas de seguridad.
+
+\subsection{Enrutamiento y Segmentación Perimetral (pfSense)}
+La red corporativa se administra mediante un cortafuegos y enrutador pfSense, dividiendo la infraestructura en tres zonas de seguridad estancas:
+\begin{itemize}
+    \item \textbf{Zona WAN:} Interfaz de salida a Internet y puerta de enlace exterior.
+    \item \textbf{Zona Desmilitarizada (DMZ - 192.168.10.0/24):} Red perimetral expuesta controladamente. Aloja el balanceador de carga HAProxy y los servidores web frontales. Es la única zona que procesa tráfico proveniente del exterior (puertos HTTP/HTTPS).
+    \item \textbf{Red Interna Protegida (LAN - 192.168.20.0/24):} Segmento hermético donde reside el clúster de bases de datos MariaDB y el servidor de monitorización Zabbix. Esta zona no tiene exposición directa a Internet, y solo admite conexiones específicas y auditadas desde la DMZ (como el tráfico TCP por el puerto 3306).
+\end{itemize}
+
+\section{Memoria Técnica: Alta Disponibilidad (HA)}
+\label{sec:AltaDisponibilidad}
+Para garantizar la continuidad operativa y eliminar los puntos únicos de fallo (SPOF - Single Point of Failure), se ha diseñado una arquitectura redundante a nivel de aplicación y de datos.
+
+\subsection{Balanceador de Carga (HAProxy)}
+Ubicado en la DMZ, el servicio HAProxy opera como el nodo director que distribuye la carga transaccional:
+\begin{itemize}
+    \item \textbf{Algoritmo de Distribución:} Utiliza \textit{Round Robin} para repartir el tráfico entrante de forma dinámica y equitativa entre el pool de servidores web.
+    \item \textbf{Sondeo de Salud (Health Checks):} HAProxy supervisa activamente el puerto 80 de los servidores. Ante un fallo en el servicio de un nodo (caída del IIS o del sistema operativo), el balanceador lo retira automáticamente de la rotación y redirige el tráfico al nodo sano, haciendo que la incidencia sea completamente transparente para el usuario final.
+\end{itemize}
+
+\subsection{Capa de Aplicación (Windows Server e IIS)}
+La lógica de negocio de la plataforma se procesa en servidores Windows Server 2019/2022 utilizando Internet Information Services (IIS). Para asegurar la compatibilidad e integración con el backend de datos en Linux, se ha configurado el entorno WIMP (Windows, IIS, MariaDB, PHP):
+\begin{itemize}
+    \item \textbf{Hardening de PHP:} Se editó manualmente el archivo \texttt{php.ini} para habilitar de forma explícita las extensiones necesarias para la conexión a la base de datos (\texttt{mysqli} y \texttt{pdo\_mysql}) y establecer la ruta absoluta en la directiva \texttt{extension\_dir}.
+\end{itemize}
+
+\subsection{Clúster de Bases de Datos (MariaDB Master-Master)}
+El núcleo de la persistencia de datos recae sobre un clúster activo-activo para garantizar la integridad y disponibilidad de la información:
+\begin{itemize}
+    \item \textbf{Replicación Circular (Master-Master):} Ambos nodos procesan escrituras y lecturas concurrentemente. Cualquier transacción en la base de datos de un nodo se replica en el otro de forma automática.
+    \item \textbf{Sincronización mediante GTID:} Se utiliza la trazabilidad por Identificador Global de Transacción (GTID) en lugar de posiciones de archivo binario, garantizando la resolución de conflictos tras posibles desincronizaciones o caídas del servicio.
+    \item \textbf{Prevención de Colisiones de Claves:} Para evitar que ambos nodos generen claves primarias idénticas simultáneamente, se ajustaron las variables \texttt{auto\_increment\_offset} y \texttt{auto\_increment\_increment} (generando IDs pares en un nodo e impares en el otro).
+    \item \textbf{Principio de Menor Privilegio:} Las conexiones de la aplicación web se realizan mediante un usuario dedicado (\texttt{user\_web@'\%'}) con permisos limitados exclusivamente a la base de datos de la tienda.
+\end{itemize}
+
+\section{Monitorización y Telemetría}
+\label{sec:Monitorizacion}
+Para garantizar el cumplimiento de los Acuerdos de Nivel de Servicio (SLA), se ha implementado un sistema centralizado de monitorización basado en \textbf{Zabbix 6.0}.
+\begin{itemize}
+    \item \textbf{Zabbix Server:} Desplegado en el nodo DB-01, compartiendo recursos dentro de la red segura para minimizar la latencia de las escrituras en la base de datos de telemetría.
+    \item \textbf{Agentes Multiplataforma:} Se han instalado agentes Zabbix nativos tanto en las distribuciones Linux (bases de datos y balanceador) como en los entornos Windows Server (servidores web).
+    \item \textbf{Accesibilidad de Red:} Debido a la estricta segmentación impuesta por pfSense, los archivos de configuración de los agentes (\texttt{zabbix\_agentd.conf}) han sido adaptados con la directiva \texttt{Server=0.0.0.0/0}. Esto permite el flujo de métricas a través de las diferentes subredes, autorizando al servidor Zabbix a interrogar a los agentes desde la LAN protegida.
+\end{itemize}
+
+\section{Guía de Despliegue y Secuencia de Arranque}
+\label{sec:Despliegue}
+Debido a las dependencias de red y servicios entre las diferentes capas de la arquitectura, la puesta en marcha de la infraestructura tras la importación del proyecto debe respetar un orden de encendido estricto:
+\begin{enumerate}
+    \item \textbf{pfSense (Firewall y Enrutamiento):} Debe encenderse en primer lugar. Establece la conectividad, las tablas de enrutamiento y el servicio DHCP para las redes internas.
+    \item \textbf{Clúster de Bases de Datos (DB-01 y DB-02):} Se inician a continuación para que los motores MariaDB sincronicen la replicación Master-Master. Adicionalmente, esto arranca el servicio Zabbix Server alojado en DB-01.
+    \item \textbf{Capa Frontal (Web-01 y Web-02):} Se encienden los Windows Server. Al iniciar el servicio IIS, la lógica de la aplicación buscará conectarse a los nodos de bases de datos, los cuales ya estarán plenamente operativos.
+    \item \textbf{Balanceador de Carga (HAProxy):} Se inicia en último lugar. De esta forma, cuando el balanceador comience a lanzar sus \textit{Health Checks} (comprobaciones de estado), los servidores web ya estarán encendidos y respondiendo, siendo añadidos inmediatamente al \textit{pool} de tráfico activo.
+\end{enumerate}
 
 \newpage
 \section{Anexo: Galería de la Página Web}

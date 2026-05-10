@@ -42,7 +42,7 @@ La plataforma se estructura en módulos funcionales diferenciados: una tienda en
 
 A nivel de interfaz de usuario (UI) y experiencia de usuario (UX), el diseño se basa en principios de accesibilidad, usabilidad y diseño adaptativo (Responsive Web Design), garantizando la correcta visualización en dispositivos de escritorio y móviles. Adicionalmente, se ha implementado soporte multi-idioma (español e inglés) para facilitar la internacionalización del servicio.
 
-El desarrollo de esta infraestructura tecnológica constituye la aplicación práctica de los conocimientos adquiridos durante el ciclo formativo de grado superior en Administración de Sistemas Informáticos en Red (ASIR). Esto abarca desde el despliegue de la capa de presentación (frontend) y lógica de negocio (backend), hasta el diseño de la persistencia de datos, la configuración de topologías de red seguras, la contenerización de servicios y el establecimiento de políticas de alta disponibilidad.
+El desarrollo de esta infraestructura tecnológica constituye la aplicación práctica de los conocimientos adquiridos durante el ciclo formativo de grado superior en Administración de Sistemas Informáticos en Red (ASIR). Esto abarca desde el despliegue de la capa de presentación (frontend) y lógica de negocio (backend), hasta el diseño de la persistencia de datos, la configuración de topologías de red seguras, la configuración de servidores y el establecimiento de políticas de alta disponibilidad.
 
 \newpage
 \section{Módulos Implicados}
@@ -51,14 +51,14 @@ El desarrollo de esta infraestructura tecnológica constituye la aplicación pr�
 El desarrollo arquitectónico e implementación técnica del proyecto se fundamentan en las siguientes áreas de conocimiento:
 
 \begin{itemize}
-    \item \textbf{Administración de Sistemas Operativos:} Despliegue y configuración de entornos de servidor (Windows Server y distribuciones GNU/Linux). Implementación de rutinas de automatización (scripts Bash) para la gestión de copias de seguridad de la base de datos (Disaster Recovery).
+    \item \textbf{Administración de Sistemas Operativos:} Despliegue y configuración de entornos de servidor híbridos (Windows Server 2019/2022 y distribuciones GNU/Linux Ubuntu). Implementación de rutinas de copias de seguridad de la base de datos (Disaster Recovery).
     \item \textbf{Planificación y Administración de Redes:} Diseño de la topología lógica, segmentación mediante VLANs y configuración de reglas de enrutamiento y cortafuegos para aislar entornos críticos.
-    \item \textbf{Fundamentos de Hardware:} Planificación de los requisitos físicos para la infraestructura de servidores y sistemas de almacenamiento necesarios para garantizar el rendimiento operativo.
+    \item \textbf{Fundamentos de Hardware:} Planificación de los requisitos físicos para la infraestructura de servidores virtuales y sistemas de almacenamiento.
     \item \textbf{Inglés:} Integración de funcionalidades de internacionalización en la plataforma, permitiendo la conmutación dinámica del contenido entre español e inglés.
-    \item \textbf{Lenguaje de Marcas y Sistemas de Gestión de Información:} Construcción de la capa de presentación mediante HTML5 y CSS3, aplicando metodologías de diseño modular. Integración de interactividad asíncrona mediante JavaScript (peticiones Fetch y notificaciones tipo toast).
-    \item \textbf{Implantación de Aplicaciones Web:} Configuración de servidores web (Apache/Nginx) y despliegue del entorno de ejecución PHP para la lógica de negocio.
-    \item \textbf{Gestión de Bases de Datos:} Diseño e implementación del esquema relacional en motores MySQL/MariaDB. Uso de procedimientos almacenados y disparadores (Triggers) para garantizar la integridad referencial y automatizar procesos internos.
-    \item \textbf{Seguridad y Alta Disponibilidad:} Aplicación de políticas de bastionado (Hardening), cifrado asimétrico para accesos (SSH), configuración de túneles seguros (TLS/SSL) y diseño de infraestructuras redundantes.
+    \item \textbf{Lenguaje de Marcas y Sistemas de Gestión de Información:} Construcción de la capa de presentación mediante HTML5 y CSS3, aplicando metodologías de diseño modular. Integración de interactividad asíncrona mediante JavaScript.
+    \item \textbf{Implantación de Aplicaciones Web:} Configuración de servidores web (Internet Information Services - IIS) y despliegue del entorno de ejecución PHP en sistemas Windows para la lógica de negocio.
+    \item \textbf{Gestión de Bases de Datos:} Diseño e implementación del esquema relacional en clústeres MariaDB Master-Master. Uso de replicación para garantizar la integridad referencial y automatizar la sincronización de datos.
+    \item \textbf{Seguridad y Alta Disponibilidad:} Aplicación de políticas de bastionado (Hardening), despliegue de balanceadores de carga en capa 7 (HAProxy) y monitorización avanzada mediante Zabbix.
     \item \textbf{Itinerario Personal para la Empleabilidad:} Formulación del plan de Prevención de Riesgos Laborales (PRL) asociado al entorno tecnológico y logístico del proyecto.
 \end{itemize}
 
@@ -66,86 +66,59 @@ El desarrollo arquitectónico e implementación técnica del proyecto se fundame
 \section{Estudio de Mercado y Viabilidad Comercial}
 \label{EstudioMercado}
 
-\textbf{Público Objetivo:} El segmento de mercado principal comprende usuarios de entre 15 y 35 años, con perfiles orientados al coleccionismo y al juego competitivo de la franquicia Pokémon. La fase inicial de despliegue logístico se acotará al territorio nacional (España), con proyecciones de escalabilidad hacia el mercado europeo (Cross-border e-commerce) a medio plazo.
+\textbf{Público Objetivo:} El segmento de mercado principal comprende usuarios de entre 15 y 35 años, con perfiles orientados al coleccionismo y al juego competitivo de la franquicia Pokémon. La fase inicial de despliegue logístico se acotará al territorio nacional (España), con proyecciones de escalabilidad hacia el mercado europeo a medio plazo.
 
-\textbf{Análisis de la Competencia:} El ecosistema de venta de JCC presenta una alta saturación. Para establecer una ventaja competitiva, la plataforma propuesta enfatiza una experiencia de usuario (UX) superior y tiempos de respuesta logísticos optimizados. Entre los principales actores del mercado se identifican:
-    
-    \begin{itemize}
-        \item \textbf{Canales Oficiales (Pokémon Center):} Presentan alta fiabilidad, pero adolecen de precios premium y frecuentes roturas de stock.
-        \item \textbf{Plataformas Marketplace (Cardmarket):} Ofrecen gran volumen, pero la naturaleza descentralizada incrementa los riesgos de fraude y encarece los costes logísticos (múltiples envíos).
-        \item \textbf{Retail Local:} Disponen de proximidad, pero generalmente aplican márgenes comerciales elevados que restan competitividad frente a soluciones digitales puras.
-    \end{itemize}
+\textbf{Análisis de la Competencia:} El ecosistema de venta de JCC presenta una alta saturación. Para establecer una ventaja competitiva, la plataforma propuesta enfatiza una experiencia de usuario (UX) superior y tiempos de respuesta logísticos optimizados, garantizados por una infraestructura tolerante a fallos.
 
-\textbf{Demanda:} El mercado de coleccionables mantiene una curva de demanda sostenida y alcista, caracterizada por su resiliencia incluso en periodos de contracción económica, impulsada por la nostalgia y el factor especulativo de los activos (cartas).
-
-\textbf{Estrategia de Penetración (Marketing):} Se priorizará el marketing de contenidos en plataformas de alta tasa de retención (Instagram, YouTube Shorts) para canalizar tráfico orgánico. Simultáneamente, se aplicarán técnicas de optimización en motores de búsqueda (SEO) y marcado semántico para mejorar la indexabilidad de la plataforma.
+\textbf{Demanda:} El mercado de coleccionables mantiene una curva de demanda sostenida y alcista, impulsada por la nostalgia y el factor coleccionable de los activos.
 
 \section{Análisis DAFO (Debilidades, Amenazas, Fortalezas y Oportunidades)}
 \label{DAFO}
 
 \textbf{Debilidades:}
 \begin{itemize}
-    \item Dependencia inicial en la gestión manual de operaciones logísticas, control de inventarios y atención de incidencias.
-    \item Posicionamiento nulo en la fase de lanzamiento (Start-up), requiriendo un esfuerzo intensivo para capturar cuota de mercado frente a competidores consolidados.
-    \item Alta dependencia del flujo de lanzamientos (novedades) dictado por el fabricante.
-    \item Requerimiento de capital de trabajo (Working Capital) elevado para el acopio inicial de inventario con márgenes competitivos.
+    \item Dependencia inicial en la gestión manual de operaciones logísticas.
+    \item Posicionamiento nulo en la fase de lanzamiento (Start-up).
+    \item Requerimiento de capital de trabajo elevado para el acopio inicial de inventario.
 \end{itemize}
 
 \textbf{Amenazas:}
 \begin{itemize}
-    \item Roturas de cadena de suministro por parte de los distribuidores mayoristas, que podrían interrumpir el flujo de ventas.
-    \item Riesgo operativo derivado de la introducción de falsificaciones ("proxies") de alta fidelidad en el mercado secundario de compraventa.
-    \item Fluctuaciones en las tarifas de los operadores logísticos (e.g., Correos, SEUR), que pueden impactar negativamente en el margen de beneficio neto.
+    \item Roturas de cadena de suministro por parte de los distribuidores.
+    \item Fluctuaciones en las tarifas de los operadores logísticos.
 \end{itemize}
 
 \textbf{Fortalezas:}
 \begin{itemize}
-    \item Producto de alta demanda y liquidez, con una base de consumidores altamente fidelizada y dispuesta a la compra recurrente.
-    \item Estructura de costes operativos fijos iniciales mínimos (Bootstrapping), al centralizar las operaciones en un entorno logístico propio y prescindir temporalmente de locales comerciales.
-    \item Arquitectura web de grado empresarial (Premium UI/UX, integración de IA, notificaciones asíncronas), que transmite confiabilidad y modernidad frente a plataformas heredadas (Legacy).
+    \item Estructura de costes operativos fijos iniciales mínimos.
+    \item Arquitectura web de grado empresarial (Alta disponibilidad, monitorización proactiva) que transmite confiabilidad y minimiza el tiempo de inactividad.
 \end{itemize}
 
 \textbf{Oportunidades:}
 \begin{itemize}
-    \item Expansión continua del mercado de coleccionables en el ecosistema digital europeo.
-    \item Posibilidad de generar sinergias mediante la creación de contenido viral en redes sociales para reducir los costes de adquisición de clientes (CAC).
-    \item Escalabilidad horizontal del catálogo hacia productos adyacentes de alto margen (accesorios de protección, álbumes, merchandising).
+    \item Expansión continua del mercado de coleccionables en Europa.
+    \item Posibilidad de generar sinergias mediante contenido en redes sociales.
 \end{itemize}
 
 \newpage
 \section{Catálogo de Servicios Digitales}
 \label{Servicios}
 
-La arquitectura del servicio ha sido diseñada para minimizar la fricción en el proceso de conversión (compra) y proporcionar valor añadido mediante soluciones tecnológicas avanzadas.
-
 \subsection{Comercio Electrónico B2C}
-El servicio central consiste en una plataforma de e-commerce transaccional. La base de datos segmenta el catálogo en dos líneas principales: productos sellados (cajas, sobres) y el mercado secundario de activos individuales (cartas sueltas).
+El servicio central consiste en una plataforma de e-commerce transaccional. La base de datos segmenta el catálogo en dos líneas principales: productos sellados y el mercado secundario de cartas sueltas.
 
 \subsection{Gestión Logística}
-Se ha implementado un flujo de gestión de pedidos integrado, diseñado para coordinar la expedición a través de operadores logísticos nacionales, garantizando el acondicionamiento protector ("packaging" especializado) para prevenir la depreciación del activo durante el tránsito.
-
-\subsection{Atención al Cliente mediante Inteligencia Artificial}
-Para optimizar los recursos de soporte, se han integrado servicios basados en Inteligencia Artificial mediante consumo de APIs RESTful:
-\begin{itemize}
-    \item \textbf{PimasBot AI:} Asistente virtual impulsado por los modelos fundacionales de Google Gemini, capaz de procesar lenguaje natural (NLP) para resolver consultas operativas de Nivel 1.
-    \item \textbf{PokeLens (Computer Vision):} Módulo de reconocimiento de imágenes que, apoyándose en la IA de visión computacional, clasifica y detecta automáticamente tarjetas subidas por el usuario, automatizando la búsqueda en el catálogo.
-\end{itemize}
+Se ha implementado un flujo de gestión de pedidos integrado, diseñado para coordinar la expedición a través de operadores logísticos nacionales.
 
 \subsection{Autenticación y Verificación de Identidad}
-Se ha implementado un flujo de autenticación robusto. La plataforma requiere la validación de cuentas mediante el envío de códigos de un solo uso (OTP) a través de un servidor de correo saliente (SMTP). Este mecanismo previene el alta de cuentas sintéticas y garantiza la trazabilidad de los usuarios.
-
-\subsection{Políticas de Restricción y Calidad de Servicio (QoS)}
-Para garantizar la disponibilidad de la plataforma y mitigar riesgos de seguridad (como ataques de denegación de servicio a nivel de aplicación - Capa 7 OSI), se aplican principios de acceso condicional. Funcionalidades de alto consumo computacional o integraciones con APIs externas (Carrito de compra, llamadas a Gemini AI) están restringidas exclusivamente a sesiones autenticadas. Esta política de "Rate Limiting" implícita previene la saturación de CPU/RAM y el agotamiento de cuotas de facturación de servicios de terceros por parte de agentes automatizados (Bots).
-
-\subsection{Diseño de Interfaz Asíncrono}
-La experiencia de usuario se ha optimizado mediante el uso de JavaScript asíncrono (AJAX/Fetch) y CSS3 avanzado. Las interacciones con la base de datos (e.g., adición de ítems al carrito) no requieren la recarga del documento (Document Object Model), operando en segundo plano e informando al usuario mediante componentes visuales no intrusivos ("Toast Notifications") y micro-animaciones.
+Se ha implementado un flujo de autenticación robusto, previniendo el alta de cuentas sintéticas y garantizando la trazabilidad de los usuarios en un entorno seguro.
 
 \newpage
 \section{Arquitectura de Persistencia de Datos}
-La persistencia de información se soporta sobre un motor de bases de datos relacional (MySQL/MariaDB). En la fase de desarrollo se ha optado por entornos de prueba locales, con un plan de migración hacia instancias contenerizadas para la fase de producción, garantizando así la inmutabilidad del entorno y eliminando dependencias tipo XAMPP.
+La persistencia de información se soporta sobre un motor de bases de datos relacional (MariaDB), configurado en un entorno clústerizado para asegurar la replicación ininterrumpida de los catálogos y usuarios.
 
 \subsection{Esquema Relacional}
-El modelo de datos garantiza la integridad referencial y se apoya en restricciones (Constraints) y disparadores lógicos (Triggers) para automatizar el control de concurrencia y los flujos de inventario.
+El modelo de datos garantiza la integridad referencial y se apoya en restricciones para automatizar el control de concurrencia y los flujos de inventario entre los distintos servidores.
 
 \begin{figure}[H]
     \centering
@@ -157,253 +130,97 @@ El modelo de datos garantiza la integridad referencial y se apoya en restriccion
 \section{Stack Tecnológico y Desarrollo Web}
 \label{PaginaWeb}
 
-La solución adopta una arquitectura cliente-servidor clásica, segmentada en las capas de presentación, lógica de negocio y persistencia.
+La solución adopta una arquitectura de alta disponibilidad, segmentada en capas de presentación, lógica de negocio y persistencia distribuida.
 
 \subsection{Definición del Stack}
 \begin{itemize}
-    \item \textbf{Capa de Presentación (Frontend):} Desarrollada en HTML5 semántico y CSS3 puro para garantizar un renderizado ligero y de alto rendimiento (Zero-dependency architecture). Se integra JavaScript nativo (Vanilla JS) para gestionar el estado de la interfaz y las llamadas asíncronas.
-    \item \textbf{Capa Lógica (Backend):} Procesamiento soportado por PHP, gestionando el control de sesiones seguras, la validación de entrada (Input sanitization) contra ataques de inyección SQL (SQLi) y Cross-Site Scripting (XSS). La gestión de contraseñas se implementa mediante funciones de derivación de claves criptográficas (BCRYPT).
-    \item \textbf{Capa de Datos (SQL):} Desplegada sobre MySQL/MariaDB, utilizando sentencias preparadas (Prepared Statements) en PHP (PDO/MySQLi) para garantizar la seguridad transaccional.
-    \item \textbf{Integración de Servicios de Terceros (APIs):} Conexiones asíncronas hacia infraestructuras Cloud (Google Gemini) para dotar a la plataforma de capacidades de inteligencia artificial generativa y visión computacional.
+    \item \textbf{Capa de Presentación (Frontend):} Desarrollada en HTML5 semántico y CSS3 puro para garantizar un renderizado ligero.
+    \item \textbf{Capa Lógica (Backend):} Procesamiento soportado por PHP sobre servidores Windows (IIS). Se han habilitado las extensiones \texttt{mysqli} y \texttt{pdo\_mysql} para optimizar la conexión con los nodos de datos.
+    \item \textbf{Capa de Datos (SQL):} Desplegada sobre nodos Linux corriendo MariaDB en clúster, utilizando sentencias preparadas en PHP para garantizar la seguridad frente a inyecciones SQL.
 \end{itemize}
-
-\subsection{Diseño Adaptativo (Responsive Design)}
-El marco de estilos (CSS) se ha estructurado mediante la metodología de separación de responsabilidades (archivos independientes para tipografías, componentes, disposición espacial). Mediante el uso de consultas de medios ("Media Queries"), la interfaz se adapta fluidamente a distintas resoluciones, garantizando la operatividad (Mobile-First approach).
 
 \newpage
 \section{Continuidad de Negocio: Backup y Recuperación (Disaster Recovery)}
 \label{Backup}
 
-La integridad y disponibilidad de la información son críticas. Se han establecido políticas de redundancia para prevenir la pérdida de datos ante fallos de hardware, errores humanos o compromisos de seguridad.
-
-La estrategia de respaldos se automatiza a nivel de sistema operativo mediante tareas programadas (Cron jobs en Linux) y scripts Bash, encargados de ejecutar volcados (Dumps) de la base de datos a intervalos regulares. Estos archivos resultantes son comprimidos y almacenados en repositorios aislados de la red pública, posibilitando una restauración rápida (RTO/RPO optimizados) en caso de contingencia.
-
-\newpage
-\section{Integración de Sistemas Empresariales (API/ERP)}
-\label{Conexiones_externas}
-
-A medio plazo, la infraestructura tecnológica contempla la integración del entorno LAMP/LEMP de producción con plataformas de gestión de recursos empresariales (ERP) y soluciones Low-Code (e.g., Appian) utilizadas para la gestión logística de inventarios.
-
-Esta integración se realizará mediante el diseño de una API RESTful, permitiendo la sincronización bidireccional de datos en formato JSON. Cuando se ejecute una transacción en la pasarela web, el servidor notificará automáticamente al sistema de gestión de almacén (WMS), automatizando el flujo de trabajo (Workflow) de recolección, empaquetado y envío.
-
-\section{Estudio de Viabilidad Técnica y Económica}
-\label{PlanNegocio}
-
-\subsection{Modelo de Ingresos (Revenue Model)}
-La viabilidad financiera del proyecto se estructura en tres verticales de negocio:
-
-\begin{enumerate}
-    \item \textbf{Retail Tradicional (Producto Sellado):} Adquisición de inventario a distribuidores mayoristas (B2B) y comercialización a precio de venta recomendado (PVR), asegurando márgenes operativos predecibles.
-    \item \textbf{Mercado Secundario (Cartas Sueltas):} Constituye el núcleo de rentabilidad, basado en el arbitraje y la tasación experta del estado de los activos ("Grading"). Los márgenes brutos en esta vertical pueden alcanzar o superar el 50\%.
-    \item \textbf{Cross-Selling (Accesorios):} Comercialización de periféricos de protección y almacenamiento (fundas, carpetas). Estos productos actúan como complementos indispensables para el cliente, incrementando significativamente el valor medio del ticket de compra.
-\end{enumerate}
-
-\subsection{Estructura Jurídico-Fiscal}
-Para la fase de lanzamiento (Seed stage), la estructura jurídica más eficiente es el alta en el Régimen Especial de Trabajadores Autónomos (RETA). Esta figura minimiza las barreras de entrada burocráticas y evita la exigencia de inmovilización de capital social (como requeriría una S.L.), permitiendo la facturación legal, la liquidación del IVA y la deducción del Impuesto sobre Sociedades/IRPF aplicable a los gastos de infraestructura IT y aprovisionamiento.
-
-\subsection{Plan de Inversiones (CAPEX)}
-La estimación del gasto de capital inicial (Capital Expenditure) necesario para el despliegue técnico y logístico se detalla a continuación:
-
-\begin{table}[H]
-    \centering
-    \begin{tabular}{|l|r|}
-        \hline
-        \textbf{Concepto de Inversión Inicial} & \textbf{Coste Estimado} \\
-        \hline
-        Hardware de Red y Computación (Servidor, Switch L2/L3, Router) & 1.300 € \\
-        \hline
-        Licenciamiento de Software (Windows Server u otros) & 600 € \\
-        \hline
-        Infraestructura Cloud (Dominio y VPS Anual) & 80 € \\
-        \hline
-        Aprovisionamiento de Inventario Inicial & 2.500 € \\
-        \hline
-        Material Logístico y Embalaje & 150 € \\
-        \hline
-        \textbf{Total Inversión Inicial (CAPEX)} & \textbf{4.630 €} \\
-        \hline
-    \end{tabular}
-    \caption{Previsión de inversión de capital inicial (CAPEX).}
-\end{table}
-
-El retorno de la inversión (ROI) se estima en un plazo de 18 meses. La asunción interna de las labores de administración de sistemas e ingeniería de software (In-house development) reduce drásticamente los gastos operativos (OPEX) asociados a la externalización.
-
-\subsection{Escalabilidad Operativa}
-El modelo de negocio nace bajo el concepto de Bootstrapping, centralizando temporalmente la logística y el alojamiento de los servidores perimetrales en instalaciones residenciales adaptadas para eliminar costes fijos de arrendamiento comercial.
-
-No obstante, la infraestructura técnica y el modelo de negocio están diseñados para el escalado operativo. Ante el aumento sostenido del tráfico transaccional, se contemplan las siguientes fases de expansión:
-\begin{enumerate}
-    \item Migración logística hacia naves industriales o centros de distribución urbanos (Hubs).
-    \item Contratación de personal operativo para el cumplimiento de pedidos (Fulfillment).
-    \item Transición de la infraestructura local a gabinetes enrackables estándar industriales (Rack 19") o migración completa hacia servicios IaaS (Infrastructure as a Service) en proveedores Cloud, asegurando ancho de banda simétrico garantizado.
-\end{enumerate}
-
-\section{Cumplimiento Normativo y Privacidad (RGPD/LOPD)}
-\label{LOPD}
-
-El diseño de la plataforma se fundamenta en el principio de "Privacidad por Diseño", garantizando el estricto cumplimiento del Reglamento General de Protección de Datos (RGPD) europeo y la normativa nacional equivalente.
-
-\begin{itemize}
-    \item \textbf{Consentimiento Informado:} La arquitectura de registro incorpora validaciones explícitas ("Opt-in") donde el usuario autoriza el tratamiento de sus datos de carácter personal, circunscritos exclusivamente a la finalidad logística y fiscal del servicio.
-    \item \textbf{Cifrado en Reposo (Data at Rest):} Bajo ningún concepto las credenciales de acceso se almacenan en texto plano. Las contraseñas son sometidas a derivación criptográfica mediante el algoritmo BCRYPT (con factor de coste adaptativo) antes de su inserción en la base de datos.
-    \item \textbf{Protección contra Autenticación Automatizada:} Se han desplegado políticas de limitación de tasa (Rate Limiting) a nivel de la base de datos y aplicación para mitigar ataques de fuerza bruta o relleno de credenciales (Credential Stuffing). Tres fallos consecutivos en el proceso de autenticación desencadenan un bloqueo temporal de la cuenta ("Lockout" de 15 minutos).
-    \item \textbf{Política de Rastreo (Cookies):} La plataforma minimiza la recopilación de telemetría. Se emplean exclusivamente cookies técnicas o de sesión, estrictamente necesarias para el mantenimiento del estado transaccional (autenticación y carrito de compra), sin utilizar rastreadores de terceros para perfiles publicitarios.
-\end{itemize}
-
-\newpage
-\section{Prevención de Riesgos Laborales (PRL) en Entornos IT}
-\label{PRL}
-
-Atendiendo a la naturaleza de las operaciones técnicas y logísticas, se establecen los siguientes protocolos preventivos:
-
-\begin{itemize}
-    \item \textbf{Ergonomía y Riesgos Psicosociales (PVD):} Para mitigar la fatiga visual y musculoesquelética derivada del uso prolongado de Pantallas de Visualización de Datos, se prescribe el uso de mobiliario ergonómico certificado, pautas de descanso visual (Regla 20-20-20) e iluminación perimetral antideslumbrante en los puestos de ingeniería.
-    \item \textbf{Higiene Postural en Logística:} La manipulación manual de cargas (recepción de inventario y expedición) se regirá por protocolos biomecánicos de levantamiento, manteniendo la verticalidad espinal para prevenir hernias o distensiones lumbares.
-    \item \textbf{Seguridad Eléctrica en CPD (Centro de Proceso de Datos):} El mantenimiento preventivo y correctivo del hardware de red y servidores exigirá protocolos antiestáticos (descarga a tierra, pulseras ESD), retirada de elementos metálicos personales y la manipulación de fuentes de alimentación bajo condiciones de aislamiento térmico y eléctrico.
-\end{itemize}
+La estrategia de respaldos se automatiza a nivel de sistema operativo mediante tareas programadas, encargadas de ejecutar volcados de la base de datos a intervalos regulares. Estos archivos resultantes son almacenados en repositorios aislados, posibilitando una restauración rápida en caso de contingencia.
 
 \newpage
 \section{Infraestructura y Segmentación de Red}
 \label{RedInterna}
 
-El diseño de la topología de red local (LAN) constituye el núcleo crítico del despliegue. La arquitectura se fundamenta en principios de defensa en profundidad y segmentación lógica para aislar los entornos de producción y mitigar los movimientos laterales en caso de compromiso.
+El diseño de la topología de red constituye el núcleo crítico del despliegue, fundamentándose en principios de defensa en profundidad y segmentación lógica para mitigar vectores de ataque.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\linewidth]{images/esquemaRed.png}
-    \caption{Topología de red y segmentación lógica.}
+    \caption{Topología de red y segmentación lógica mediante pfSense.}
 \end{figure}
 
 \subsection{Enrutamiento y Segmentación (VLANs)}
-La red corporativa se administra mediante switches gestionables de Capa 2/3, dividiendo el direccionamiento base (192.168.1.0/24) en zonas lógicas estancas:
-
+La red se administra mediante el cortafuegos perimetral \textbf{pfSense}, que actúa como gateway y gestor de tráfico entre las siguientes zonas:
 \begin{itemize}
-    \item \textbf{Zona Desmilitarizada (DMZ / VLAN 10):} Red perimetral destinada al alojamiento del servidor web proxy/frontal. El cortafuegos perimetral (pfSense) aplica políticas de filtrado estrictas (NAT y Port Forwarding), permitiendo exclusivamente el tráfico entrante hacia los puertos HTTP (80) y HTTPS (443). El servidor expuesto permanece aislado del resto de la organización.
-    \item \textbf{Red Interna Protegida (Backend / VLAN 20):} Segmento hermético donde residen los clústeres de bases de datos y los equipos de gestión logística corporativa. Carece de visibilidad hacia Internet. Las comunicaciones entre la DMZ (aplicación web) y la VLAN 20 (base de datos) están rigurosamente auditadas mediante reglas estáticas de cortafuegos que permiten el flujo de datos unidireccional y cifrado solo sobre los puertos requeridos (ej. TCP 3306).
-\end{itemize}
-
-\section{Sistemas Operativos y Directorios Corporativos}
-\label{SistemasOperativos}
-
-La arquitectura prescinde de entornos monolíticos de desarrollo (como XAMPP), apostando por infraestructuras distribuidas y robustas basadas en entornos Microsoft Windows Server para la gestión interna corporativa y distribuciones GNU/Linux para los sistemas productivos en red.
-
-\subsection{Directorio Activo y Políticas Centralizadas}
-Se desplegará una infraestructura de dominio basada en Windows Server 2022 para gestionar la identidad y el acceso en los equipos de gestión corporativa, implementando los siguientes servicios:
-
-\begin{itemize}
-    \item \textbf{Servicios de Dominio de Active Directory (AD DS):} Implementación del "Principio de Menor Privilegio" (PoLP) mediante el Control de Acceso Basado en Roles (RBAC). Se estructuran Unidades Organizativas (OU) jerárquicas que impiden a usuarios no autorizados (ej. operarios de almacén) acceder a servidores de bases de datos o recursos compartidos críticos.
-    \item \textbf{Resolución de Nombres DNS (Split-Brain DNS):} Configuración de zonas de búsqueda locales (ej. db.pokepimas.local) para abstraer la topología IP, garantizando que las migraciones de red o asignaciones DHCP no comprometan la configuración de los aplicativos internos.
-    \item \textbf{Políticas de Grupo (GPO) como vector defensivo:} Despliegue de políticas de seguridad automatizadas aplicadas a nivel de equipo. Se deshabilitará preventivamente el almacenamiento masivo USB en terminales de operarios, erradicando los vectores de infección clásicos por malware físico y previniendo la exfiltración de datos (DLP).
+    \item \textbf{WAN (World Wide Web):} Interfaz con salida a la red pública.
+    \item \textbf{Zona Desmilitarizada (DMZ - 192.168.10.0/24):} Aloja el balanceador HAProxy y los servidores web frontales IIS. Es el único segmento que procesa tráfico entrante filtrado desde el exterior.
+    \item \textbf{Red Interna Protegida (LAN - 192.168.20.0/24):} Segmento estanco donde reside el clúster de bases de datos y la gestión de telemetría.
 \end{itemize}
 
 \newpage
-\section{Contenerización de Servicios (Docker / Linux)}
-\label{DockerLinux}
-
-Mientras que el plano de gestión interna opera bajo Windows Server, el entorno de producción web de alta disponibilidad se despliega íntegramente sobre infraestructuras GNU/Linux (Ubuntu Server 24.04 LTS), garantizando eficiencia, mínima huella de recursos y ausencia de superficies de ataque derivadas de interfaces gráficas (GUI).
-
-\subsection{Arquitectura de Microservicios}
-La pila tecnológica se empaqueta mediante el motor de Docker. A través de un orquestador declarativo (Docker Compose), la infraestructura se divide en contenedores aislados que corren en el mismo plano de host:
-
-\begin{itemize}
-    \item \textbf{Contenedor de Aplicación (Web/PHP):} Utilización de imágenes inmutables (php:8.2-apache) optimizadas. Este contenedor gestiona el ciclo de vida de la aplicación y expone únicamente los puertos necesarios al proxy inverso.
-    \item \textbf{Contenedor de Persistencia (MariaDB/MySQL):} Aislado operativamente del exterior mediante redes definidas por software (Docker Networks). Este contenedor no expone puertos al host físico local, asegurando que la base de datos solo es accesible desde el contenedor de aplicación en la misma red virtual.
-    \item \textbf{Almacenamiento Persistente (Docker Volumes):} Los datos transaccionales se disocian del ciclo de vida efímero del contenedor. Se mapean volúmenes encriptados hacia el sistema de archivos del anfitrión, garantizando que reinicios, caídas o actualizaciones del motor no provoquen la pérdida de la información corporativa.
-\end{itemize}
-
-\subsection{Ventajas Operativas y Escalabilidad Horizontal}
-La contenerización proporciona una portabilidad absoluta. Ante la eventual necesidad de escalar la plataforma, los contenedores sin estado (Stateless) pueden ser replicados instantáneamente. El diseño preparatorio es compatible con la migración futura hacia clústeres de orquestación masiva (Kubernetes), permitiendo el auto-escalado horizontal de los nodos de aplicación para gestionar picos volumétricos de tráfico transaccional.
-
-\newpage
-\section{Memoria Técnica Detallada: Infraestructura de Alta Disponibilidad}
+\section{Memoria Técnica: Infraestructura de Alta Disponibilidad}
 \label{AltaDisponibilidad}
 
-\subsection{Introducción y Objetivos}
-Este proyecto se centra en el diseño e implementación de un entorno de servicios web y bases de datos con redundancia. El objetivo principal ha sido eliminar los puntos únicos de fallo (Single Points of Failure), garantizando que el servicio continúe operativo ante la caída de cualquier componente crítico.
+Este proyecto implementa una arquitectura orientada a la continuidad de negocio, eliminando los Puntos Únicos de Fallo (SPOF) mediante redundancia en todas las capas.
 
-\subsection{Detalle de los Sistemas Implementados}
-
-\subsubsection{Firewall Perimetral (pfSense)}
-El appliance virtual pfSense actúa como el guardián de toda la red. Su función en la arquitectura es:
+\subsection{Capa Frontal y Balanceo de Carga (HAProxy)}
+Se ha desplegado un servicio \textbf{HAProxy} operando en capa 7 (HTTP) dentro de la DMZ para gestionar la carga transaccional:
 \begin{itemize}
-    \item \textbf{Segmentación (VLANs/Subredes):} Aislamiento de las máquinas en redes distintas (DMZ de balanceo, servidores web de backend y clúster de bases de datos), forzando que el tráfico intra-red sea auditado por las listas de control de acceso (ACLs) del firewall.
-    \item \textbf{NAT (Network Address Translation):} Redirección de las peticiones externas (puertos TCP 80/443) hacia la IP virtual (VIP) del balanceador de carga.
-    \item \textbf{Filtrado de Egress (Salida):} Implementación de reglas restrictivas para limitar la conectividad exterior de los servidores, autorizando exclusivamente el tráfico necesario (resolución DNS, repositorios de parches), mitigando severamente los movimientos laterales o exfiltración en caso de brecha ("Command and Control").
+    \item \textbf{Distribución de Carga:} Implementación del algoritmo \textit{Round Robin} para repartir el tráfico entrante de forma equitativa entre el pool de servidores web.
+    \item \textbf{Health Checks (Sondeo de Salud):} Supervisión activa y constante del puerto 80 de los nodos web. Ante un fallo en el servicio IIS o caída del nodo, HAProxy ejecuta un \textit{failover} automático, retirando el nodo de la rotación y garantizando que la interrupción sea transparente para el usuario final.
 \end{itemize}
 
-\subsubsection{Balanceador de Carga (HAProxy)}
-El servicio HAProxy opera como el nodo director que distribuye la carga transaccional:
+\subsection{Capa de Aplicación (Windows Server / IIS)}
+La lógica de negocio se procesa en una granja de servidores (\textbf{Web-01} y \textbf{Web-02}) bajo entornos Windows Server 2019/2022:
 \begin{itemize}
-    \item \textbf{Distribución de Carga (Round Robin / Leastconn):} Reparte el tráfico entrante de forma dinámica entre el "pool" de servidores web, optimizando el uso de recursos computacionales.
-    \item \textbf{Health Checks (Sondeo de Salud):} Supervisión activa de la operatividad de los servidores web (Capa 7 HTTP) y bases de datos (Capa 4 TCP). Ante respuestas anómalas o caídas temporales (Timeouts), el nodo afectado es retirado automáticamente del "pool" de balanceo.
-    \item \textbf{Terminación SSL/TLS (Offloading):} Centralización de la validación criptográfica. El proxy recibe y descifra el tráfico HTTPS, reenviándolo en texto plano a la granja de servidores backend, aliviando la carga de procesamiento criptográfico (CPU overhead) en los nodos de aplicación y facilitando la rotación de certificados.
+    \item \textbf{Servidor Web:} Uso de \textit{Internet Information Services} (IIS) para el despliegue del backend en PHP.
+    \item \textbf{Hardening de PHP:} Configuración manual del archivo \texttt{php.ini} para habilitar las extensiones \texttt{mysqli} y \texttt{pdo\_mysql}, especificando el \texttt{extension\_dir} mediante rutas absolutas para asegurar la correcta carga de controladores de datos.
 \end{itemize}
 
-\subsubsection{Granja de Servidores Web (Application Nodes)}
-Constituyen el clúster de alojamiento de la lógica PHP. La configuración de los nodos se diseña bajo un patrón de inmutabilidad (Stateless), garantizando la paridad entre servidores para que el balanceador conmute peticiones entre ellos de manera transparente y sin disrupciones de sesión ("Sticky sessions").
-
-\subsubsection{Clúster de Bases de Datos (MariaDB Active-Active)}
-El subsistema de mayor complejidad técnica recae en el aseguramiento de la disponibilidad de datos:
+\subsection{Capa de Persistencia (MariaDB Master-Master)}
+El almacenamiento reside en un clúster de MariaDB sobre Linux, configurado en replicación \textbf{Master-Master circular} (Activo-Activo):
 \begin{itemize}
-    \item \textbf{Replicación Multi-Master:} Topología circular donde múltiples nodos ejecutan escrituras y lecturas de forma concurrente. Se han configurado desplazamientos en los incrementos automáticos (\texttt{auto\_increment\_increment} y \texttt{auto\_increment\_offset}) para prevenir colisiones de claves primarias.
-    \item \textbf{Sincronización por Identificador Global (GTID):} La réplica prescinde del método obsoleto por posición de archivo binario, basándose en la trazabilidad transaccional global (GTID). Este protocolo asegura la resolución de conflictos y evita el desajuste o pérdida de transacciones durante la resincronización de un nodo tras una interrupción eléctrica.
-    \item \textbf{Resiliencia Operativa:} Habilitación de políticas \texttt{relay\_log\_recovery} que obligan al motor a purgar logs corruptos y solicitar las transacciones faltantes al nodo par tras reinicios inesperados ("Crash-safe replication").
-\end{itemize}
-
-\subsection{Metodología de Implementación}
-El proceso de ingeniería se ha ejecutado bajo el paradigma de "Seguridad por Diseño":
-\begin{itemize}
-    \item \textbf{Despliegue Base:} Definición de topología de red virtual, VLAN tagging y direccionamiento IP estático interno.
-    \item \textbf{Aseguramiento Perimetral:} Configuración del firewall (Deny-All por defecto) de manera previa a la exposición de servicios web.
-    \item \textbf{Orquestación Inversa:} Configuración de HAProxy como barrera y encaminador intermedio.
-    \item \textbf{Sincronía de Estado:} Despliegue del túnel de replicación GTID, aplicando directivas estrictas de \texttt{bind-address} e implementando usuarios SQL con privilegios hiper-restringidos exclusivamente autorizados para ejecutar procesos de sincronización.
+    \item \textbf{Sincronización por GTID:} Se utiliza el \textit{Global Transaction ID} para garantizar la consistencia de los datos, evitando los problemas de desincronización asociados a las posiciones de archivos binarios tradicionales.
+    \item \textbf{Gestión de Colisiones:} Para permitir escrituras simultáneas sin conflictos de claves primarias, se han ajustado las directivas \texttt{auto\_increment\_offset} y \texttt{auto\_increment\_increment}.
+    \item \textbf{Seguridad (Principio de Menor Privilegio):} Se ha creado el usuario \texttt{user\_web@'\%'} con permisos granulares, limitando el acceso de la capa web exclusivamente a los recursos necesarios de la base de datos.
 \end{itemize}
 
 \newpage
-\section{Monitorización y Telemetría de la Infraestructura}
+\section{Monitorización y Telemetría Proactiva}
 \label{Monitorizacion}
 
-Garantizar la continuidad operativa requiere una observabilidad ininterrumpida de los componentes (SLA 24/7). Para este propósito, la infraestructura incorpora servicios centralizados de monitorización reactiva y proactiva basados en Zabbix.
+Para garantizar la visibilidad total del estado de salud del sistema, se ha implementado una solución basada en \textbf{Zabbix 6.0}.
 
-\subsection{Parámetros de Auditoría Sensible}
-El servidor de monitorización despliega agentes pasivos ("Zabbix Agents") en los nodos anfitriones, recolectando la telemetría del estado crítico de los recursos con alta frecuencia de sondeo:
-
+\subsection{Arquitectura de Monitorización}
+El servidor Zabbix reside en el nodo \textbf{DB-01} para centralizar la recolección de datos:
 \begin{itemize}
-    \item \textbf{Consumo Intensivo de CPU/RAM:} La detección de picos abruptos o desviaciones sostenidas en el consumo de memoria o procesamiento alerta sobre escenarios anómalos, tales como ataques de Denegación de Servicio (DDoS volumétricos o agostamiento de recursos) o fugas de memoria (Memory Leaks) en el código, permitiendo la intervención manual o escalado antes del colapso del nodo.
-    \item \textbf{Cuotas de Almacenamiento y Repositorios de Backup:} La saturación silenciosa del disco duro constituye un vector crítico de interrupción en entornos Linux. Los agentes de Zabbix sondean constantemente las particiones y sistemas de archivos, generando alertas (Triggers de severidad naranja/alta) si la ocupación del almacenamiento destinado a copias de seguridad supera el 85\%, mitigando caídas operativas ("Kernel Panic" o rotura de tablas SQL).
-    \item \textbf{Sondeos Sintéticos (Web Scenarios):} Monitorización externa automatizada de la disponibilidad de la plataforma web. Zabbix ejecuta comprobaciones transaccionales completas (validación de respuestas HTTP 200 OK y tiempo de latencia). Ante divergencias o latencias superiores al umbral aceptable, el sistema notifica de forma inmediata al centro de operaciones a través de pasarelas de correo electrónico.
+    \item \textbf{Agentes Zabbix:} Instalados en todos los nodos de la infraestructura (Windows y Linux), permitiendo la recolección de métricas críticas de CPU, RAM, almacenamiento y estado de servicios.
+    \item \textbf{Configuración Permisiva de Red:} Debido a la segmentación mediante pfSense, los agentes se configuraron con la directiva \texttt{Server=0.0.0.0/0}. Esto permite que los paquetes de telemetría atraviesen el firewall desde distintas subredes sin ser bloqueados por políticas de filtrado de origen.
 \end{itemize}
 
-\section{Bastionado de Servidores (Hardening) y Ciberseguridad Activa}
-\label{Hardening}
-
-Con anterioridad a la exposición pública de los servicios, los nodos anfitriones son sometidos a procesos rigurosos de "Hardening" operativo. El objetivo es reducir drásticamente la superficie de ataque explotable de los demonios subyacentes.
-
-\subsection{Aseguramiento de los Protocolos de Administración (SSH)}
-El servicio de administración remota OpenSSH se configura mediante alteraciones restrictivas en sus archivos de configuración subyacentes (\texttt{/etc/ssh/sshd\_config}):
+\section{Secuencia Crítica de Arranque (Guía de Despliegue)}
+\label{SecuenciaArranque}
+Para asegurar la correcta inicialización de las dependencias y servicios del proyecto, es imperativo seguir el siguiente orden estricto de encendido:
 
 \begin{enumerate}
-    \item \textbf{Inhabilitación de Autenticación Clásica y Escalada Root:} Prohibición absoluta de accesos remotos basados en contraseña (\texttt{PasswordAuthentication no}) y revocación de los permisos de acceso de red directos para el superusuario (\texttt{PermitRootLogin no}).
-    \item \textbf{Criptografía Asimétrica Obligatoria (Claves RSA/ED25519):} La autenticación requiere la presentación y correspondencia de pares de claves criptográficas de alta densidad provistas por el administrador, neutralizando la viabilidad de cualquier ataque de fuerza bruta o diccionario matemático.
-    \item \textbf{Protección Dinámica contra Intrusiones (Fail2Ban/IPS):} Despliegue del motor reactivo Fail2Ban para la auditoría de registros del sistema (Syslog/Auth.log). Ante patrones iterativos de intentos fallidos provenientes de una IP externa, el sistema interactúa de forma automatizada con el cortafuegos interno (Netfilter/IPtables) para aislar (Baneo) el nodo hostil en tiempo real.
+    \item \textbf{pfSense:} Establecimiento previo del enrutamiento, reglas de cortafuegos y resolución de red.
+    \item \textbf{Clúster de Base de Datos (DB-01 y DB-02):} Inicialización de la persistencia y estabilización de la replicación GTID.
+    \item \textbf{Servidores Web Windows (Web-01 y Web-02):} Arranque de los motores IIS y conexión al backend de datos.
+    \item \textbf{HAProxy:} Último elemento en iniciar para que sus comprobaciones de salud detecten los servicios web ya operativos y comience la distribución de tráfico.
 \end{enumerate}
 
-\subsection{Criptografía en Tránsito (TLS/SSL y Let's Encrypt)}
-La confidencialidad de la información transaccionada entre la capa de presentación y el cliente exige la obliteración del protocolo de texto plano (HTTP). Se ha establecido el cifrado integral de la comunicación:
-
-\begin{itemize}
-    \item \textbf{Certificación Automatizada:} Implementación del protocolo ACME mediante el cliente Certbot para la expedición, renovación desatendida y firma de certificados digitales validados por la Autoridad de Certificación Let's Encrypt.
-    \item \textbf{Redirección Forzosa (HSTS):} El balanceador de carga y los servidores web imponen políticas estrictas de redirección permanente (HTTP 301) forzando el transporte de datos exclusivamente a través del puerto seguro HTTPS (TCP 443), previniendo vulnerabilidades de degradación de protocolo y secuestros de sesión (Man In The Middle - MITM).
-\end{itemize}
-
-\subsection{Cortafuegos de Nivel de Host (UFW / IPtables)}
-Con independencia del cortafuegos perimetral (pfSense), cada nodo anfitrión incluye una política de denegación predeterminada ("Deny-All / Drop by Default") en su cortafuegos lógico (Uncomplicated Firewall - UFW). Exclusivamente se autoriza la apertura (Allow In) de puertos esenciales: el servicio SSH ofuscado y el puerto de escucha del contenedor inverso, cerrando de forma absoluta el acceso directo a los restantes 65.535 puertos lógicos.
 
 \newpage
 \section{Anexo: Galería de la Página Web}
 \label{GaleriaPáginaWeb}
-
-A continuación se adjunta una recopilación de imágenes para mostrar el diseño y el funcionamiento visual y práctico de la página web terminada.
 
 \subsection{Navegación e Inicio de la Tienda}
 \begin{figure}[H]
@@ -435,70 +252,14 @@ A continuación se adjunta una recopilación de imágenes para mostrar el diseñ
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{images/accesoLogin.png}
-    \caption{Página de login con un inicio de sesión básico basado en un formulario.}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\linewidth]{images/correoVerificación.png}
-    \caption{Correo con el código de verificación de la cuenta.}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\linewidth]{images/verificacion.png}
-    \caption{Página donde debemos meter el código que nos ha llegado para completar la verificación de la cuenta.}
-\end{figure}
-
-\subsection{Herramientas de Inteligencia Artificial}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\linewidth]{images/ejemploBot.png}
-    \caption{Ejemplo de conversación con el chatbot de la tienda.}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\linewidth]{images/ejemploBot2.png}
-    \caption{El chatbot resolviendo dudas.}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\linewidth]{images/pokeLensWorking.png}
-    \caption{Herramienta PokeLens detectando una carta con éxito.}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\linewidth]{images/pokeLensNot.png}
-    \caption{Herramienta PokeLens cuando no encuentra la carta en la base de datos.}
-\end{figure}
-
-\subsection{Atención al Cliente}
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\linewidth]{images/contacto.png}
-    \caption{Página de contacto.}
+    \caption{Página de login con un inicio de sesión básico.}
 \end{figure}
 
 \subsection{Vista Móvil (Diseño Responsive)}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.45\linewidth]{images/movil1.jpeg}
-    \caption{Visualización general de la interfaz adaptada a un teléfono móvil.}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.45\linewidth]{images/movil2.jpeg}
-    \caption{Menú de navegación principal desplegado en formato móvil.}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.45\linewidth]{images/movil3.jpeg}
-    \caption{Vista del catálogo de productos y carrito adaptados a la pantalla táctil.}
+    \caption{Visualización general adaptada a móvil.}
 \end{figure}
 
 \end{document}
