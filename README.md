@@ -51,6 +51,7 @@ La base de datos es el corazón del proyecto y se basa en una replicación circu
 
 ### B. Servidores Web (Windows Server 2019 + IIS)
 Los servidores de aplicaciones procesan el frontend y el backend de la tienda de cartas:
+- **Despliegue Local:** Si desea alojar la web en su propio servidor, debe copiar el contenido de la carpeta de la aplicación web en la ruta raíz de IIS, por defecto: `C:\inetpub\wwwroot`.
 - **Entorno:** Se utiliza un entorno WIMP (Windows, IIS, MariaDB, PHP).
 - **Configuración PHP:** En el archivo `php.ini` se han habilitado las extensiones `mysqli` y `pdo_mysql` indicando la ruta correcta en `extension_dir`.
 - **Conectividad:** Los scripts PHP conectan al backend de datos a través del puerto 3306, procesando las solicitudes de los usuarios y devolviendo el HTML generado.
