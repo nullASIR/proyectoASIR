@@ -1,5 +1,7 @@
 # PokePimas: Infraestructura de Alta Disponibilidad y Monitorización
 
+**[Descargar Proyecto Completo: Máquinas Virtuales (.ova) desde Google Drive](https://drive.google.com/file/d/15R4s0rhUxGWG_f_REi2abDcoTxqu7cj4/view?usp=drive_link)**
+
 ## 1. Introducción y Propósito
 **PokePimas** es un proyecto de fin de grado (TFG) que implementa una infraestructura empresarial robusta para una plataforma de gestión y venta de cartas. El objetivo principal es garantizar que el servicio nunca se interrumpa, utilizando técnicas de balanceo de carga, replicación de datos en tiempo real, supervisión y monitorización proactiva.
 
